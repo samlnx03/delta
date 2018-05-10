@@ -24,7 +24,7 @@ function analizadimensiones(d){
 	res=d1.split("X");
 	//alert("tokens: "+res);
 	if((nd=res.length)!=3){
-		//alert("dimensiones incorrectas, hay "+nd);
+		alert("dimensiones incorrectas, hay "+nd);
 		return;
 	}
 	var g,a,l;
@@ -127,8 +127,8 @@ if(isset($_POST["descripcion"]))
 	$descrip=$_POST["descripcion"];
 ?>
 <h1>Nueva madera dimensionada</h1>
-<form method=POST>
-Especie <input type=text name=especie> (pino, encino, etc.)
+<form action='madDimensionadaAlta.php' method=POST>
+Especie <input type=text name=especie required> (pino, encino, etc.)
 <br>
 Clave (Actividad prod) 
 <?php
@@ -143,21 +143,21 @@ echo "<br>\n";
 ?>
 <br>
 Rectifique medidas de ser necesario<br>
-grueso <input type=text id='gruesoDecimal' name=grueso size=5>
+grueso <input type=text id='gruesoDecimal' name=grueso size=5 required>
 <select id='ugrueso' name='ugrueso'>
 <option id='ugruesoI' value='I'>Inches</option>
 <option id='ugruesoC' value='C'>Cm.</option>
 </select>
 
 <?php //echo ifc("ugrueso");?> 
- ancho <input type=text id='anchoDecimal' name=ancho size=5>
+ ancho <input type=text id='anchoDecimal' name=ancho size=5 required>
 <select id='uancho' name='uancho'>
 <option id='uanchoI' value='I'>Inches</option>
 <option id='uanchoC' value='C'>Cm.</option>
 </select>
 
 <?php //echo ifc("uancho");?> 
- largo <input type=text id='largoDecimal' name=largo size=5>
+ largo <input type=text id='largoDecimal' name=largo size=5 required>
 <?php //echo ifc("ulargo");?> 
 <select id='ulargo' name='ulargo'>
 <option id='ulargoI' value='I'>Inches</option>
@@ -173,7 +173,7 @@ volumen <input id='volumenPT' type=text name=volumenPT size=5> (pie-tabla)
 
 <br>
 <br>
-<input type=submit name=nuevo value='Agregar'>
+<input type=submit name=agregar value='Agregar'>
 </form>
 <?php
 /*
