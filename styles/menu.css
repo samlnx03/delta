@@ -1,0 +1,38 @@
+﻿body{
+	background-color: #e9ebee;
+	/*background-image: url("nic_backfade.jpg");*/
+}
+
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 2px 2px;
+    overflow: hidden;
+    background-color: #3b5998;
+    color: white;
+}
+.menu a {
+    text-decoration: none !important;
+    color: inherit;
+}
+.menu li {
+    float: left;
+    padding: 0px 4px;
+}
+.menu li a:hover {
+    color: #000;
+    background-color: #ccc;
+}
+.menu li a, .menu-navitem {
+    display: block;
+    padding: 0px 4px;
+}
+
+div.mensaje {
+    background-color: #ffffc1;
+    border: 2px solid red;
+    font-size: 12px;
+    padding: 5px;
+    text-align: left;
+    width: 400px;
+}

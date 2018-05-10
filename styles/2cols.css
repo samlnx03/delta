@@ -1,0 +1,10 @@
+.divrow {
+    display: flex;
+}
+
+.divcol {
+    flex: 50%;
+}
+.divcol3 {
+    flex: 33%;
+}

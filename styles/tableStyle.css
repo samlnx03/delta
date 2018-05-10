@@ -1,0 +1,52 @@
+.TFtable{
+	/*width:100%; */
+	border-collapse:collapse; 
+}
+.TFtable td,th{ 
+	padding:5px; border:#4e95f4 1px solid;
+}
+.TFtable th{ 
+	padding:2px;
+	background: #c0c0c0;
+}
+
+/*  Define the background color for all the ODD background rows  */
+.TFtable tr:nth-child(odd){ 
+	background: #b8d1f3;
+}
+/*  Define the background color for all the EVEN background rows  */
+.TFtable tr:nth-child(even){
+	background: #dae5f4;
+}
+
+.TFtable tr:hover{
+	background-color:#ffff99;
+}
+
+
+
+.Txml{
+	/*width:100%; */
+	border-collapse:collapse; 
+}
+.Txml td,th{ 
+	padding:5px; border:#4e95f4 1px solid;
+}
+.Txml th{ 
+	padding:2px;
+	background: #f0f0f0;
+}
+
+/*  Define the background color for all the ODD background rows  */
+.Txml tr:nth-child(odd){ 
+	/*background: #b8d1f3;*/
+	background: #f0f0f0;
+}
+/*  Define the background color for all the EVEN background rows  */
+.Txml tr:nth-child(even){
+	background: #dae5f4;
+}
+
+.Txml tr:hover{
+	background-color:#ffff99;
+}

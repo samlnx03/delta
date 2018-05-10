@@ -1,0 +1,40 @@
+span#status {
+	padding:5px 10px;
+}
+
+input#show, input#hide {
+	display:none;
+}
+div#filtro, div#editfactura{
+	background-color: #99cc63;
+	border: 1px solid red;
+	padding: 8px 8px 0px 8px;
+}
+div#filtro {
+	display:none;
+}
+
+input#show:checked ~ div#filtro {
+	display:block;
+}
+input#hide:checked ~ div#filtro {
+	display:none;
+}
+label.filtrolabel:hover{
+    color: #000;
+    background-color: #fff;
+}
+
+/*
+input.disabled {
+	pointer-events:none;
+    color:#AAA;
+    background:#F5F5F5;
+}
+input#ff12e:checked ~ input#ff1 {
+	disabled:true;
+    	color:#AAA;
+    	background:#F5F5F5;
+}
+*/
+
