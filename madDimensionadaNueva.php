@@ -1,13 +1,15 @@
 <?php
 require_once "Auth/dbclass.php";
+require_once "Auth/session.php";
 require_once "Auth/table.php";
 
 require_once "desarrollo.php";
-
+/*
 if(!isset($_POST["nueva"])){
         header('Location: madDimensionada.php');
         die();
 }
+ */
 ?>
 <html>
 <head>
@@ -127,6 +129,12 @@ if(isset($_POST["descripcion"]))
 	$descrip=$_POST["descripcion"];
 ?>
 <h1>Nueva madera dimensionada</h1>
+<?php
+if(isset($_SESSION["msg"])){
+	echo "<div class='mensaje'>".$_SESSION["msg"]."</div>";
+	unset($_SESSION["msg"]);
+}
+?>
 <form action='madDimensionadaAlta.php' method=POST>
 Especie <input type=text name=especie required> (pino, encino, etc.)
 <br>

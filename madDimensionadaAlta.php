@@ -2,8 +2,7 @@
 require_once "Auth/session.php";
 // borrar 2
 //require_once "Auth/proteger.php";
-//require_once "funcs.php";
-
+require_once "funcs.php";
 require_once("desarrollo.php");  // reporta errores
 
 if(!isset($_POST["agregar"])){
@@ -32,10 +31,10 @@ $largo=htmlNpost("largo");
 $ulargo=htmlpost("ulargo");
 $volumenPT=htmlNpost("volumenPT");
 
-$q="insert into tablas ".\
-	"(especie, claveprod, descrip, grueso, ugrueso, ancho, uancho, largo, ulargo, volpt, existen) ".\
-	"VALUES ".\
-	"('$especie','$claveProd', '$descripcion', $grueso, '$ugrueso', $ancho, '$uancho', $largo, '$ulargo', $volPT, 0)";
+$q="insert into tablas ";
+$q.=	"(especie, claveprod, descrip, grueso, ugrueso, ancho, uancho, largo, ulargo, volpt, existen) ";
+$q.=	"VALUES ";
+$q.=	"('$especie','$claveProd', '$descripcion', $grueso, '$ugrueso', $ancho, '$uancho', $largo, '$ulargo', $volumenPT, 0)";
 
 $db->query($q);
 $id=$db->insert_id;
