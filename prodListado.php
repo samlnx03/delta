@@ -56,7 +56,7 @@ $t->addextras( array(
 		array("id")
 		)
 );
-$t->setcdatas(array("Ver"=>"Editar", "id"=>"id", "supervisor" => "supervisor", "fecha" => "fecha", "# sierra"=>"sierraCinta", "Operador"=>"operador", "o%"=>"pctjOp", "ayudante"=>"ayudante", "a%"=>"pctjAyu", "Entrego"=>"entrego", "recibio"=>"recibio"));
+$t->setcdatas(array("Ver"=>"Editar", "id"=>"id", "supervisor" => "supervisor", "fecha" => "fecha", "# sierra"=>"sierraCinta", "operador"=>"operador", "op%"=>"pctjOp", "ayudante"=>"ayudante", "ay%"=>"pctjAyu", "entregó"=>"entrego", "recibió"=>"recibio"));
 //$t->setFieldClas("Importe","class='alin-der'"); //campo=>id_class, p.e. 'id'=>"class='myclas'"
 //$t->setFieldTotalizado("total", 0); // campo a totalizar, inicializado en 0
 echo "<form action='prodDetalle.php' method='GET'>\n";

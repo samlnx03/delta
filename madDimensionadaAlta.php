@@ -38,7 +38,7 @@ $q.=	"('$especie','$claveProd', '$descripcion', $grueso, '$ugrueso', $ancho, '$u
 
 $db->query($q);
 $id=$db->insert_id;
-//$_SESSION["q"]="$q<br>\n"; 
+$_SESSION["msg"]="Registro realizado (id=$id)"; 
 header("Location: madDimensionadaNueva.php");	//a los detalles
 die();
 ?>

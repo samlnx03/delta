@@ -1,5 +1,5 @@
 <?php
-require_once "Auth/dbclass.php";
+require_once "Auth/session.php";
 require_once "Auth/table.php";
 require_once "desarrollo.php"; // debug show errors
 
@@ -43,6 +43,12 @@ if(isset($_GET["id"])){
 	echo "</body></html>";
 	die();
 }
+
+if(isset($_SESSION["msg"])){
+	echo "<div class='mensaje'>".$_SESSION["msg"]."</div>";
+	unset($_SESSION["msg"]);
+}
+
 $db=db::getInstance();
 $q="select fecha, e1.nombre as operador, e2.nombre as ayudante from prodRepos as r LEFT JOIN empleados as e1 on r.operador=e1.id LEFT JOIN empleados as e2 on r.ayudante=e2.id WHERE r.id='$id'";
 $db->query($q);
@@ -56,7 +62,22 @@ echo "Movimientos del Reporte No. <b>$id</b>. del día <b>$f</b> Operador: <b>$o
 Mostrar/Ocultar
 <button onclick="dimensionada()">Madera Dimensionada</button>
 <button onclick="otros()">otros destajos</button>
-<div  id="madera" style="display: none; background-color: eeeeee; font-weight: bold; color: black; border:thin Black; border-style : dashed; line-height: 20px; padding-top: 6px; padding-left: 6px; padding-bottom: 6px; padding-right: 6px;">
+<?php 
+if(!isset($_SESSION["agregando"])){
+	$styl1="display: none; ";
+	$styl2="display: none; ";
+}
+elseif($_SESSION["agregando"]==1){
+	$styl1="display: block; ";
+	$styl2="display: none; ";
+}
+elseif($_SESSION["agregando"]==2){
+	$styl2="display: block; ";
+	$styl1="display: none; ";
+}
+$styl1.="background-color: eeeeee; font-weight: bold; color: black; border:thin Black; border-style : dashed; line-height: 20px; padding-top: 6px; padding-left: 6px; padding-bottom: 6px; padding-right: 6px;";
+?>
+<div  id="madera" style="<?php echo $styl1;?>">
 <form action=prodDetalleAlta.php method=POST>
 <table>
 <tr>
@@ -75,8 +96,10 @@ echo "$clave\n";
 </table>
 </form>
 </div>
-
-<div id="otros" style="display: none; background-color: eeeeee; font-weight: bold; color: black; border:thin Black; border-style : dashed; line-height: 20px; padding-top: 6px; padding-left: 6px; padding-bottom: 6px; padding-right: 6px;">
+<?php
+$styl2.="background-color: eeeeee; font-weight: bold; color: black; border:thin Black; border-style : dashed; line-height: 20px; padding-top: 6px; padding-left: 6px; padding-bottom: 6px; padding-right: 6px;";
+?>
+<div  id="otros" style="<?php echo $styl2;?>">
 <form action=prodDetalleAlta.php method=POST>
 <table>
 <tr>
@@ -91,6 +114,9 @@ echo "<input type=hidden name=descripcion>";
 <td> <br>
 <input type=submit name=soloOperador value='Agregar'>
 <?php echo "Solo el Operador: <b>$o</b>\n";?>
+</td></tr></table></form>
+<form action=prodDetalleAlta.php method=POST>
+<table>
 <tr>
 <td>Cantidad<br><input type=text name=cantidad size=9>
 <?php
@@ -101,6 +127,9 @@ echo "<input type=hidden name=descripcion>";
 <td> <br>
 <input type=submit name=soloAyudante value='Agregar'>
 <?php echo "Solo el Ayudante: <b>$a</b>\n";?>
+</td></tr></table></form>
+<form action=prodDetalleAlta.php method=POST>
+<table>
 <tr>
 <td>Cantidad<br><input type=text name=cantidad size=9>
 <?php
@@ -111,12 +140,27 @@ echo "<input type=hidden name=descripcion>";
 <td> <br>
 <input type=submit name=operadorYayudante value='Agregar'>
 <?php echo "Para cada uno: <b>$o y $a</b>\n";?>
-</table>
-</form>
+</td></tr></table></form>
 </div>
 <?php
-// mostrar movimientos de madera habilitada
-// mostrar otros destajos
+// mostrar movimientos del reporte madera habilitada y destajos en misma tabla
+$q="select m.id, m.idRepo, m.actividad, m.cantidad, m.descripcion, a.descrip from repoMovs as m LEFT JOIN clavesActividad as a on m.actividad=a.clave WHERE m.idRepo='$id'";
+//echo "<br>q: $q<br>\n";
+$db->query($q);
+$t=new html_table();
+$t->setbody($db->get_all());
+$t->addextras( array(
+	"Editar", 
+		"<button type='submit' name='id' value='%f0%'>Eliminar</button>", 
+		array("id")
+		)
+);
+$t->setcdatas(array("Eliminar"=>"Editar", "Repo"=>"idRepo", "cve" => "actividad", "descrip"=>"descrip", "cant" => "cantidad", "descripcion"=>"descripcion" ));
+//$t->setFieldClas("Importe","class='alin-der'"); //campo=>id_class, p.e. 'id'=>"class='myclas'"
+//$t->setFieldTotalizado("total", 0); // campo a totalizar, inicializado en 0
+echo "<form action='e.php' method='GET'>\n";
+$t->show();
+echo "</form>\n";
 ?>
 </body>
 </html>

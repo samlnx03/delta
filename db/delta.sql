@@ -42,7 +42,7 @@ create table prodRepos(
 	primary key(id), key (fecha), key(operador), key(ayudante)
 );
 
-insert into prodRepos(supervisor,fecha,sierraCinta, operador, pctjOp, ayudante, pctjAyu, entrego, recibio) values ('sup001',now(),'1','1',100,'NULL',0,'entrego','recibio');
+#insert into prodRepos(supervisor,fecha,sierraCinta, operador, pctjOp, ayudante, pctjAyu, entrego, recibio) values ('sup001',now(),'1','1',100,'NULL',0,'entrego','recibio');
 #------------------------------------------------------------------------
 create table repoMovs(
 	id int not null auto_increment,
