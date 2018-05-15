@@ -17,4 +17,18 @@ function htmlFpost($campo){  // fecha
 	return "'$d'";
 }
 
+function htmlSelect($qry, $name, $val, $tit, $selected){
+	$db=db::getInstance();
+	$db->query($qry);
+	$ops="<select name='$name'>\n";
+	while($db->next_row()){
+		$ops=$ops."<option ";
+		if($db->f($val)==$selected){
+			$ops.="selected ";
+		}
+		$ops.= "value='".$db->f("$val")."'>".$db->f($tit)."</option>\n";
+	}
+	$ops=$ops."</select>\n";
+	return $ops;
+}
 ?>

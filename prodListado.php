@@ -7,7 +7,7 @@ require_once "Auth/table.php";
 
 $cond="order by p.id desc limit 10";
 if(isset($_POST["alta"])){
-        header('Location: prodSCnuevoRepo.php');
+        header('Location: prodNuevoRepo.php');
         die();
 }
 elseif(isset($_POST["today"])){
@@ -32,7 +32,7 @@ elseif(isset($_POST["ultimos"])){
 </head>
 <body>
 <?php require('menu.php'); ?>
-<h1>Producción Sierras Cintas</h1>
+<h1>Reporte de Producción</h1>
 <form method='POST'>
 <input type=submit name=alta value='Nuevo Reporte'> 
 ver: <input type=submit name=ultimos value='Ultimos 10'>
@@ -44,7 +44,7 @@ y <input type=date name=f2>
 </form>
 
 <?php
-$q="select p.id, supervisor, fecha, sierraCinta, e1.nombre as operador, e2.nombre as ayudante, entrego, recibio from prodSierrasCintas as p LEFT JOIN empleados as e1 on p.operador=e1.id LEFT JOIN empleados as e2 on p.ayudante=e2.id $cond";
+$q="select p.id, supervisor, fecha, sierraCinta, e1.nombre as operador, pctjOp, e2.nombre as ayudante, pctjAyu, entrego, recibio from prodRepos as p LEFT JOIN empleados as e1 on p.operador=e1.id LEFT JOIN empleados as e2 on p.ayudante=e2.id $cond";
 //echo "<br>q: $q<br>\n";
 $db=db::getInstance();
 $db->query($q);
@@ -56,10 +56,10 @@ $t->addextras( array(
 		array("id")
 		)
 );
-$t->setcdatas(array("Ver"=>"Editar", "id"=>"id", "supervisor" => "supervisor", "fecha" => "fecha", "# sierra"=>"sierraCinta", "Operador"=>"operador", "ayudante"=>"ayudante", "Entrego"=>"entrego", "recibio"=>"recibio"));
+$t->setcdatas(array("Ver"=>"Editar", "id"=>"id", "supervisor" => "supervisor", "fecha" => "fecha", "# sierra"=>"sierraCinta", "Operador"=>"operador", "o%"=>"pctjOp", "ayudante"=>"ayudante", "a%"=>"pctjAyu", "Entrego"=>"entrego", "recibio"=>"recibio"));
 //$t->setFieldClas("Importe","class='alin-der'"); //campo=>id_class, p.e. 'id'=>"class='myclas'"
 //$t->setFieldTotalizado("total", 0); // campo a totalizar, inicializado en 0
-echo "<form action='prodSCrepoDetalle.php' method='GET'>\n";
+echo "<form action='prodDetalle.php' method='GET'>\n";
 $t->show();
 echo "</form>\n";
 ?>

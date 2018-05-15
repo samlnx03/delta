@@ -8,3 +8,7 @@
 .divcol3 {
     flex: 33%;
 }
+
+.divborde {
+	border: 1px solid black;
+}

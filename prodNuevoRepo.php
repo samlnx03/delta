@@ -4,9 +4,7 @@ require_once "Auth/table.php";
 // borrar 2
 //require_once "Auth/proteger.php";
 //require_once "funcs.php";
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+require_once "desarrollo.php";  // show errors
 ?>
 <html>
 <head>
@@ -16,8 +14,11 @@ error_reporting(E_ALL);
 <link rel="stylesheet" type="text/css" href="styles/abutton.css">
 <script>
 function validar(){
-	if(document.getElementById("ayudante").value=='')
+	if(document.getElementById("ayudante").value==''){
 		document.getElementById("ayudante").value='0';
+		document.getElementById("pctjAyu").value='0';
+		document.getElementById("pctjOp").value='100';
+	}
 	return true;
 }
 </script>
@@ -39,7 +40,7 @@ if(isset($_SESSION["msg"])){
 ?>
 <div class="divrow">
 <div class="divcol">
-<form action='prodSCaltaRepo.php' method='POST' onsubmit='validar()'>
+<form action='prodAltaRepo.php' method='POST' onsubmit='validar()'>
 <table>
 <tr>
 <td>Supervisor de Area<td><input type=text name=supervisor required>
@@ -49,9 +50,10 @@ if(isset($_SESSION["msg"])){
 <td>Sierra cinta No.<td><input type=text name=sierraCinta required>
 <tr>
 <td># Operador<td><input id='operador' type=text name=operador required> 
-
+ <input id=pctjOp type=text name=pctjOp size=4 value=50> %
 <tr>
 <td># Ayudante<td><input id='ayudante' type=text name=ayudante>
+ <input id=pctjAyu type=text name=pctjAyu size=4 value=50> %
 <tr>
 <td>Entregó<td><input type=text name=entrego>
 <tr>

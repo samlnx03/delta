@@ -18,16 +18,18 @@ if(isset($_POST["alta"])){
 	$costo=htmlNpost("costo");
 	$unidad=$_POST["unidad"];
 	$q="insert into clavesActividad (clave, descrip, costo, unidad) values ('$clave','$descrip',$costo,'$unidad')";
-        $db->query($q);
-	$_SESSION["msg"]="No borrado porque existe producción";
+	$db->query($q);
+	$nreg=$db->affected_rows();
+	$_SESSION["msg"]="$nreg registro(s) insertado(s)";
 } else if(isset($_POST["borrar"])){
 	$clave=$_POST["borrar"];
-	$q="select id from prodSierrasCintasMovs where clave='$clave' limit 1";
+	$q="select id from repoMovs where actividad='$clave' limit 1";
         $db->query($q);
 	if($db->num_rows()==0){
 		$q="delete from clavesActividad where clave='$clave'";
-		//$_SESSION["msg"]="$q";
 		$db->query($q);
+		$nreg=$db->affected_rows();
+		$_SESSION["msg"]="$nreg registro(s) eliminado(s)";
 	} else {
 		$_SESSION["msg"]="No borrado porque existe producción";
 	}
@@ -55,9 +57,10 @@ descripcion: <input type=text name=descrip required>
 <br>
 costo: <input type=text name=costo size=10 required>
 por <input type=text name=unidad required>
-(pieza, m3, pies, hora, dia, etc)
+(pie-tabla, pieza, hora, bulto, etc.)
 <br>
 <input type=submit name=alta value=Agregar>
+ Especifique <b>pie-tabla</b> para madera dimensionada pagada por volumen en pie-tabla
 </form>
 </div>
 
