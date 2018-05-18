@@ -113,7 +113,7 @@ echo "$clave\n";
 $styl2.="background-color: eeeeee; font-weight: bold; color: black; border:thin Black; border-style : dashed; line-height: 20px; padding-top: 6px; padding-left: 6px; padding-bottom: 6px; padding-right: 6px;";
 ?>
 <div  id="otros" style="<?php echo $styl2;?>">
-<form action=prodDetalleAlta.php method=POST>
+<form action=prodDetalleAltaOD.php method=POST>
 <table>
 <tr>
 <td>Cantidad<br><input type=text name=cantidad size=9>
@@ -128,7 +128,7 @@ echo "<input type=hidden name=descripcion>";
 <input type=submit name=soloOperador value='Agregar'>
 <?php echo "Solo el Operador: <b>$o</b>\n";?>
 </td></tr></table></form>
-<form action=prodDetalleAlta.php method=POST>
+<form action=prodDetalleAltaOD.php method=POST>
 <table>
 <tr>
 <td>Cantidad<br><input type=text name=cantidad size=9>
@@ -141,7 +141,7 @@ echo "<input type=hidden name=descripcion>";
 <input type=submit name=soloAyudante value='Agregar'>
 <?php echo "Solo el Ayudante: <b>$a</b>\n";?>
 </td></tr></table></form>
-<form action=prodDetalleAlta.php method=POST>
+<form action=prodDetalleAltaOD.php method=POST>
 <table>
 <tr>
 <td>Cantidad<br><input type=text name=cantidad size=9>
@@ -161,7 +161,7 @@ echo "<input type=hidden name=descripcion>";
 //echo "<br>q: $q<br>\n";
 
 // mostrar movimeintos de madera dimensionada
-$q="select d.id, d.cantidad, a.descrip,t.descrip as dimensiones from movsRepoDimensionado as d LEFT JOIN actividades as a ON d.actividad=a.clave LEFT JOIN tablas as t ON d.idtabla=t.id WHERE d.idRepo='$id'";
+$q="select d.id, d.cantidad, a.descrip, t.especie, t.descrip as dimensiones from movsRepoDimensionado as d LEFT JOIN actividades as a ON d.actividad=a.clave LEFT JOIN tablas as t ON d.idtabla=t.id WHERE d.idRepo='$id'";
 //echo "$q<br>\n";
 $db->query($q);
 $t=new html_table();
@@ -172,15 +172,28 @@ $t->addextras( array(
 		array("id")
 		)
 );
-$t->setcdatas(array("Eliminar"=>"Editar", "cant" => "cantidad", "descrip"=>"descrip","dimensiones"=>"dimensiones" ));
+$t->setcdatas(array("Eliminar"=>"Editar", "cant" => "cantidad", "descrip"=>"descrip", "especie"=>"especie", "dimensiones"=>"dimensiones" ));
 //$t->setFieldClas("Importe","class='alin-der'"); //campo=>id_class, p.e. 'id'=>"class='myclas'"
 //$t->setFieldTotalizado("total", 0); // campo a totalizar, inicializado en 0
 echo "<form action='e.php' method='GET'>\n";
 $t->show();
 echo "</form>\n";
 
+// mostrar movimientos de otros destajos
 $q="select d.id, d.cantidad, a.unidad, a.descrip, e.nombre from movsRepoOtrasActiv as d LEFT JOIN actividades as a ON d.actividad=a.clave LEFT JOIN empleados as e ON d.idEmpleado=e.id WHERE d.idRepo='$id'";
-$t->setcdatas(array("Eliminar"=>"Editar", "cant" => "cantidad", "unidad"=>"unidad", "cve" => "actividad", "descrip"=>"descrip","descripcion"=>"descripcion" ));
+$db->query($q);
+$t=new html_table();
+$t->addextras( array(
+	"Editar", 
+		"<button type='submit' name='id' value='%f0%'>Eliminar</button>", 
+		array("id")
+		)
+);
+$t->setbody($db->get_all());
+$t->setcdatas(array("Eliminar"=>"Editar", "cant" => "cantidad", "unidad"=>"unidad", "descrip"=>"descrip","empleado"=>"nombre" ));
+echo "<form action='e.php' method='GET'>\n";
+$t->show();
+echo "</form>\n";
 ?>
 </body>
 </html>

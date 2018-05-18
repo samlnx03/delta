@@ -1,3 +1,4 @@
+<script src="https://togetherjs.com/togetherjs-min.js"></script>
 <?php
 echo "<ul class='menu'>\n";
 echo "<li><a href=index.php>[Inicio]</a></li>\n";
@@ -8,6 +9,7 @@ echo "<li><a href=madDimensionada.php>[Madera Dim]</a></li>\n";
 echo "<li><a href=tarimas.php>[Tarimas]</a></li>\n";
 echo "<li><a href=reportes.php>[Reportes]</a></li>\n";
 echo "<li><a href=bye.php>[Logout]</a></li>\n";
+echo "<li><a onclick=\"TogetherJS(this); return false;\">TOGHETER</a>\n";
 echo "</ul>\n";
 ?>
 

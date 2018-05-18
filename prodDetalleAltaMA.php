@@ -45,6 +45,7 @@ $db->query($q);
 //$_SESSION["q"]="$q<br>\n"; 
 $id=$db->insert_id;
 $_SESSION["msg"]="Registro realizado (id=$id)"; 
+$_SESSION["agregando"]=1; 
 header("Location: prodDetalle.php");
 die();
 ?>

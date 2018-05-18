@@ -70,7 +70,7 @@ Dimensiones <input type=text name=descripcion>
 </form>
 <?php
 // mostrar componnetes de la tarima
-$q="select deftarima.id, cantidad, especie, descrip, volpt from deftarima LEFT JOIN tablas ON idtabla=tablas.id WHERE deftarima.idtarima='$id'";
+$q="select deftarima.id, cantidad, especie, descrip, volpt, volpt*cantidad as vol from deftarima LEFT JOIN tablas ON idtabla=tablas.id WHERE deftarima.idtarima='$id'";
 $db->query($q);
 $t=new html_table();
 $t->setbody($db->get_all());
@@ -80,11 +80,12 @@ $t->addextras( array(
 		array("id")
 		)
 );
-$t->setcdatas(array("Eliminar"=>"Editar", "cantidad" => "cantidad", "descrip"=>"descrip", "volpt" => "volpt", "especie"=>"especie" ));
+$t->setcdatas(array("Eliminar"=>"Editar", "cantidad" => "cantidad", "descrip"=>"descrip", "vol u" => "volpt", "especie"=>"especie", "vol pt"=>"vol"));
 //$t->setFieldClas("Importe","class='alin-der'"); //campo=>id_class, p.e. 'id'=>"class='myclas'"
-//$t->setFieldTotalizado("total", 0); // campo a totalizar, inicializado en 0
+$t->setFieldTotalizado("vol", 0); // campo a totalizar, inicializado en 0
 echo "<form action='e.php' method='GET'>\n";
 $t->show();
+echo "Total volumen (pt): ".$t->getFieldTotalizado("vol")."<br>\n";
 echo "</form>\n";
 ?>
 </body>
