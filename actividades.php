@@ -17,7 +17,7 @@ if(isset($_POST["alta"])){
 	$descrip=$_POST["descrip"];
 	$costo=htmlNpost("costo");
 	$unidad=$_POST["unidad"];
-	$q="insert into clavesActividad (clave, descrip, costo, unidad) values ('$clave','$descrip',$costo,'$unidad')";
+	$q="insert into actividades (clave, descrip, costo, unidad) values ('$clave','$descrip',$costo,'$unidad')";
 	$db->query($q);
 	$nreg=$db->affected_rows();
 	$_SESSION["msg"]="$nreg registro(s) insertado(s)";
@@ -26,7 +26,7 @@ if(isset($_POST["alta"])){
 	$q="select id from repoMovs where actividad='$clave' limit 1";
         $db->query($q);
 	if($db->num_rows()==0){
-		$q="delete from clavesActividad where clave='$clave'";
+		$q="delete from actividades where clave='$clave'";
 		$db->query($q);
 		$nreg=$db->affected_rows();
 		$_SESSION["msg"]="$nreg registro(s) eliminado(s)";
@@ -71,7 +71,7 @@ Especifique <b>tarima</b> para clavado de tarima por pieza
 <div id="lista">
 <?php
 //<div id="lista" style="overflow:scroll">
-        $q="select * from clavesActividad";
+        $q="select * from actividades";
         $db=db::getInstance();
         $db->query($q);
         $t=new html_table();

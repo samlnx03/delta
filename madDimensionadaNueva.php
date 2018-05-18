@@ -138,10 +138,7 @@ if(isset($_SESSION["msg"])){
 <form action='madDimensionadaAlta.php' method=POST>
 Especie <input type=text name=especie required> (pino, encino, etc.)
 <br>
-Clave (Actividad prod) 
 <?php
-echo htmlSelect("select clave, descrip from clavesActividad WHERE unidad='pie-tabla'", "claveProd", "clave","descrip","");
-echo "<br>\n";
 echo "<br>\n";
 echo "Descripción (dimensiones) <input type=text name=descripcion value='$descrip' size=50 onfocusout='analizadimensiones(this.value)'>\n";
 echo "<br>\n";

@@ -44,7 +44,7 @@ y <input type=date name=f2>
 </form>
 
 <?php
-$q="select p.id, supervisor, fecha, sierraCinta, e1.nombre as operador, pctjOp, e2.nombre as ayudante, pctjAyu, entrego, recibio from prodRepos as p LEFT JOIN empleados as e1 on p.operador=e1.id LEFT JOIN empleados as e2 on p.ayudante=e2.id $cond";
+$q="select p.id, supervisor, fecha, sierraCinta, e1.nombre as operador, pctjOp, e2.nombre as ayudante, pctjAyu, entrego, recibio from repoProd as p LEFT JOIN empleados as e1 on p.operador=e1.id LEFT JOIN empleados as e2 on p.ayudante=e2.id $cond";
 //echo "<br>q: $q<br>\n";
 $db=db::getInstance();
 $db->query($q);

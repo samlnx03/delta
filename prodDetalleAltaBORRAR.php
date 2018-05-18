@@ -16,8 +16,8 @@ if(!(isset($_POST["aserrioYhojeado"]) OR
 
 $db=db::getInstance();
 $idRepo=$_SESSION["idrepo"];
-$q="select r.operador as idOp, e1.nombre as operador, r.ayudante as idAyu, e2.nombre as ayudante from prodRepos as r LEFT JOIN empleados as e1 on r.operador=e1.id LEFT JOIN empleados as e2 on r.ayudante=e2.id WHERE r.id='$idRepo'";
-// datos sobre el empleado que estan en prodRepos (reportes de produccion)
+$q="select r.operador as idOp, e1.nombre as operador, r.ayudante as idAyu, e2.nombre as ayudante from repoProd as r LEFT JOIN empleados as e1 on r.operador=e1.id LEFT JOIN empleados as e2 on r.ayudante=e2.id WHERE r.id='$idRepo'";
+// datos sobre el empleado que estan en repoProd (reportes de produccion)
 $db->query($q);
 $db->next_row();
 $idOp=$db->f("idOp");
@@ -29,14 +29,19 @@ $ayu=$db->f("ayudante");
 $cantidad=htmlNpost("cantidad");
 $clave=htmlpost("clave");
 $descripcion=htmlpost("descripcion");
+
+// busqueda de la tabla
+$especie=htmlpost("especie");
+$q="select id from tablas where especie='$especie' AND descrip='$descripcion'";
+$idtabla=
 $_SESSION["agregando"]=0; 
 if(isset($_POST["aserrioYhojeado"])){
 	$_SESSION["agregando"]=1; 
 	// un solo se registro y aplica op y ayudante como diga el reporte a la hora de los destajos
-	$q="insert into repoMovs ";
-	$q.="(idRepo, actividad, cantidad, descripcion) ";
+	$q="insert into movsRepoDimensionado ";
+	$q.="(idRepo, actividad, cantidad, idtabla) ";
 	$q.="VALUES ";
-	$q.="($idRepo,'$clave',$cantidad,'$descripcion')";
+	$q.="($idRepo,'$clave',$cantidad,'$idtabla')";
 	// $clave es ap (aserrio de pino) u hp (hojeado de pino) etc.
 	// descripcion son las medidas de la tabla de pino
 	$db->query($q);

@@ -45,7 +45,7 @@ $fecha=htmlFpost("fecha");
 $sierraCinta=htmlpost("sierraCinta");
 $entrego=htmlpost("entrego");
 $recibio=htmlpost("recibio");
-$q="insert into prodRepos(supervisor,fecha,sierraCinta, operador, pctjOp, ayudante, pctjAyu, entrego, recibio) values ('$supervisor',$fecha,'$sierraCinta',$op, $pctjOp, $ayu,$pctjAyu, '$entrego','$recibio')";
+$q="insert into repoProd(supervisor,fecha,sierraCinta, operador, pctjOp, ayudante, pctjAyu, entrego, recibio) values ('$supervisor',$fecha,'$sierraCinta',$op, $pctjOp, $ayu,$pctjAyu, '$entrego','$recibio')";
 $db->query($q);
 $id=$db->insert_id;
 //$_SESSION["q"]="$q<br>\n"; 

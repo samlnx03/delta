@@ -19,7 +19,7 @@ create table empleados(
 );
 
 #---------------------------------------
-create table RepoProd(
+create table repoProd(
         id int not null auto_increment,
         supervisor char(20),
         fecha date,
