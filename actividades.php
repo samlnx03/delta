@@ -56,11 +56,14 @@ clave: <input type=text name=clave size=10 required>
 descripcion: <input type=text name=descrip required>
 <br>
 costo: <input type=text name=costo size=10 required>
-por <input type=text name=unidad required>
-(pie-tabla, pieza, hora, bulto, etc.)
+por <input type=text name=unidad size=10 required>
+(pie-tabla, tarima, hora, bulto, etc.)
+<br>
+Especifique <b>pie-tabla</b> para madera dimensionada pagada por volumen en pie-tabla
+<br>
+Especifique <b>tarima</b> para clavado de tarima por pieza
 <br>
 <input type=submit name=alta value=Agregar>
- Especifique <b>pie-tabla</b> para madera dimensionada pagada por volumen en pie-tabla
 </form>
 </div>
 

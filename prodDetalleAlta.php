@@ -81,6 +81,3 @@ header("Location: prodDetalle.php");
 die();
 ?>
 
-<?php
-require_once "funcs.php";
-?>

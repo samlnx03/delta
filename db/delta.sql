@@ -84,3 +84,19 @@ create table tablas(
 
 insert into tablas (especie, claveprod,descrip, grueso, ancho, largo, volpt) values ('pino','hp','3/4x4x81/4',0.75,4,8.25,1.1);
 
+#------------------------------------------------------------------------
+create table tarimas(
+	id int not null auto_increment, 
+	tarima char(20),
+	descripcion char(50),
+	primary key(id), key(tarima)
+);
+#----------------
+create table deftarima(
+	id int not null auto_increment, 
+	idtarima int not null,
+	idtabla int not null,
+	cantidad int not null,
+	primary key(id)
+);
+
