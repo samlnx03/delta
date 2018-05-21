@@ -33,7 +33,7 @@ if(isset($_SESSION["msg"])){
 <form action='tarimaAlta.php' method='POST'>
 <table>
 <tr>
-<td>Nombre<td><input type=text name=tarima required>
+<td>Clave<td><input type=text name=tarima size=10 maxlength=10 required>
 <tr>
 <td>descripción<td><input type=text name=descripcion size=50>
 <tr><td><td><input type=submit name=agregar value=Agregar>

@@ -12,12 +12,34 @@ if(!isset($_POST["agregar"])){
 // dar el alta
 $tarima=htmlpost("tarima");
 $descripcion=htmlpost("descripcion");
-$q="insert into tarimas(tarima, descripcion) values ('$tarima', '$descripcion')";
 $db=db::getInstance();
+// checar que no exista la clave en actividades y en tarimas
+$q="select tarima,descripcion from tarimas where tarima='$tarima'";
 $db->query($q);
-$id=$db->insert_id;
+if($db->num_rows()>0){
+	$_SESSION["msg"]="Ya existe la clave $tarima para otra tarima";
+	header('Location: tarimaNueva.php');
+	die();
+}
+$q="select descrip from actividades where clave='ct$tarima'";
+$db->query($q);
+if($db->num_rows()>0){
+	$_SESSION["msg"]="Ya existe la clave $tarima en otra actividad";
+	header('Location: tarimaNueva.php');
+	die();
+}
+$q="insert into tarimas(tarima, descripcion) values ('$tarima', '$descripcion')";
+$db->query($q);
+$_SESSION["msg"]="Agregada tarima ".$db->insert_id;
+$_SESSION["idtarima"]=$db->insert_id;
+// insertar tambien la clave de produccion para clavado
+// el costo de clavado se debe poner en actividades
+$clave="ct$tarima";
+$q="insert into actividades (clave, descrip, costo, unidad, tipo) values ('$clave','$descripcion',0,'tarima','tarima')";
+$db->query($q);
 //$_SESSION["q"]="$q<br>\n"; 
-header("Location: tarimaDetalle.php?id=$id");	//a los detalles
+$_SESSION["msg"].="<br><br>Se agregó actividad de producción pero debe poner el costo en Actividades ";
+header("Location: tarimaDetalle.php");	//a los detalles, ya hay id de tarima en la session
 die();
 ?>
 

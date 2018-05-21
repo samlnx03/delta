@@ -1,12 +1,13 @@
-create database delta;
-grant all privileges on delta.* to sperez@localhost identified by 'sam';
-connect delta;
+#create database delta;
+#grant all privileges on delta.* to sperez@localhost identified by 'sam';
+#connect delta;
 
 create table actividades(
         clave char(10),
         descrip char(50),
         costo Decimal(9,4),
         unidad char(10),
+	tipo enum('tabla','tarima','otro') default 'otro',
         primary key(clave)
 );
 
@@ -30,6 +31,7 @@ create table repoProd(
         pctjAyu int,
         entrego char(20),
         recibio char(20),
+	aplicadaEnInventario char(1) default 'n',
         primary key(id), key (fecha), key(operador), key(ayudante)
 );
 
@@ -83,11 +85,19 @@ create table tablas(
         existen int,
         primary key(id), key(descrip), key(especie,descrip)
 );
-
+create table tablasIO(
+	id int not null auto_increment,
+	idtabla int not null,
+	cantidad int not null comment 'positivo o neg, p.e. compras y ventas directas'
+	fecha date,
+	observaciones char(50),
+	aplicadaEnInventario char(1) default 'n',
+	primary key(id), key(fecha)
+);
 #---------------------------------------
 create table tarimas(
         id int not null auto_increment,
-        tarima char(20),
+        tarima char(10),
         descripcion char(50),
         primary key(id), key(tarima)
 );

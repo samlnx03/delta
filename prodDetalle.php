@@ -4,6 +4,9 @@ require_once "Auth/table.php";
 require_once "desarrollo.php"; // debug show errors
 
 require_once "funcs.php";  // funciones utiles
+//
+// checar si ya fue inventariado y si es el caso solo mostrar items
+// desaplicar en otro script especial para ello
 ?>
 <html>
 <head>
@@ -96,7 +99,8 @@ $styl1.="background-color: eeeeee; font-weight: bold; color: black; border:thin 
 <td>
 Producción<br>
 <?php
-$q="select clave, descrip from actividades where unidad='pie-tabla'";
+//$q="select clave, descrip from actividades where unidad='pie-tabla'";
+$q="select clave, descrip from actividades where tipo='tabla'";
 $clave=htmlSelect($q, "clave", "clave", "descrip", '');
 echo "$clave\n";
 ?>
@@ -116,9 +120,10 @@ $styl2.="background-color: eeeeee; font-weight: bold; color: black; border:thin 
 <form action=prodDetalleAltaOD.php method=POST>
 <table>
 <tr>
-<td>Cantidad<br><input type=text name=cantidad size=9>
+<td>Cantidad<br><input type=text name=cantidad size=3>
 <?php
-$q="select clave, concat(unidad,' ',descrip) as descrip from actividades where unidad<>'pie-tabla'";
+//$q="select clave, concat(unidad,' ',descrip) as descrip from actividades where unidad<>'pie-tabla'";
+$q="select clave, concat(clave,': (',unidad,') ',descrip) as descrip from actividades where tipo<>'tabla'";
 $clave=htmlSelect($q, "clave", "clave", "descrip", '');
 echo "<td>Clave<br>$clave\n";
 echo "<td> \n";
@@ -131,7 +136,7 @@ echo "<input type=hidden name=descripcion>";
 <form action=prodDetalleAltaOD.php method=POST>
 <table>
 <tr>
-<td>Cantidad<br><input type=text name=cantidad size=9>
+<td>Cantidad<br><input type=text name=cantidad size=3>
 <?php
 echo "<td>Clave<br>$clave\n";
 echo "<td> \n";
@@ -144,7 +149,7 @@ echo "<input type=hidden name=descripcion>";
 <form action=prodDetalleAltaOD.php method=POST>
 <table>
 <tr>
-<td>Cantidad<br><input type=text name=cantidad size=9>
+<td>Cantidad<br><input type=text name=cantidad size=3>
 <?php
 echo "<td>Clave<br>$clave\n";
 echo "<td> \n";

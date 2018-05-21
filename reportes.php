@@ -38,6 +38,8 @@ cantidad total diaria de piezas aserradas de cada dimension y especie
 <br>
 Pagos de destajos (jueves-miercoles)
 <br>
+Entradas y salidas de madera dimensionada
+<br>
 Inventario de materias primas
 <br>
 </body>
