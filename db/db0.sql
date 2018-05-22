@@ -1,7 +1,6 @@
-#create database delta;
-#grant all privileges on delta.* to sperez@localhost identified by 'sam';
-#connect delta;
+#mysq -u user -p db < db0.sql
 
+drop table if exists actividades;
 create table actividades(
         clave char(10),
         descrip char(50),
@@ -10,8 +9,8 @@ create table actividades(
 	tipo enum('tabla','tarima','otro') default 'otro',
         primary key(clave)
 );
-
 #---------------------------------------
+drop table if exists empleados;
 create table empleados(
         id int not null auto_increment, 
         nombre char(60), 
@@ -20,6 +19,7 @@ create table empleados(
 );
 
 #---------------------------------------
+drop table if exists repoProd;
 create table repoProd(
         id int not null auto_increment,
         supervisor char(20),
@@ -35,6 +35,7 @@ create table repoProd(
         primary key(id), key (fecha), key(operador), key(ayudante)
 );
 
+drop table if exists movsRepoDimensionado;
 create table movsRepoDimensionado(
         id int not null auto_increment,
         idRepo int not null,
@@ -43,6 +44,8 @@ create table movsRepoDimensionado(
         idtabla int not null comment 'la tabla incluye la especie de madera',
         primary key(id), key (idRepo), key(actividad,idtabla)
 );
+
+drop table if exists movsRepoOtrasActiv;
 create table movsRepoOtrasActiv(
         id int not null auto_increment,
         idRepo int not null,
@@ -52,6 +55,7 @@ create table movsRepoOtrasActiv(
         primary key(id), key (idRepo), key(idEmpleado,idRepo)
 );
 #---------------------------------------
+drop table if exists destajosDim;
 create table destajosDim(
         id int not null auto_increment,
         idDimensionado int comment 'tabla movsRepoDimensionado',
@@ -61,6 +65,8 @@ create table destajosDim(
         costo Decimal(9,4),
         primary key(id), key (idEmpleado)
 );
+
+drop table if exists destajosOtros;
 create table destajosOtros(
         id int not null auto_increment,
         idOtras int comment 'tabla movsRepoOtrasActividades',
@@ -71,6 +77,7 @@ create table destajosOtros(
 );
 
 #---------------------------------------
+drop table if exists tablas;
 create table tablas(
         id int not null auto_increment,
         especie char(10) not null,
@@ -85,6 +92,8 @@ create table tablas(
         existen int,
         primary key(id), key(descrip), key(especie,descrip), key(especie,grueso)
 );
+
+drop table if exists tablasIO;
 create table tablasIO(
 	id int not null auto_increment,
 	idtabla int not null,
@@ -95,6 +104,7 @@ create table tablasIO(
 	primary key(id), key(fecha)
 );
 #---------------------------------------
+drop table if exists tarimas;
 create table tarimas(
         id int not null auto_increment,
         tarima char(10),
@@ -102,10 +112,12 @@ create table tarimas(
 	editable char(1) default 's' comment 'si !=s ya no se puede editar componentes', 
         primary key(id), key(tarima)
 );
+
+drop table if exists deftarima;
 create table deftarima(
         id int not null auto_increment,
         idtarima int not null,
         idtabla int not null,
         cantidad int not null,
         primary key(id)
-)
+);
