@@ -83,7 +83,7 @@ create table tablas(
         ulargo char(1) not null default 'i',
         volpt decimal(9,4) not null,
         existen int,
-        primary key(id), key(descrip), key(especie,descrip)
+        primary key(id), key(descrip), key(especie,descrip), key(especie,grueso)
 );
 create table tablasIO(
 	id int not null auto_increment,
@@ -99,6 +99,7 @@ create table tarimas(
         id int not null auto_increment,
         tarima char(10),
         descripcion char(50),
+	editable char(1) default 's' comment 'si !=s ya no se puede editar componentes', 
         primary key(id), key(tarima)
 );
 create table deftarima(

@@ -59,7 +59,7 @@ function analizadimensiones(d){
 	if(l.includes("."))
 		ul='M'; // metros
 	else if(l.includes("/")){
-		if(vl>12)
+		if(vl<8)
 			ul='I'; // pulgadas
 		else
 			ul='F';	// pies

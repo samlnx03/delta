@@ -9,6 +9,7 @@ echo "<li><a href=madDimensionada.php>[Madera Dim]</a></li>\n";
 echo "<li><a href=tarimas.php>[Tarimas]</a></li>\n";
 echo "<li><a href=reportes.php>[Reportes]</a></li>\n";
 echo "<li><a href=bye.php>[Logout]</a></li>\n";
+echo "<li><a href=pendientes.php>[Pendientes]</a></li>\n";
 //echo "<li><a onclick=\"TogetherJS(this); return false;\">TOGHETER</a>\n";
 echo "</ul>\n";
 ?>

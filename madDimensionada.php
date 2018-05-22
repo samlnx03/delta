@@ -17,18 +17,32 @@ require_once "desarrollo.php"; // reporta errores
 <?php require('menu.php'); ?>
 <h1>Madera Dimensionada</h1>
 <?php
+$condi="";
 $descrip="";
+$consultar=false;
 if(isset($_SESSION["newIO"])){
 	$descrip=$_SESSION["newIO"];
 	unset($_SESSION["newIO"]);
+	$condi=" WHERE descrip like '$descrip%'";
+	$consultar=true;
 }
 if(isset($_POST["buscar"])){
 	$descrip=$_POST["descripcion"];
+	if($descrip!="") {
+		$condi=" WHERE descrip like '$descrip%'";
+		$consultar=true;
+	}
+}
+if(isset($_POST["verTodas"])){
+	$descrip="";
+	$condi="";
+	$consultar=true;
 }
 $results=0; // hay resultados de la consulta
-if(isset($descrip)){
+//if(isset($descrip)){
+if($consultar){
 	//$q="select id, especie, claveprod, descrip, grueso, ugrueso, ancho, uancho, largo, ulargo, volpt, existen from tablas where descrip like '$descrip%'";
-	$q="select id, especie, descrip, grueso, ugrueso, ancho, uancho, largo, ulargo, volpt from tablas where descrip like '$descrip%'";
+	$q="select id, especie, descrip, grueso, ugrueso, ancho, uancho, largo, ulargo, volpt from tablas $condi ORDER BY especie,grueso";
 	$db=db::getInstance();
 	$db->query($q);
 	if($db->num_rows()==0){
@@ -40,7 +54,8 @@ if(isset($descrip)){
 ?>
 <form method=POST>
 Dimensiones <input type=text name=descripcion <?php echo "value='$descrip' ";?> size=50>
-<input type=submit name=buscar value='Buscar'>
+<input type=submit name=buscar value='Buscar'> 
+<input type=submit name=verTodas value='Ver Todas'>
 </form>
 
 <?php
