@@ -90,6 +90,7 @@ if($editable=='s'){
  $t->show();
  echo "Total volumen (pt): <b>".$t->getFieldTotalizado("vol")."</b><br>\n";
  echo "<input type=submit name=terminaDef value='Terminar Definición'>\n";
+ echo " Ya no será posible modificar detalles de esta tarima\n";
  echo "</form>\n";
 } else {
  $t->setcdatas(array("cantidad" => "cantidad", "descrip"=>"descrip", "vol u" => "volpt", "especie"=>"especie", "vol pt"=>"vol"));

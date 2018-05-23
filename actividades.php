@@ -43,17 +43,21 @@ if(isset($_POST["alta"])){
 		$_SESSION["msg"]="Ya existe la clave $clave";
 	}
 } else if(isset($_POST["borrar"])){
-	$clave=$_POST["borrar"];
-	$q="select id from repoMovs where actividad='$clave' limit 1";
+        $clave=$_POST["borrar"];
+        $q="select id from movsRepoDimensionado where actividad='$clave' limit 1";
         $db->query($q);
-	if($db->num_rows()==0){
-		$q="delete from actividades where clave='$clave'";
-		$db->query($q);
-		$nreg=$db->affected_rows();
-		$_SESSION["msg"]="$nreg registro(s) eliminado(s)";
-	} else {
-		$_SESSION["msg"]="No borrado porque existe producción";
-	}
+        $mdim=$db->num_rows();
+        $q="select id from movsRepoOtrasActiv where actividad='$clave' limit 1";
+        $db->query($q);
+        $moa=$db->num_rows();
+        if($mdim==0 AND $moa==0){
+                $q="delete from actividades where clave='$clave'";
+                $db->query($q);
+                $nreg=$db->affected_rows();
+                $_SESSION["msg"]="$nreg registro(s) eliminado(s)";
+        } else {
+                $_SESSION["msg"]="No borrado porque existe producción";
+        }
 } else if(isset($_POST["okCambiaCosto"])){
 	$clave=htmlpost("activ2change");
 	$newvalue=htmlNpost("newCosto");

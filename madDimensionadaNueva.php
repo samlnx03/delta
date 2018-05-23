@@ -20,15 +20,19 @@ if(!isset($_POST["nueva"])){
 function analizadimensiones(d){
 	var res;
 	var nd;
-	d1=d.replace(/ /g,"+");
-	d1=d1.replace(/x/gi,"X");
-	//alert("reemplazar x por X en d: "+d);
-	res=d1.split("X");
-	//alert("tokens: "+res);
-	if((nd=res.length)!=3){
-		alert("dimensiones incorrectas, hay "+nd);
-		return;
-	}
+        var d1;
+        d1=d.replace(/X/gi,"x");
+        d1=d1.replace(/\*/gi,"x");
+        d1=d1.replace(/[ ]*x[ ]*/g,"x");
+        d1=d1.replace(/ /g,"+");
+        alert("normalizando dimensones: "+d1);
+        res=d1.split("x");
+        //alert("tokens: "+res);
+        if((nd=res.length)!=3){
+                alert("dimensiones incorrectas, hay "+nd);
+                return;
+        }
+	
 	var g,a,l;
 	g=res[0]; a=res[1]; l=res[2];
 	//alert("g:"+g+" a:"+a+" l:"+l);
@@ -93,6 +97,9 @@ function analizadimensiones(d){
 	else if(ul=='F') vol=vol*12;
 	vol=vol/144;
 	document.getElementById("volumenPT").value = vol;
+	// descripcion normalizada
+	d1=d1.replace(/\+/gi," ");
+	document.getElementById("descripcion").value = d1;
 }
 function recalcVol(){
 	var vg=document.getElementById("gruesoDecimal").value;
@@ -140,7 +147,8 @@ Especie <input type=text name=especie required> (pino, encino, etc.)
 <br>
 <?php
 echo "<br>\n";
-echo "Descripción (dimensiones) <input type=text name=descripcion value='$descrip' size=50 onfocusout='analizadimensiones(this.value)'>\n";
+echo "Descripción (dimensiones) <input type=text id='descripcion' name=descripcion value='$descrip''
+ size=50 onfocusout='analizadimensiones(this.value)'>\n";
 echo "<br>\n";
 echo "ejemplo1: <input type=text value='3/4x4x8 1/4' disabled>  ejemplo2: <input type=text value='1 1/2x4 1/2x120' disabled><br>\n";
 echo "<br>\n";
