@@ -86,7 +86,7 @@ if($results){
 		"largo"=>"largo", "ul"=>"ulargo", "volpt"=>"volpt"
 		)
 	);
-	echo "<form action='madDimIO.php' method=POST>\n";
+	//echo "<form action='madDimIO.php' method=POST>\n";
 	$t->show();
 	echo "<input type=hidden name=newIOdescrip value='$descrip'>\n";
 	echo "</form>\n";

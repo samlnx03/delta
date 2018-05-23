@@ -27,6 +27,9 @@ Reporte de produccion
 actualizar la bandera al aplicar al inventario los reportes de producción
 solo afectan al inventario los destajos de tablas (el aserrio y el hojeado)
 
+Reporte de produccion
+al agregar aserrio u hojeado normalizar las dimensiones para la busqueda
+
 -------- YA REALIZADO ----
 
 Borrar en actividades YA funciona
