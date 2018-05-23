@@ -25,7 +25,7 @@ function analizadimensiones(d){
         d1=d1.replace(/\*/gi,"x");
         d1=d1.replace(/[ ]*x[ ]*/g,"x");
         d1=d1.replace(/ /g,"+");
-        alert("normalizando dimensones: "+d1);
+        //alert("normalizando dimensones: "+d1);
         res=d1.split("x");
         //alert("tokens: "+res);
         if((nd=res.length)!=3){
@@ -62,18 +62,10 @@ function analizadimensiones(d){
 	// largo
 	if(l.includes("."))
 		ul='M'; // metros
-	else if(l.includes("/")){
-		if(vl<8)
-			ul='I'; // pulgadas
-		else
-			ul='F';	// pies
-	}
-	else if(vl>100)	// no hay . ni /
+	else if(vl>=100)	// no hay . ni /
 		ul='C'; // centimetros
-	else if(vl>12)
-		ul='I'; // pulgadas
 	else
-		ul='F'; // pies
+		ul='I'; // pulgadas
 	//alert("ug:"+ug+" ua:"+ua+" ul:"+ul);
 	//
 	// ajuste de selects
@@ -143,7 +135,7 @@ if(isset($_SESSION["msg"])){
 }
 ?>
 <form action='madDimensionadaAlta.php' method=POST>
-Especie <input type=text name=especie required> (pino, encino, etc.)
+Especie <input type=text name=especie onKeyUp="this.value = this.value.toUpperCase();" required> (pino, encino, etc.)
 <br>
 <?php
 echo "<br>\n";

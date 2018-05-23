@@ -1,7 +1,7 @@
 <?php
-
-require_once "Auth/dbclass.php";
+require_once "Auth/session.php";
 require_once "Auth/table.php";
+require_once "desarrollo.php";
 // borrar 2
 //require_once "Auth/proteger.php";
 //require_once "funcs.php";
@@ -20,7 +20,7 @@ if(isset($_POST["opcion"])){
 	}
 } else if(isset($_POST["borrar"])){
 	$id=$_POST["borrar"];
-	$q="select id from prodSierrasCintas where operador='$id' or ayudante='$id'";
+	$q="select id from repoProd where operador='$id' or ayudante='$id'";
         $db->query($q);
 	if($db->num_rows()==0){
 		$q="delete from empleados where id='$id'";
@@ -73,11 +73,15 @@ nombre: <input type=text name=nombre size=60>
 	);
 	$t->setcdatas(array("Acción"=>"Acción", "id"=>"id", "nombre" => "nombre"));
 	//echo "q:$q<br>";
-        $db->query($q);
-        $t->setbody($db->get_all());
-	echo "<form method=POST>\n";
-	$t->show();
-	echo "</form>\n";
+	$db->query($q);
+	if($db->num_rows()>0){
+	       $t->setbody($db->get_all());
+		echo "<form method=POST>\n";
+		$t->show();
+		echo "</form>\n";
+	} else {
+		echo "<div class='mensaje'>No encontrado</div>";
+	}
 ?>
 </div>
 

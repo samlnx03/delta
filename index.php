@@ -23,6 +23,13 @@ $(document).ready(function(){
 <body>
 <?php require('menu.php'); ?>
 <h1>Delta</h1>
+<?php
+
+if(isset($_GET["monitoreo"])){
+	echo "<a href='".$_GET["monitoreo"]."'>Monitoreo<a/><br>\n";
+}
+
+?>
 <div class="container">
 	<ul class="tabs">
 		<li class="tab-link current" data-tab="tab-1">Empleados</li>

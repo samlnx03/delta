@@ -29,9 +29,9 @@ $q="select clave, descrip from actividades where tipo='tabla'";
 $clave=htmlSelect($q, "clave", "clave", "descrip", '');
 echo "$clave\n";
 ?>
-<td>Cantidad<br><input type=text name=cantidad size=3>
-<td>Especie<br><input type=text name=especie size=7>
-<td>Dimensiones<br><input type=text name=descripcion size=50>
+<td>Cantidad<br><input type=text name=cantidad size=3 required>
+<td>Especie<br><input onKeyUp="this.value = this.value.toUpperCase();" type=text name=especie size=7 required>
+<td>Dimensiones<br><input type=text name=descripcion size=50 required>
 <td><br>
 <input type=submit name=aserrioYhojeado value='Agregar'>
 <b>Aserrio y hojeado</b>

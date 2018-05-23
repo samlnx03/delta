@@ -29,6 +29,10 @@ solo afectan al inventario los destajos de tablas (el aserrio y el hojeado)
 
 Reporte de produccion
 al agregar aserrio u hojeado normalizar las dimensiones para la busqueda
+no se deben ven las tarimas a menos que este cerrada su definicion (que ya no se pueda cambiar las tablas que tiene una tarima)
+
+madDimensionadaNueva.php
+solo mayusculas en la especie
 
 -------- YA REALIZADO ----
 
