@@ -1,5 +1,5 @@
 <?php
-require_once "Auth/dbclass.php";
+require_once "Auth/session.php";
 require_once "Auth/table.php";
 
 require_once "desarrollo.php";
@@ -22,6 +22,12 @@ if(isset($_POST["alta"])){
 <body>
 <?php require('menu.php'); ?>
 <h1>Catalogo de tarimas</h1>
+<?php
+if(isset($_SESSION["msg"])){
+	echo "<div class='mensaje'>".$_SESSION["msg"]."</div>";
+	unset($_SESSION["msg"]);
+}
+?>
 <form method='POST'>
 <input type=submit name=alta value='Nueva Tarima'> 
 </form>

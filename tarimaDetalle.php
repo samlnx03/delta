@@ -4,6 +4,15 @@ require_once "Auth/table.php";
 require_once "desarrollo.php"; // debug show errors
 
 require_once "funcs.php";  // funciones utiles
+$db=db::getInstance();
+if(isset($_POST["renombrar"])){
+	$newdescrip=$_POST["descripcion"];
+	//$q="insert into tarimas(tarima, descripcion) values ('$tarima', '$descripcion')";
+	$id=$_SESSION["idtarima"];
+	$q="update tarimas set descripcion='$newdescrip' where id='$id'";
+	$db->query($q);
+	$_SESSION["msg"]="descripción actualizada";
+}
 ?>
 <html>
 <head>
@@ -49,11 +58,11 @@ if(isset($_SESSION["msg"])){
 	unset($_SESSION["msg"]);
 }
 
-$db=db::getInstance();
 $q="select tarima, descripcion, editable from tarimas where id='$id'";
 $db->query($q);
 $db->next_row();
 $t=$db->f("tarima");
+$ctarima=$t;
 $d=$db->f("descripcion");
 $editable=$db->f("editable");
 echo "Detalles de la tarima <b>$t: $d</b>\n";
@@ -88,9 +97,22 @@ if($editable=='s'){
  $t->setcdatas(array("Eliminar"=>"Editar", "cantidad" => "cantidad", "descrip"=>"descrip", "vol u" => "volpt", "especie"=>"especie", "vol pt"=>"vol"));
  echo "<form action='tarimaDetalleBorra.php' method='POST'>\n";
  $t->show();
+ echo "</form>\n";
  echo "Total volumen (pt): <b>".$t->getFieldTotalizado("vol")."</b><br>\n";
+ echo "<form action='tarimaDetalleBorra.php' method='POST'>\n";
  echo "<input type=submit name=terminaDef value='Terminar Definición'>\n";
  echo " Ya no será posible modificar detalles de esta tarima\n";
+ echo "</form>\n";
+ //
+ echo "<form action='tarimaBorrar.php' method='POST'>\n";
+ echo "<input type=submit name=borrarTarima value='Elimar tarima'>\n";
+ echo "<input type=hidden name='ctarima' value='$ctarima'>\n";
+ echo " Elimina completamente la definicion de la tarima\n";
+ echo "</form>\n";
+ //
+ echo "<form method='POST'>\n";
+ echo "Nombre nuevo: <input type=text name=descripcion value='$d' size=50>\n";
+ echo "<input type=submit name=renombrar value='Cambiar nombre'>\n";
  echo "</form>\n";
 } else {
  $t->setcdatas(array("cantidad" => "cantidad", "descrip"=>"descrip", "vol u" => "volpt", "especie"=>"especie", "vol pt"=>"vol"));
