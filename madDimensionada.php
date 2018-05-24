@@ -10,6 +10,7 @@ require_once "desarrollo.php"; // reporta errores
 <link rel="stylesheet" type="text/css" href="styles/menu.css">
 <link rel="stylesheet" type="text/css" href="styles/tableStyle.css">
 <link rel="stylesheet" type="text/css" href="styles/2cols.css">
+<link rel="stylesheet" type="text/css" href="styles/abutton.css">
 <script LANGUAGE="JavaScript">
 </script>
 </head>
@@ -80,8 +81,14 @@ if($results){
 		array("id")
 		)
 	);
+	$t->addextras( array(
+		"+", 
+		"<button class='red' type='submit' name='similar' value='%f0%'>+</button>", 
+		array("id")
+		)
+	);
 	$t->setcdatas(array("Registar"=>"Entradas", "Agregar"=>"Salida", 
-		"Especie"=>"especie", "Descrip"=>"descrip", 
+		"Especie"=>"especie", "Descrip"=>"descrip", "+"=>"+",
 		"grueso" => "grueso", "ug"=>"ugrueso", "ancho"=>"ancho", "ua"=>"uancho", 
 		"largo"=>"largo", "ul"=>"ulargo", "volpt"=>"volpt"
 		)
@@ -89,7 +96,7 @@ if($results){
 	//echo "<form action='madDimIO.php' method=POST>\n";
 	$t->show();
 	echo "<input type=hidden name=newIOdescrip value='$descrip'>\n";
-	echo "</form>\n";
+	//echo "</form>\n";
 }
 ?>
 </body>
