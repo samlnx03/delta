@@ -14,9 +14,6 @@
 <h1>Pendientes en el desarrollo del sistema</h1>
 <pre>
 
-Empleados agregar boton de dar de BAJA (no borrar para mantener historico)
-no se debe poder borrar si esta en reportes de produccion como operador o ayudante
-
 Madera dimensionada
 agregar entrdas y salidas para ajustes de inventario
 
@@ -32,9 +29,15 @@ al agregar aserrio u hojeado normalizar las dimensiones para la busqueda
 no se deben ven las tarimas a menos que este cerrada su definicion (que ya no se pueda cambiar las tablas que tiene una tarima)
 
 madDimensionadaNueva.php
-solo mayusculas en la especie
+quitar espacios al frente y detras de las dimensiones
 
 -------- YA REALIZADO ----
+
+madDimensionadaNueva.php
+solo mayusculas en la especie
+
+Empleados agregar boton de dar de BAJA (no borrar para mantener historico)
+no se debe poder borrar si esta en reportes de produccion como operador o ayudante
 
 Borrar en actividades YA funciona
 no de debe poder borrar si hay produccion de esa actividad (bandera?) no, se checa la tabla de movs del reporte de produccion.

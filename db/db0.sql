@@ -1,5 +1,12 @@
 #mysq -u user -p db < db0.sql
 
+drop table if exists claveValor;
+create table claveValor(
+	clave char(20),
+	valor char(255),
+	primary key(clave)
+);
+#------------------------------------
 drop table if exists actividades;
 create table actividades(
         clave char(10),
@@ -13,7 +20,8 @@ create table actividades(
 drop table if exists empleados;
 create table empleados(
         id int not null auto_increment, 
-        nombre char(60), 
+        nombre char(60),
+	baja char(1) default ' ',
         primary key(id), 
         key(nombre)
 );

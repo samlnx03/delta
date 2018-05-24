@@ -1,3 +1,7 @@
+<?php
+require_once "Auth/session.php";
+require_once "desarrollo.php";
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,11 +28,14 @@ $(document).ready(function(){
 <?php require('menu.php'); ?>
 <h1>Delta</h1>
 <?php
-
-if(isset($_GET["monitoreo"])){
-	echo "<a href='".$_GET["monitoreo"]."'>Monitoreo<a/><br>\n";
+$db=db::getInstance();
+$q="SELECT valor FROM claveValor WHERE clave='linktogether'";
+$db->query($q);
+if($db->num_rows()>0){
+	$db->next_row();
+	$l=$db->f("valor");
+	echo "<a href='$l'>Monitoreo</a><br>\n";
 }
-
 ?>
 <div class="container">
 	<ul class="tabs">
