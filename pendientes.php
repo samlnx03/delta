@@ -20,8 +20,6 @@ agilizar captura de tabla de dimensiones muy comunes
 usar un lista desplegable o cuadro de texto
 las mas comunes se editan en una tabla
 
-alta de madera aserrada que ya existen dimensiones pero es otra especie (agilizar)
-
 Madera dimensionada
 agregar entrdas y salidas para ajustes de inventario
 
@@ -54,6 +52,7 @@ quitar espacios al frente y detras de las dimensiones
 filtros como excel en el inventario de madera dimensionada
 
 -------- YA REALIZADO ----
+alta de madera aserrada que ya existen dimensiones pero es otra especie (agilizar)
 
 Tarima. poder cambiarle el nombre (antes de cerrar la definicion)
 y borrar la tarima (antes de cerrar definicion)

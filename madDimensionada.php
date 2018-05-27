@@ -1,5 +1,5 @@
 <?php
-require_once "Auth/dbclass.php";
+require_once "Auth/session.php";
 require_once "Auth/table.php";
 
 require_once "desarrollo.php"; // reporta errores
@@ -18,6 +18,12 @@ require_once "desarrollo.php"; // reporta errores
 <?php require('menu.php'); ?>
 <h1>Madera Dimensionada</h1>
 <?php
+
+if(isset($_SESSION["msg"])){
+	echo "<div class='mensaje'>".$_SESSION["msg"]."</div>";
+	unset($_SESSION["msg"]);
+}
+
 $condi="";
 $descrip="";
 $consultar=false;
@@ -70,33 +76,34 @@ if($results){
 	$t->setbody($db->get_all());
 	//$q="select id, especie, descrip, grueso, ugrueso, ancho, uancho, largo, ulargo, volpt from tablas where descrip like '$descrip%'";
 	$t->addextras( array(
-		"Entradas", 
-		"<button class='red' type='submit' name='borrar' value='%f0%'>Entradas</button>", 
+		"IO", 
+		"<button class='red' type='submit' name='inout' value='%f0%'>E/S</button>", 
 		array("id")
 		)
 	);
 	$t->addextras( array(
-		"Salida", 
-		"<button class='red' type='submit' name='borrar' value='%f0%'>Salidas</button>", 
+		"Favoritos", 
+		"<button class='red' type='submit' name='favorita' value='%f0%'>F</button>", 
 		array("id")
 		)
 	);
 	$t->addextras( array(
-		"+", 
+		"Sim", 
 		"<button class='red' type='submit' name='similar' value='%f0%'>+</button>", 
 		array("id")
 		)
 	);
-	$t->setcdatas(array("Registar"=>"Entradas", "Agregar"=>"Salida", 
-		"Especie"=>"especie", "Descrip"=>"descrip", "+"=>"+",
+	$lfav="<a href=favoritas.php title='Medidas Favoritas'>Fav</a>";
+	$t->setcdatas(array("Agregar"=>"IO", "fav"=>"Favoritos", 
+		"Especie"=>"especie", "sim"=>"Sim", "Descrip"=>"descrip",
 		"grueso" => "grueso", "ug"=>"ugrueso", "ancho"=>"ancho", "ua"=>"uancho", 
 		"largo"=>"largo", "ul"=>"ulargo", "volpt"=>"volpt"
 		)
 	);
-	//echo "<form action='madDimIO.php' method=POST>\n";
+	echo "<form action='madDimIO.php' method=POST>\n";
 	$t->show();
 	echo "<input type=hidden name=newIOdescrip value='$descrip'>\n";
-	//echo "</form>\n";
+	echo "</form>\n";
 }
 ?>
 </body>

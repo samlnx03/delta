@@ -1,0 +1,92 @@
+$("#boton-usuarios").on("click", getUsers);
+
+
+function getUsers() {
+
+  $.ajax({
+
+    url: 'https://reqres.in/api/users',
+
+    success: function(respuesta) {
+
+
+      var listaUsuarios = $("#lista-usuarios");
+
+      $.each(respuesta.data, function(index, elemento) {
+
+        listaUsuarios.append(
+
+            '<div>'
+
+          +     '<p>' + elemento.first_name + ' ' + elemento.last_name + '</p>'
+
+          +     '<img src=' + elemento.avatar + '></img>'
+
+          + '</div>'
+
+        );    
+
+      });
+
+    },
+
+    error: function() {
+
+      console.log("No se ha podido obtener la información");
+
+    }
+
+  });
+
+}
+
+
+--------------------
+<html lang="es">
+
+    <head>
+
+        <meta charset="utf-8">
+
+        <title>$.ajax jQuery</title>
+
+    </head>
+
+
+    <body>
+
+        <button id="boton-usuarios">Obtener usuarios</button>
+
+        <div id="lista-usuarios"></div>
+
+    </body>
+
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="scripts.js"></script>
+
+</html>
+---------------------
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $.ajax({url: "demo_test.txt", success: function(result){
+            $("#div1").html(result);
+        }});
+    });
+});
+</script>
+</head>
+<body>
+
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+
+<button>Get External Content</button>
+
+</body>
