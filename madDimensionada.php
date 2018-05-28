@@ -94,7 +94,7 @@ if($results){
 		)
 	);
 	$lfav="<a href=favoritas.php title='Medidas Favoritas'>Fav</a>";
-	$t->setcdatas(array("Agregar"=>"IO", "fav"=>"Favoritos", 
+	$t->setcdatas(array("Agregar"=>"IO", "fav"=>"Favoritos", "id"=>"id",
 		"Especie"=>"especie", "sim"=>"Sim", "Descrip"=>"descrip",
 		"grueso" => "grueso", "ug"=>"ugrueso", "ancho"=>"ancho", "ua"=>"uancho", 
 		"largo"=>"largo", "ul"=>"ulargo", "volpt"=>"volpt"

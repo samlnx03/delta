@@ -6,8 +6,9 @@ if(isset($_POST["similar"])){
 	// dar de alta una dimension similar a otra (cambira la especie)
 	require_once("similar.php");
 } elseif(isset($_POST["favorita"])){
-
+	require_once("favorita.php");
 } elseif(isset($_POST["inout"])){
+	require_once("similar.php");
 
 } else{
 	//$_SESSION["msg"]="Acceso incorrecto a script";

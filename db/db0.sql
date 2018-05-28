@@ -101,6 +101,14 @@ create table tablas(
         primary key(id), key(descrip), key(especie,descrip), key(especie,grueso)
 );
 
+drop table if exists favoritablas;
+create table favoritablas(
+	id int not null auto_increment,
+	idtabla int not null,
+	usuario char(20) default null,
+	primary key(id), key(usuario)
+);
+
 drop table if exists tablasIO;
 create table tablasIO(
 	id int not null auto_increment,
