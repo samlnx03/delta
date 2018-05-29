@@ -1,3 +1,3 @@
 <?php
-echo "<div class='mensaje'>Se agregó + (similar) para dar de alta madera similar pero en otra especie<br>y ya se pueden definir favoritas</div>\n";
+echo "<div class='mensaje'>Conta marcame al 443 322 35 00 ext 1174</div>\n";
 ?>

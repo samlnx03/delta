@@ -19,6 +19,7 @@ if(isset($_POST["renombrar"])){
 <link rel="stylesheet" type="text/css" href="styles/menu.css">
 <link rel="stylesheet" type="text/css" href="styles/tableStyle.css">
 <link rel="stylesheet" type="text/css" href="styles/2cols.css">
+<script src="libs/jquery-3.3.1.min.js"></script>
 <script LANGUAGE="JavaScript">
 function dimensionada(){
     var x = document.getElementById("madera");
@@ -74,9 +75,9 @@ $q="select distinct especie from tablas";
 $especies=htmlSelect($q, "especie", "especie", "especie", '');
 ?>
 <form action='tarimaDetalleAlta.php' method='POST'>
-cantidad <input type=text name=cantidad size=4> 
+cantidad <input id=cantidad type=text name=cantidad size=4> 
 especie <?php echo $especies;?> 
-Dimensiones <input type=text name=descripcion>
+Dimensiones <input id=dimensiones type=text name=descripcion>
 <input type=submit name=agregar value=agregar>
 </form>
 <?php
@@ -121,6 +122,40 @@ if($editable=='s'){
 }
 //$t->setFieldClas("Importe","class='alin-der'"); //campo=>id_class, p.e. 'id'=>"class='myclas'"
 ?>
+<script>
+$( "#cantidad" )
+  .focusout(function() {
+	  // si hay separador la 1a es cantidad, la 2a es clave de tabla
+	  //var cc = $( "#cantidad" ).text();
+	  var cc = $( "#cantidad" ).val();
+	  var nd;
+	  cc=cc.trim();
+	  cc=cc.replace(/ /gi,"-");
+	  res=cc.split("-");
+	  //alert("tokens: "+res);
+	  if((nd=res.length)<2){
+		  //alert("solo cantidad "+nd);
+		  return;
+	  }
+	  //alert("cantidad y clave tabla "+res[0]+"-"+res[1]);
+	  $( "#cantidad" ).val(res[0]);
+	  $.get( "getdescrip.php", { id:res[1] } )
+		  .done( function (data) {
+			  //alert("data descrip: "+data);
+			  var r=jQuery.parseJSON(data);
+			  $( "#dimensiones" ).val( r.descrip );
+			  //$( "#especie" ).val(r.especie);
+	  		});
+	  return;
+/*
+    $( "#focus-count" ).text( "focusout fired: " + focus + "x" );
+  })
+  .blur(function() {
+    blur++;
+    $( "#blur-count" ).text( "blur fired: " + blur + "x" );
+ */
+  });
+</script>
 </body>
 </html>
 
