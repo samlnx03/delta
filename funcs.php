@@ -20,7 +20,7 @@ function htmlFpost($campo){  // fecha
 function htmlSelect($qry, $name, $val, $tit, $selected){
 	$db=db::getInstance();
 	$db->query($qry);
-	$ops="<select name='$name'>\n";
+	$ops="<select id='$name' name='$name'>\n";
 	while($db->next_row()){
 		$ops=$ops."<option ";
 		if($db->f($val)==$selected){

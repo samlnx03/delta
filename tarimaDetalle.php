@@ -144,7 +144,7 @@ $( "#cantidad" )
 			  //alert("data descrip: "+data);
 			  var r=jQuery.parseJSON(data);
 			  $( "#dimensiones" ).val( r.descrip );
-			  //$( "#especie" ).val(r.especie);
+			  $( "#especie" ).val(r.especie);
 	  		});
 	  return;
 /*
