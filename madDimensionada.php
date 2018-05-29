@@ -11,8 +11,7 @@ require_once "desarrollo.php"; // reporta errores
 <link rel="stylesheet" type="text/css" href="styles/tableStyle.css">
 <link rel="stylesheet" type="text/css" href="styles/2cols.css">
 <link rel="stylesheet" type="text/css" href="styles/abutton.css">
-<script LANGUAGE="JavaScript">
-</script>
+<script src="libs/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <?php require('menu.php'); ?>
@@ -27,14 +26,24 @@ if(isset($_SESSION["msg"])){
 $condi="";
 $descrip="";
 $consultar=false;
+/*
 if(isset($_SESSION["newIO"])){
 	$descrip=$_SESSION["newIO"];
 	unset($_SESSION["newIO"]);
 	$condi=" WHERE descrip like '$descrip%'";
 	$consultar=true;
 }
+ */
+if(isset($_SESSION["buscar"])){
+	$descrip=$_SESSION["buscar"];
+	if($descrip!="") {
+		$condi=" WHERE descrip like '$descrip%'";
+		$consultar=true;
+	}
+}
 if(isset($_POST["buscar"])){
 	$descrip=$_POST["descripcion"];
+	$_SESSION["buscar"]=$descrip;
 	if($descrip!="") {
 		$condi=" WHERE descrip like '$descrip%'";
 		$consultar=true;
@@ -43,6 +52,8 @@ if(isset($_POST["buscar"])){
 if(isset($_POST["verTodas"])){
 	$descrip="";
 	$condi="";
+	if(isset($_SESSION["buscar"]))
+		unset($_SESSION["buscar"]);
 	$consultar=true;
 }
 $results=0; // hay resultados de la consulta
@@ -63,6 +74,8 @@ if($consultar){
 Dimensiones <input type=text name=descripcion <?php echo "value='$descrip' ";?> size=50>
 <input type=submit name=buscar value='Buscar'> 
 <input type=submit name=verTodas value='Ver Todas'>
+<!-- <input type=submit name=verFavoritas value='Ver Favoritas'> -->
+<a href=madDimensionadaFavoritas.php>Ver Favoritas</a>
 </form>
 
 <?php
@@ -70,6 +83,8 @@ echo "<form action=madDimensionadaNueva.php method=post>\n";
 echo "<input type=hidden name=descripcion value='$descrip'>\n";
 echo "<input type=submit name=nueva value=Agregar>\n";
 echo "</form>\n";
+
+echo "<div id='listaFavoritas'></div>\n";
 
 if($results){
 	$t=new html_table();
@@ -83,7 +98,7 @@ if($results){
 	);
 	$t->addextras( array(
 		"Favoritos", 
-		"<button class='red' type='submit' name='favorita' value='%f0%'>F</button>", 
+		"<button class='red' id='favorita' type='submit' name='favorita' value='%f0%'>F</button>", 
 		array("id")
 		)
 	);
@@ -106,6 +121,34 @@ if($results){
 	echo "</form>\n";
 }
 ?>
+<script>
+/*
+$( "p" ).click(function() {
+  $( this ).slideUp();
+});
+$("#b1").click(function(){
+	alert("B1 was clicked!");
+});
+$("#b2").click(function(){
+	$.ajax({
+	  url: "ajaxMaderaDim.php",
+	  context: document.body
+	}).done(function(r) {
+	  //$( this ).addClass( "done" );
+	  $("#ajaxOut").html( r );
+	});	
+});
+
+$("#favorita").click(function(){
+	$.get("ajaxMaderaDim.php",
+		function(r) {
+	  		$("#listaFavoritas").html( r );
+		});
+	return false;
+	//
+});
+*/
+</script>
 </body>
 </html>
 

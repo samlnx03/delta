@@ -8,7 +8,9 @@ if(isset($_POST["similar"])){
 } elseif(isset($_POST["favorita"])){
 	require_once("favorita.php");
 } elseif(isset($_POST["inout"])){
-	require_once("similar.php");
+	//require_once("similar.php");
+	$_SESSION["msg"]="Pendiente, entradas y salidas";
+	header('Location: madDimensionada.php');
 
 } else{
 	//$_SESSION["msg"]="Acceso incorrecto a script";

@@ -34,17 +34,17 @@
 }
 .Txml th{ 
 	padding:2px;
-	background: #f0f0f0;
+	background: #c0c0c0;
 }
 
 /*  Define the background color for all the ODD background rows  */
 .Txml tr:nth-child(odd){ 
 	/*background: #b8d1f3;*/
-	background: #f0f0f0;
+	background: #dbf086;
 }
 /*  Define the background color for all the EVEN background rows  */
 .Txml tr:nth-child(even){
-	background: #dae5f4;
+	background: #e6f2c7;
 }
 
 .Txml tr:hover{
