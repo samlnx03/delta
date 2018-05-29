@@ -14,6 +14,8 @@
 <h1>Pendientes en el desarrollo del sistema</h1>
 <pre>
 
+preguntar si compran de una o de varias medidas de madera aserrada
+
 agilizar captura de tabla de dimensiones muy comunes
 -en movimeinto de reporte de produccion
 -en def de tarima
@@ -50,6 +52,10 @@ madDimensionadaNueva.php
 quitar espacios al frente y detras de las dimensiones
 
 filtros como excel en el inventario de madera dimensionada
+
+renglon clickable
+https://www.electrictoolbox.com/jquey-make-entire-table-row-clickable/
+
 
 -------- YA REALIZADO ----
 alta de madera aserrada que ya existen dimensiones pero es otra especie (agilizar)
