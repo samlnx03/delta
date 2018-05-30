@@ -18,9 +18,11 @@ if(isset($_POST["renombrar"])){
 <head>
 <link rel="stylesheet" type="text/css" href="styles/menu.css">
 <link rel="stylesheet" type="text/css" href="styles/tableStyle.css">
+<link rel="stylesheet" type="text/css" href="styles/abutton.css">
 <link rel="stylesheet" type="text/css" href="styles/2cols.css">
 <script src="libs/jquery-3.3.1.min.js"></script>
 <script LANGUAGE="JavaScript">
+/*
 function dimensionada(){
     var x = document.getElementById("madera");
     if (x.style.display === "none") {
@@ -37,6 +39,7 @@ function otros(){
         x.style.display = "none";
     }
 }
+*/
 </script>
 </head>
 <body>
@@ -125,12 +128,87 @@ if($editable=='s'){
 //$t->setFieldClas("Importe","class='alin-der'"); //campo=>id_class, p.e. 'id'=>"class='myclas'"
 ?>
 <script>
-var status=0;
-// 0=no cargada, no mostrada, 1=cargada, mostrada, 2=cargada,no mostrada
 $( document ).ready(function() {
   $("#cantidad").focus();
 });
 
+$( "#cantidad" )
+  .focusout(function() {
+	  // si hay separador la 1a es cantidad, la 2a es clave de tabla
+	  //var cc = $( "#cantidad" ).text();
+	  var cc = $( "#cantidad" ).val();
+	  cc=cc.trim();
+	  cc=cc.replace(/ /gi,"-");
+	  res=cc.split("-");
+	  //alert("tokens: "+res);
+	  if(res.length<2){
+		  //alert("solo cantidad "+nd);
+		  return;
+	  }
+	  //alert("cantidad y clave tabla "+res[0]+"-"+res[1]);
+	  $( "#cantidad" ).val(res[0]);
+	  $.get( "getdescrip.php", { id:res[1] } )
+		  .done( function (data) {
+			  //alert("data descrip: "+data);
+			  var r=jQuery.parseJSON(data);
+			  $( "#dimensiones" ).val( r.descrip );
+			  $( "#especie" ).val(r.especie);
+	  		});
+	  return;
+  });
+
+$('#cant_esp_dim').submit(function(e){  // al enviar el formulario (enter)
+	// form submit
+	  var cc = $( "#cantidad" ).val();
+	  var nd;
+	  cc=cc.trim();
+	  cc=cc.replace(/ /gi,"-");
+	  res=cc.split("-");
+	  //alert("tokens: "+res);
+	  if(res.length<2){
+		if($("#dimensiones").val().length==0){
+			e.preventDefault();
+			return;
+		}else{ //hay dimensiones, normalizar
+			nd=analizadimensiones($("#dimensiones").val());
+			$("#dimensiones").val(nd);
+		}
+		return;
+	  }
+	  //alert("cantidad y clave tabla "+res[0]+"-"+res[1]);
+	  $( "#cantidad" ).val(res[0]);
+	  $.get( "getdescrip.php", { id:res[1] })
+		  .done( function (data) {
+			  //alert("data descrip: "+data);
+			  var r=jQuery.parseJSON(data);
+			  $( "#dimensiones" ).val( r.descrip );
+			  $( "#especie" ).val(r.especie);
+		  });
+	  e.preventDefault(); // asyncrona, espera antes de enviar sirve que se revisa
+});
+
+function analizadimensiones(d){
+	var res;
+        var d1;
+        d1=d.replace(/X/gi,"x");
+        d1=d1.replace(/\*/gi,"x");
+        d1=d1.replace(/[ ]*x[ ]*/g,"x");
+        //d1=d1.replace(/ /g,"+");
+        //alert("normalizando dimensones: "+d1);
+        res=d1.split("x");
+        //alert("tokens: "+res);
+	if(res.length!=3){
+		return d;  // tu sabras lo que metes!
+                //alert("dimensiones incorrectas, hay "+nd);
+                //return;
+        }
+	return d1;
+}
+</script>
+
+<script>
+var status=0;
+// 0=no cargada, no mostrada, 1=cargada, mostrada, 2=cargada,no mostrada
 $( "#verlista" )
 .click(function(){
 	//alert( "Handler for .click() called." );
@@ -153,72 +231,21 @@ $( "#verlista" )
 	return false; // no submit
 });
 
-$( "#cantidad" )
-  .focusout(function() {
-	  // si hay separador la 1a es cantidad, la 2a es clave de tabla
-	  //var cc = $( "#cantidad" ).text();
-	  var cc = $( "#cantidad" ).val();
-	  var nd;
-	  cc=cc.trim();
-	  cc=cc.replace(/ /gi,"-");
-	  res=cc.split("-");
-	  //alert("tokens: "+res);
-	  if((nd=res.length)<2){
-		  //alert("solo cantidad "+nd);
-		  return;
-	  }
-	  //alert("cantidad y clave tabla "+res[0]+"-"+res[1]);
-	  $( "#cantidad" ).val(res[0]);
-	  $.get( "getdescrip.php", { id:res[1] } )
-		  .done( function (data) {
-			  //alert("data descrip: "+data);
-			  var r=jQuery.parseJSON(data);
-			  $( "#dimensiones" ).val( r.descrip );
-			  $( "#especie" ).val(r.especie);
-	  		});
-	  return;
-  });
-
-//var override_keys = [13, 38, 40];
-/*
-$('#cantidad').keyup(function(e){
-  var code = e.keyCode ? e.keyCode : e.which;
-
-  if ($.inArray(code, override_keys)) {
-    e.preventDefault();
-    e.stopPropagation();
-	//alert("code="+code);
-    return false;
-  }
-});
-*/
-$('#cant_esp_dim').submit(function(e){
-
-	  var cc = $( "#cantidad" ).val();
-	  var nd;
-	  cc=cc.trim();
-	  cc=cc.replace(/ /gi,"-");
-	  res=cc.split("-");
-	  //alert("tokens: "+res);
-	  if(res.length<2){
-		if($("#dimensiones").val().length==0){
-			e.preventDefault();
-			return;
+function botonclicked(b) { // en la lista ajax de tablas
+	$.get( "getdescrip.php", { id:b.value } )
+		.done( function (data) {
+		//alert("data descrip: "+data);
+		var r=jQuery.parseJSON(data);
+		$( "#dimensiones" ).val( r.descrip );
+		$( "#especie" ).val(r.especie);
 		}
-		return;
-	  }
-	  //alert("cantidad y clave tabla "+res[0]+"-"+res[1]);
-	  $( "#cantidad" ).val(res[0]);
-	  $.get( "getdescrip.php", { id:res[1] })
-		  .done( function (data) {
-			  //alert("data descrip: "+data);
-			  var r=jQuery.parseJSON(data);
-			  $( "#dimensiones" ).val( r.descrip );
-			  $( "#especie" ).val(r.especie);
-		  });
-	  e.preventDefault();
-});
-
+	);
+	//document.getElementById("dimensiones").value = "Hello World" + b.value;
+	//alert("boton: "+b.value);
+	//document.getElementById("lista").style.display = "none";
+	$("#verlista").trigger("click");
+  	$("#cantidad").focus();
+}
 </script>
 </body>
 </html>

@@ -27,7 +27,11 @@
 
 .Txml{
 	/*width:100%; */
-	border-collapse:collapse; 
+	border-collapse:collapse;
+       font-size:70%;	
+}
+.Txml button{
+       font-size:90%;
 }
 .Txml td,th{ 
 	padding:5px; border:#4e95f4 1px solid;

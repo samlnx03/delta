@@ -22,7 +22,7 @@ $t->setTclas("Txml");
 $t->setbody($db->get_all());
 $t->addextras( array(
 	"IO", 
-	"<button onclick='botonclicked(this);return false;' class='red' id='ok' name='inout' value='%f0%'>OK</button>", 
+	"<button onclick='botonclicked(this);return false;' class='green' id='ok' name='inout' value='%f0%'>OK</button>", 
 	array("id")
 	)
 );
@@ -36,12 +36,3 @@ echo "<form>\n";
 $t->show();
 echo "</form>\n";
 ?>
-<script>
-function botonclicked(b) {
-	document.getElementById("dimensiones").value = "Hello World" + b.value;
-	alert("boton: "+b.value);
-	//document.getElementById("lista").style.display = "none";
-	$("#verlista").trigger("click");
-}
-</script>
-
