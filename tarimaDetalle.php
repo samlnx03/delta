@@ -74,12 +74,14 @@ if($editable=='s'){
 $q="select distinct especie from tablas";
 $especies=htmlSelect($q, "especie", "especie", "especie", '');
 ?>
-<form action='tarimaDetalleAlta.php' method='POST'>
-cantidad <input id=cantidad type=text name=cantidad size=4> 
+<form id='cant_esp_dim' action='tarimaDetalleAlta.php' method='POST'>
+cantidad[-clave] <input id=cantidad type=text name=cantidad size=4> 
 especie <?php echo $especies;?> 
 Dimensiones <input id=dimensiones type=text name=descripcion>
-<input type=submit name=agregar value=agregar>
+<input type=submit name=agregar value=agregar> 
+<button id="verlista">Ver Lista</button>
 </form>
+<div id=lista></div>
 <?php
 } // editable
 // mostrar componnetes de la tarima
@@ -123,6 +125,34 @@ if($editable=='s'){
 //$t->setFieldClas("Importe","class='alin-der'"); //campo=>id_class, p.e. 'id'=>"class='myclas'"
 ?>
 <script>
+var status=0;
+// 0=no cargada, no mostrada, 1=cargada, mostrada, 2=cargada,no mostrada
+$( document ).ready(function() {
+  $("#cantidad").focus();
+});
+
+$( "#verlista" )
+.click(function(){
+	//alert( "Handler for .click() called." );
+	if(status==0){
+		$.get("ajaxMaderaDim.php")
+		  .done( function (data) {
+			  //alert("data descrip: "+data);
+			  $("#lista").append( data );
+	  		});
+		status=1;
+	} else if(status==1){
+		// ocultar
+		$("#lista").hide();
+		status=2;
+	} else {
+		// mostrar
+		$("#lista").show();
+		status=1;
+	}
+	return false; // no submit
+});
+
 $( "#cantidad" )
   .focusout(function() {
 	  // si hay separador la 1a es cantidad, la 2a es clave de tabla
@@ -147,14 +177,48 @@ $( "#cantidad" )
 			  $( "#especie" ).val(r.especie);
 	  		});
 	  return;
-/*
-    $( "#focus-count" ).text( "focusout fired: " + focus + "x" );
-  })
-  .blur(function() {
-    blur++;
-    $( "#blur-count" ).text( "blur fired: " + blur + "x" );
- */
   });
+
+//var override_keys = [13, 38, 40];
+/*
+$('#cantidad').keyup(function(e){
+  var code = e.keyCode ? e.keyCode : e.which;
+
+  if ($.inArray(code, override_keys)) {
+    e.preventDefault();
+    e.stopPropagation();
+	//alert("code="+code);
+    return false;
+  }
+});
+*/
+$('#cant_esp_dim').submit(function(e){
+
+	  var cc = $( "#cantidad" ).val();
+	  var nd;
+	  cc=cc.trim();
+	  cc=cc.replace(/ /gi,"-");
+	  res=cc.split("-");
+	  //alert("tokens: "+res);
+	  if(res.length<2){
+		if($("#dimensiones").val().length==0){
+			e.preventDefault();
+			return;
+		}
+		return;
+	  }
+	  //alert("cantidad y clave tabla "+res[0]+"-"+res[1]);
+	  $( "#cantidad" ).val(res[0]);
+	  $.get( "getdescrip.php", { id:res[1] })
+		  .done( function (data) {
+			  //alert("data descrip: "+data);
+			  var r=jQuery.parseJSON(data);
+			  $( "#dimensiones" ).val( r.descrip );
+			  $( "#especie" ).val(r.especie);
+		  });
+	  e.preventDefault();
+});
+
 </script>
 </body>
 </html>

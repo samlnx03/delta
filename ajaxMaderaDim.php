@@ -6,27 +6,42 @@ require_once "desarrollo.php"; // reporta errores
 
 ?>
 <?php
-
-$results=0; // hay resultados de la consulta
-//if(isset($descrip)){
-//$condi=" WHERE descrip like '$descrip%'";
-$condi=" WHERE descrip like '3/4%'";
-$q="select id, especie, descrip, grueso, ugrueso, ancho, uancho, largo, ulargo, volpt from tablas $condi ORDER BY especie,grueso";
+$desc="";
+if(isset($_GET["descrip"])){
+	$desc=$_GET["descrip"];
+}
+if($desc!="")
+	$condi=" WHERE descrip like '$desc%'";
+else
+	$condi="";
+$q="select id, especie, descrip, grueso, ugrueso, ancho, uancho, largo, ulargo, volpt from tablas $condi ORDER BY grueso";
 $db=db::getInstance();
 $db->query($q);
 $t=new html_table();
+$t->setTclas("Txml");
 $t->setbody($db->get_all());
 $t->addextras( array(
 	"IO", 
-	"<button class='red' type='submit' name='inout' value='%f0%'>E/S</button>", 
+	"<button onclick='botonclicked(this);return false;' class='red' id='ok' name='inout' value='%f0%'>OK</button>", 
 	array("id")
 	)
 );
-$t->setcdatas(array("Seleccionar"=>"IO", "id"=>"id",
+$t->setcdatas(array("Sel"=>"IO", "id"=>"id",
 	"Especie"=>"especie", "Descrip"=>"descrip",
-	"grueso" => "grueso", "ug"=>"ugrueso", "ancho"=>"ancho", "ua"=>"uancho", 
-	"largo"=>"largo", "ul"=>"ulargo", "volpt"=>"volpt"
+	"volpt"=>"volpt"
 	)
 );
+echo "q:$q<br>\n";
+echo "<form>\n";
 $t->show();
+echo "</form>\n";
 ?>
+<script>
+function botonclicked(b) {
+	document.getElementById("dimensiones").value = "Hello World" + b.value;
+	alert("boton: "+b.value);
+	//document.getElementById("lista").style.display = "none";
+	$("#verlista").trigger("click");
+}
+</script>
+

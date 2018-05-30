@@ -1,3 +1,3 @@
 <?php
-echo "<div class='mensaje'>Conta marcame al 443 322 35 00 ext 1174</div>\n";
+echo "<div class='mensaje'>Detalle de tarima ya con clave de la tabla</div>\n";
 ?>
