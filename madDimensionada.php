@@ -83,7 +83,7 @@ echo "<form action=madDimensionadaNueva.php method=post>\n";
 echo "<input type=hidden name=descripcion value='$descrip'>\n";
 echo "<input type=submit name=nueva value='Nueva Medida'>\n";
 echo "<a class='button-green' href='comprasma.php'>Compras</a>\n";
-echo "<a class='button-green' href=''>Ventas</a>\n";
+echo "<a class='button-green' href='ventasma.php'>Ventas</a>\n";
 echo "</form>\n";
 
 echo "<div id='listaFavoritas'></div>\n";

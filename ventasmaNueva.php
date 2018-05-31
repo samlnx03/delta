@@ -14,8 +14,8 @@ require_once "desarrollo.php";  // show errors
 </head>
 <body>
 <?php require('menu.php'); ?>
-<h1>Compras de Madera Dimensionada</h1>
-<h3>Nueva compra</h3>
+<h1>Ventas de Madera Dimensionada</h1>
+<h3>Nueva venta</h3>
 <?php
 //<a class='button-slategray' href=prodSClistado.php>Listado</a>
 ?>
@@ -27,16 +27,16 @@ if(isset($_SESSION["msg"])){
 	unset($_SESSION["msg"]);
 }
 ?>
-<form action='comprasmaAlta.php' method='POST'>
+<form action='ventasmaAlta.php' method='POST'>
 <table>
 <tr>
 <td>Fecha<td><input type=date name=fecha>
 <tr>
-<td>Proveedor<td><input type=text name=proveedor size=60 maxlength=80>
+<td>Cliente<td><input type=text name=cliente size=60 maxlength=80>
 <tr>
 <td>Observaciones<td><input type=text name=observ size=60 maxlength=80>
 <tr><td><td><input type=submit name=agregar value=Agregar>
-<?php echo "<a class='button-green' href='comprasma.php'>Regresar a la lista de Compras</a>\n";?>
+<?php echo "<a class='button-green' href='ventasma.php'>Regresar a la lista de Ventas</a>\n";?>
 </table>
 
 </form>

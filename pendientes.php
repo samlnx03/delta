@@ -13,16 +13,8 @@
 <?php require('menu.php'); ?>
 <h1>Pendientes en el desarrollo del sistema</h1>
 <pre>
-eliminar tablas sql tablasIO y favoritablas (checar que no se usen)
-
 agilizar captura de tabla de dimensiones muy comunes
--en movimeinto de reporte de produccion
--en def de tarima
-usar un lista desplegable o cuadro de texto
-las mas comunes se editan en una tabla
-
-Madera dimensionada
-agregar salidas (ventas) para ajustes de inventario.
+-en movimiento de reporte de produccion
 
 Invetario
 al consultar el inventario reportar si hay reportes de produccion pendientes o entradas/salidas de madera dimensionada
@@ -55,8 +47,19 @@ filtros como excel en el inventario de madera dimensionada
 renglon clickable
 https://www.electrictoolbox.com/jquey-make-entire-table-row-clickable/
 
+eliminar tablas sql tablasIO y favoritablas (checar que no se usen)
+
 
 -------- YA REALIZADO ----
+agilizar captura de tabla de dimensiones muy comunes
+-en def de tarima
+	usar un lista desplegable o cuadro de texto
+	las mas comunes se editan en una tabla
+	YA no usamos favoritas, sino la lista completa 
+- en compras y en ventas
+
+Madera dimensionada
+agregar salidas (ventas) para ajustes de inventario.
 agregar entrdas (compras) de madera aserrada
 
 alta de madera aserrada que ya existen dimensiones pero es otra especie (agilizar)
