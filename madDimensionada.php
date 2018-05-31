@@ -75,7 +75,7 @@ Dimensiones <input type=text name=descripcion <?php echo "value='$descrip' ";?> 
 <input type=submit name=buscar value='Buscar'> 
 <input type=submit name=verTodas value='Ver Todas'>
 <!-- <input type=submit name=verFavoritas value='Ver Favoritas'> -->
-<a href=madDimensionadaFavoritas.php>Ver Favoritas</a>
+<!-- <a href=madDimensionadaFavoritas.php>Ver Favoritas</a> -->
 </form>
 
 <?php
@@ -92,18 +92,18 @@ if($results){
 	$t=new html_table();
 	$t->setbody($db->get_all());
 	//$q="select id, especie, descrip, grueso, ugrueso, ancho, uancho, largo, ulargo, volpt from tablas where descrip like '$descrip%'";
-	$t->addextras( array(
-		"IO", 
-		"<button class='red' type='submit' name='inout' value='%f0%'>E/S</button>", 
-		array("id")
-		)
-	);
-	$t->addextras( array(
-		"Favoritos", 
-		"<button class='red' id='favorita' type='submit' name='favorita' value='%f0%'>F</button>", 
-		array("id")
-		)
-	);
+	//$t->addextras( array(
+	//	"IO", 
+	//	"<button class='red' type='submit' name='inout' value='%f0%'>E/S</button>", 
+	//	array("id")
+	//	)
+	//);
+	//$t->addextras( array(
+	//	"Favoritos", 
+	//	"<button class='red' id='favorita' type='submit' name='favorita' value='%f0%'>F</button>", 
+	//	array("id")
+	//	)
+	//);
 	$t->addextras( array(
 		"Sim", 
 		"<button class='red' type='submit' name='similar' value='%f0%'>+</button>", 
@@ -111,13 +111,15 @@ if($results){
 		)
 	);
 	$lfav="<a href=favoritas.php title='Medidas Favoritas'>Fav</a>";
-	$t->setcdatas(array("Agregar"=>"IO", "fav"=>"Favoritos", "id"=>"id",
+	//$t->setcdatas(array("Agregar"=>"IO", "fav"=>"Favoritos", "id"=>"id",
+	$t->setcdatas(array("id"=>"id",
 		"Especie"=>"especie", "sim"=>"Sim", "Descrip"=>"descrip",
 		"grueso" => "grueso", "ug"=>"ugrueso", "ancho"=>"ancho", "ua"=>"uancho", 
 		"largo"=>"largo", "ul"=>"ulargo", "volpt"=>"volpt"
 		)
 	);
-	echo "<form action='madDimIO.php' method=POST>\n";
+	// echo "<form action='madDimIO.php' method=POST>\n"; directo a similar.php
+	echo "<form action='similar.php' method=POST>\n";
 	$t->show();
 	echo "<input type=hidden name=newIOdescrip value='$descrip'>\n";
 	echo "</form>\n";

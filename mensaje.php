@@ -1,3 +1,3 @@
 <?php
-echo "<div class='mensaje'>Detalle de tarima ya con clave de la tabla</div>\n";
+echo "<div class='mensaje'>Se agrega boton de compras en Madera dimensionada</div>\n";
 ?>
