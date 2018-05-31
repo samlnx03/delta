@@ -208,15 +208,21 @@ function analizadimensiones(d){
 
 <script>
 var status=0;
+var medidas="";
 // 0=no cargada, no mostrada, 1=cargada, mostrada, 2=cargada,no mostrada
 $( "#verlista" )
 .click(function(){
 	//alert( "Handler for .click() called." );
+	var dim=$( "#dimensiones" ).val();
+	if(medidas!=dim) {
+		status=0;
+		medidas=dim;
+	}
 	if(status==0){
-		$.get("ajaxMaderaDim.php")
+		$.get("ajaxMaderaDim.php",{descrip:medidas})
 		  .done( function (data) {
 			  //alert("data descrip: "+data);
-			  $("#lista").append( data );
+			  $("#lista").empty().append( data );
 	  		});
 		status=1;
 	} else if(status==1){

@@ -31,7 +31,7 @@ $t->setcdatas(array("Sel"=>"IO", "id"=>"id",
 	"volpt"=>"volpt"
 	)
 );
-echo "q:$q<br>\n";
+//echo "q:$q<br>\n";
 echo "<form>\n";
 $t->show();
 echo "</form>\n";
