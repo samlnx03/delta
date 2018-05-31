@@ -13,8 +13,7 @@
 <?php require('menu.php'); ?>
 <h1>Pendientes en el desarrollo del sistema</h1>
 <pre>
-
-preguntar si compran de una o de varias medidas de madera aserrada
+eliminar tablas sql tablasIO y favoritablas (checar que no se usen)
 
 agilizar captura de tabla de dimensiones muy comunes
 -en movimeinto de reporte de produccion
@@ -23,7 +22,7 @@ usar un lista desplegable o cuadro de texto
 las mas comunes se editan en una tabla
 
 Madera dimensionada
-agregar entrdas y salidas para ajustes de inventario
+agregar salidas (ventas) para ajustes de inventario.
 
 Invetario
 al consultar el inventario reportar si hay reportes de produccion pendientes o entradas/salidas de madera dimensionada
@@ -58,6 +57,8 @@ https://www.electrictoolbox.com/jquey-make-entire-table-row-clickable/
 
 
 -------- YA REALIZADO ----
+agregar entrdas (compras) de madera aserrada
+
 alta de madera aserrada que ya existen dimensiones pero es otra especie (agilizar)
 
 Tarima. poder cambiarle el nombre (antes de cerrar la definicion)
