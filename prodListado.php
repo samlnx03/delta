@@ -1,5 +1,5 @@
 <?php
-require_once "Auth/dbclass.php";
+require_once "Auth/session.php";
 require_once "Auth/table.php";
 // borrar 2
 //require_once "Auth/proteger.php";
@@ -29,10 +29,19 @@ elseif(isset($_POST["ultimos"])){
 <head>
 <link rel="stylesheet" type="text/css" href="styles/menu.css">
 <link rel="stylesheet" type="text/css" href="styles/tableStyle.css">
+<link rel="stylesheet" type="text/css" href="styles/abutton.css">
 </head>
 <body>
 <?php require('menu.php'); ?>
 <h1>Reporte de Producción</h1>
+<?php
+if(isset($_SESSION["msg"])){
+	echo "<div class='mensaje'>".$_SESSION["msg"]."</div>";
+	unset($_SESSION["msg"]);
+}
+if(isset($_SESSION["agregando"]))
+       unset($_SESSION["agregando"]); // no abras formularios al entrar a revisar detalles
+?>
 <form method='POST'>
 <input type=submit name=alta value='Nuevo Reporte'> 
 ver: <input type=submit name=ultimos value='Ultimos 10'>
@@ -52,11 +61,11 @@ $t=new html_table();
 $t->setbody($db->get_all());
 $t->addextras( array(
 	"Editar", 
-		"<button type='submit' name='id' value='%f0%'>Revisar</button>", 
+		"<button class='green' type='submit' name='id' value='%f0%'>Revisar</button>", 
 		array("id")
 		)
 );
-$t->setcdatas(array("Ver"=>"Editar", "id"=>"id", "supervisor" => "supervisor", "fecha" => "fecha", "# sierra"=>"sierraCinta", "operador"=>"operador", "op%"=>"pctjOp", "ayudante"=>"ayudante", "ay%"=>"pctjAyu", "entregó"=>"entrego", "recibió"=>"recibio","Inventario"=>"aplicadaEnInventario"));
+$t->setcdatas(array("Ver"=>"Editar", "id"=>"id", "supervisor" => "supervisor", "fecha" => "fecha", "# sierra"=>"sierraCinta", "operador"=>"operador", "op%"=>"pctjOp", "ayudante"=>"ayudante", "ay%"=>"pctjAyu", "entregó"=>"entrego", "recibió"=>"recibio","en<br>Inv"=>"aplicadaEnInventario"));
 //$t->setFieldClas("Importe","class='alin-der'"); //campo=>id_class, p.e. 'id'=>"class='myclas'"
 //$t->setFieldTotalizado("total", 0); // campo a totalizar, inicializado en 0
 echo "<form action='prodDetalle.php' method='GET'>\n";

@@ -5,7 +5,7 @@ require_once "desarrollo.php"; // debug show errors
 
 require_once "funcs.php";  // funciones utiles
 //
-// solo mostrar items
+// checar si ya fue inventariado y si es el caso solo mostrar items
 // desaplicar en otro script especial para ello
 ?>
 <html>
@@ -14,6 +14,24 @@ require_once "funcs.php";  // funciones utiles
 <link rel="stylesheet" type="text/css" href="styles/tableStyle.css">
 <link rel="stylesheet" type="text/css" href="styles/2cols.css">
 <script src="libs/jquery-3.3.1.min.js"></script>
+<script LANGUAGE="JavaScript">
+function dimensionada(){
+    var x = document.getElementById("madera");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+function otros(){
+    var x = document.getElementById("otros");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
 </head>
 <body>
 <?php require('menu.php'); ?>
@@ -43,23 +61,14 @@ $o=$db->f("operador");
 $a=$db->f("ayudante");
 $f=$db->f("fecha");
 $readonly=$db->f("aplicadaEnInventario");
-echo "Movimientos del Reporte No. <b>$id</b>. del día <b>$f</b><br>Operador: <b>$o</b>, Ayudante: <b>$a</b>\n";
-	// mostrar movimeintos de madera dimensionada
-	$q="select d.id, d.cantidad, a.descrip, t.especie, t.descrip as dimensiones from movsRepoDimensionado as d LEFT JOIN actividades as a ON d.actividad=a.clave LEFT JOIN tablas as t ON d.idtabla=t.id WHERE d.idRepo='$id'";
-	//echo "$q<br>\n";
-	$db->query($q);
-	$t=new html_table();
-	$t->setcdatas(array("cant" => "cantidad", "descrip"=>"descrip", "especie"=>"especie", "dimensiones"=>"dimensiones" ));
-	$t->setbody($db->get_all());
-	$t->show();
-	echo "<br>\n";
-	// mostrar movimientos de otros destajos
-	$q="select d.id, d.cantidad, a.unidad, a.descrip, e.nombre from movsRepoOtrasActiv as d LEFT JOIN actividades as a ON d.actividad=a.clave LEFT JOIN empleados as e ON d.idEmpleado=e.id WHERE d.idRepo='$id'";
-	$db->query($q);
-	$t=new html_table();
-  	$t->setcdatas(array("cant" => "cantidad", "unidad"=>"unidad", "descrip"=>"descrip","empleado"=>"nombre" ));
-	$t->setbody($db->get_all());
-	$t->show();
+echo "Movimientos del Reporte No. <b>$id</b>. del día <b>$f</b> Operador: <b>$o</b>, Ayudante: <b>$a</b>\n";
+//echo "<br>readonly: $readonly<br>\n";
+if($readonly=='n'){
+	require_once "repoMovsForm.php";
+}else{
+	require_once "repoMovs.php";
+}
 ?>
 </body>
 </html>
+
