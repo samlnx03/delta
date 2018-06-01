@@ -8,7 +8,7 @@ if(!isset($_SESSION["idrepo"])){ // viene de prodDetalle
 	header('Location: prodListado.php');
 }
 $id=$_SESSION["idrepo"];
-// aplicar al inventario y luego
+// PENDIENTE aplicar al inventario y luego
 $q="update repoProd set aplicadaEnInventario='s' where id='$id'";
 $db->query($q);
 $_SESSION["msg"]="Reporte $id aplicado al inventario";

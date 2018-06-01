@@ -33,6 +33,7 @@ elseif(isset($_POST["ultimos"])){
 </head>
 <body>
 <?php require('menu.php'); ?>
+<?php require('menuProd.php'); ?>
 <h1>Reporte de Producción</h1>
 <?php
 if(isset($_SESSION["msg"])){

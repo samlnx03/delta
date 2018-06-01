@@ -17,6 +17,7 @@ if(isset($_POST["alta"])){
 </head>
 <body>
 <?php require('menu.php'); ?>
+<?php require('menuMaDim.php'); ?>
 <h1>Ventas de Madera Dimensionada</h1>
 <?php
 if(isset($_SESSION["msg"])){

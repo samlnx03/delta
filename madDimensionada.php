@@ -15,6 +15,7 @@ require_once "desarrollo.php"; // reporta errores
 </head>
 <body>
 <?php require('menu.php'); ?>
+<?php require('menuMaDim.php'); ?>
 <h1>Madera Dimensionada</h1>
 <?php
 
@@ -82,8 +83,10 @@ Dimensiones <input type=text name=descripcion <?php echo "value='$descrip' ";?> 
 echo "<form action=madDimensionadaNueva.php method=post>\n";
 echo "<input type=hidden name=descripcion value='$descrip'>\n";
 echo "<input type=submit name=nueva value='Nueva Medida'>\n";
+/*
 echo "<a class='button-green' href='comprasma.php'>Compras</a>\n";
 echo "<a class='button-green' href='ventasma.php'>Ventas</a>\n";
+ */
 echo "</form>\n";
 
 echo "<div id='listaFavoritas'></div>\n";

@@ -3,7 +3,7 @@
 	/*background-image: url("nic_backfade.jpg");*/
 }
 
-.menu {
+.menu, .submenu{
     list-style-type: none;
     margin: 0;
     padding: 2px 2px;
@@ -11,19 +11,23 @@
     background-color: #3b5998;
     color: white;
 }
-.menu a {
+.submenu{
+    background-color: #5776b6;
+}
+
+.menu a, .submenu a {
     text-decoration: none !important;
     color: inherit;
 }
-.menu li {
+.menu li, .submenu li {
     float: left;
     padding: 0px 4px;
 }
-.menu li a:hover {
+.menu li a:hover, .submenu li a:hover {
     color: #000;
     background-color: #ccc;
 }
-.menu li a, .menu-navitem {
+.menu li a, .submenu li a, .menu-navitem {
     display: block;
     padding: 0px 4px;
 }

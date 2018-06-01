@@ -13,9 +13,6 @@
 <?php require('menu.php'); ?>
 <h1>Pendientes en el desarrollo del sistema</h1>
 <pre>
-agilizar captura de tabla de dimensiones muy comunes
--en movimiento de reporte de produccion
-
 Invetario
 al consultar el inventario reportar si hay reportes de produccion pendientes o entradas/salidas de madera dimensionada
 
@@ -57,6 +54,7 @@ agilizar captura de tabla de dimensiones muy comunes
 	las mas comunes se editan en una tabla
 	YA no usamos favoritas, sino la lista completa 
 - en compras y en ventas
+-en movimiento de reporte de produccion
 
 Madera dimensionada
 agregar salidas (ventas) para ajustes de inventario.

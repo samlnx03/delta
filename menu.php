@@ -12,6 +12,6 @@ echo "<li><a href=bye.php>[Logout]</a></li>\n";
 echo "<li><a href=pendientes.php>[Pendientes]</a></li>\n";
 //echo "<li><a onclick=\"TogetherJS(this); return false;\">TOGHETER</a>\n";
 echo "</ul>\n";
-require_once "mensaje.php";
+//require_once "mensaje.php";
 ?>
 
