@@ -8,8 +8,8 @@ if(!(isset($_POST["soloOperador"]) OR
 	isset($_SESSION["idrepo"]) OR
 	isset($_POST["operadorYayudante"])))
 {
-	$_SESSION["msg"]="Acceso incorrecto a script";
-	header('Location: prodDetalle.php');
+	$_SESSION["msg"]="Acceso incorrecto a script Alta Otros Destajos";
+	header('Location: scListado.php');
 	die();
 }
 
@@ -57,7 +57,8 @@ if (isset($_POST["soloOperador"])){
 //$_SESSION["q"]="$q<br>\n"; 
 $id=$db->insert_id;
 $_SESSION["msg"]="Registro realizado ( id=$id $id2)"; 
-header("Location: prodDetalle.php");
+//header("Location: scDetalle.php");
+header("Location: scMovsForm.php");
 die();
 ?>
 

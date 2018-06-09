@@ -17,8 +17,10 @@ require_once "funcs.php";  // funciones utiles
 <script src="libs/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-<?php require('menu.php'); ?>
-<h1>Detalle de reporte de Produccion</h1>
+<?php require('menu.php');
+require("menuProd.php");
+?>
+<h1>Detalle de reporte de Sierra Cinta</h1>
 <?php
 if(!isset($_SESSION["idrepo"])){ // viene de prodDetalle que hace require a este script
 	echo "<div class='mensaje'>Acceso incorrecto a este lugar</div>";

@@ -8,8 +8,8 @@ require_once("desarrollo.php");  // reporta errores
 if(!(isset($_POST["aserrioYhojeado"]) OR
 	isset($_SESSION["idrepo"])))
 {
-	$_SESSION["msg"]="Acceso incorrecto a script";
-	header('Location: prodDetalle.php');
+	$_SESSION["msg"]="Acceso incorrecto a script alta M.A.";
+	header('Location: scListado.php');
 	die();
 }
 
@@ -22,7 +22,7 @@ $db->query($q);
 if($db->num_rows()==0)
 {
 	$_SESSION["msg"]="No exite especie y dimensiones dadas";
-	header('Location: prodDetalle.php');
+	header('Location: scDetalle.php');
 	die();
 }
 $db->next_row();
@@ -46,7 +46,7 @@ $db->query($q);
 $id=$db->insert_id;
 $_SESSION["msg"]="Registro realizado (id=$id)"; 
 $_SESSION["agregando"]=1; 
-header("Location: prodDetalle.php");
+header("Location: scDetalle.php");
 die();
 ?>
 
