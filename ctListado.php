@@ -57,7 +57,7 @@ y <input type=date name=f2>
 
 <?php
 $q="select id, supervisor, fecha, aplicadaEnInventario from repoCT as p $cond";
-echo "<br>q: $q<br>\n";
+//echo "<br>q: $q<br>\n";
 $db=db::getInstance();
 $db->query($q);
 $t=new html_table();

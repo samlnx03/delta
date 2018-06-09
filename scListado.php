@@ -7,7 +7,7 @@ require_once "Auth/table.php";
 
 $cond="order by p.id desc limit 10";
 if(isset($_POST["alta"])){
-        header('Location: prodNuevoRepo.php');
+        header('Location: scNuevoRepo.php');
         die();
 }
 elseif(isset($_POST["today"])){
@@ -69,7 +69,7 @@ $t->addextras( array(
 $t->setcdatas(array("Ver"=>"Editar", "id"=>"id", "supervisor" => "supervisor", "fecha" => "fecha", "# sierra"=>"sierraCinta", "operador"=>"operador", "op%"=>"pctjOp", "ayudante"=>"ayudante", "ay%"=>"pctjAyu", "entregó"=>"entrego", "recibió"=>"recibio","en<br>Inv"=>"aplicadaEnInventario"));
 //$t->setFieldClas("Importe","class='alin-der'"); //campo=>id_class, p.e. 'id'=>"class='myclas'"
 //$t->setFieldTotalizado("total", 0); // campo a totalizar, inicializado en 0
-echo "<form action='prodDetalle.php' method='GET'>\n";
+echo "<form action='scDetalle.php' method='GET'>\n";
 $t->show();
 echo "</form>\n";
 ?>

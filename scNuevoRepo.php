@@ -24,7 +24,9 @@ function validar(){
 </script>
 </head>
 <body>
-<?php require('menu.php'); ?>
+<?php require('menu.php');
+require("menuProd.php");
+?>
 <h1>Producción Sierras Cintas</h1>
 <h3>Nuevo reporte de producción</h3>
 <?php
@@ -40,7 +42,7 @@ if(isset($_SESSION["msg"])){
 ?>
 <div class="divrow">
 <div class="divcol">
-<form action='prodAltaRepo.php' method='POST' onsubmit='validar()'>
+<form action='scAltaRepo.php' method='POST' onsubmit='validar()'>
 <table>
 <tr>
 <td>Supervisor de Area<td><input type=text name=supervisor required>

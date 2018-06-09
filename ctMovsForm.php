@@ -17,7 +17,9 @@ require_once "funcs.php";  // funciones utiles
 <script src="libs/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-<?php require('menu.php'); ?>
+<?php require('menu.php');
+require('menuProd.php');
+?>
 <div class=mensaje>Todavia no funciona</div>
 <h1>Detalle de reporte de Clavado de Tarima</h1>
 <?php
@@ -45,7 +47,7 @@ echo "Movimientos del Reporte No. <b>$id</b>. del día <b>$f</b><br>Supervisor: 
 // mostrar forma para el clavado de tarima
 ?>
 <?php
-echo "<form action=prodDetalleAltaCT.php method=POST>\n";
+echo "<form action=ctDetalleAlta.php method=POST>\n";
 echo "Cantidad <input type=text name=cantidad size=3>\n";
 $q="select clave, concat(clave,': (',unidad,') ',descrip) as descrip from actividades where tipo='tarima'";
 $clave=htmlSelect($q, "clave", "clave", "descrip", '');

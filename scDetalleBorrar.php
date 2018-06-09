@@ -8,7 +8,7 @@ require_once("desarrollo.php");  // reporta errores
 if(!isset($_POST["id"]))
 {
 	$_SESSION["msg"]="Acceso incorrecto a script";
-	header('Location: prodDetalle.php');
+	header('Location: scDetalle.php');
 	die();
 }
 
@@ -25,7 +25,7 @@ $db->query($q);
 $ar=$db->affected_rows();
 	
 $_SESSION["msg"]="Registros eliminados: $ar";
-header('Location: prodDetalle.php');
+header('Location: scDetalle.php');
 die();
 
 ?>

@@ -12,7 +12,7 @@ if(isset($_GET["id"])){
 	$id=$_SESSION["idrepoct"];
 } else{
 	$_SESSION["msg"]="Acceso incorrecto a detalle de reporte";
-	header('Location: prodDetalle.php');
+	header('Location: ctListado.php');
 	die();
 }
 $db=db::getInstance();
@@ -21,7 +21,7 @@ $db->query($q);
 $db->next_row();
 $readonly=$db->f("aplicadaEnInventario");
 if($readonly=='n'){
-	require_once "repoCTMovsForm.php";
+	require_once "ctMovsForm.php";
 }else{
-	require_once "repoCTMovs.php";
+	require_once "ctMovs.php";
 }

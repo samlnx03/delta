@@ -60,7 +60,7 @@ $styl1.="background-color: eeeeee; color: black; border:thin Black; border-style
 
 ?>
 <div  id="madera" style="<?php echo $styl1;?>">
-<form id='cant_esp_dim' action='prodDetalleAltaMA.php' method='POST'>
+<form id='cant_esp_dim' action='scDetalleAltaMA.php' method='POST'>
 <?php
 $q="select clave, descrip from actividades where tipo='tabla'";
 $clave=htmlSelect($q, "clave", "clave", "descrip", '');
@@ -81,7 +81,7 @@ Dimensiones <input id='dimensiones' type='text' name='descripcion'>
 $styl2.="background-color: eeeeee; color: black; border:thin Black; border-style : dashed; line-height: 20px; padding-top: 6px; padding-left: 6px; padding-bottom: 6px; padding-right: 6px;";
 ?>
 <div  id="otros" style="<?php echo $styl2;?>">
-<form action=prodDetalleAltaOD.php method=POST>
+<form action=scDetalleAltaOD.php method=POST>
 <table>
 <tr>
 <td>Cantidad<br><input type=text name=cantidad size=3>
@@ -97,7 +97,7 @@ echo "<input type=hidden name=descripcion>";
 <input type=submit name=soloOperador value='Agregar'>
 <?php echo "Solo el Operador: <b>$o</b>\n";?>
 </td></tr></table></form>
-<form action=prodDetalleAltaOD.php method=POST>
+<form action=scDetalleAltaOD.php method=POST>
 <table>
 <tr>
 <td>Cantidad<br><input type=text name=cantidad size=3>
@@ -110,7 +110,7 @@ echo "<input type=hidden name=descripcion>";
 <input type=submit name=soloAyudante value='Agregar'>
 <?php echo "Solo el Ayudante: <b>$a</b>\n";?>
 </td></tr></table></form>
-<form action=prodDetalleAltaOD.php method=POST>
+<form action=scDetalleAltaOD.php method=POST>
 <table>
 <tr>
 <td>Cantidad<br><input type=text name=cantidad size=3>
@@ -138,7 +138,7 @@ echo "<input type=hidden name=descripcion>";
   	);
 	  $t->setcdatas(array("Eliminar"=>"Editar", "cant" => "cantidad", "descrip"=>"descrip", "especie"=>"especie", "dimensiones"=>"dimensiones" ));
 	$t->setbody($db->get_all());
-  	echo "<form action='prodDetalleBorrar.php' method='POST'>\n";
+  	echo "<form action='scDetalleBorrar.php' method='POST'>\n";
 	$t->show();
 	echo "<input type=hidden name=tabla value=MD>";
 	echo "</form>\n";
@@ -155,13 +155,13 @@ echo "<input type=hidden name=descripcion>";
   	);
 	$t->setcdatas(array("Eliminar"=>"Editar", "cant" => "cantidad", "unidad"=>"unidad", "descrip"=>"descrip","empleado"=>"nombre" ));
 	$t->setbody($db->get_all());
-	echo "<form action='prodDetalleBorrar.php' method='POST'>\n";
+	echo "<form action='scDetalleBorrar.php' method='POST'>\n";
 	$t->show();
 	echo "<input type=hidden name=tabla value=OA>";
 	echo "</form>\n";
-	echo "<a class='button-red' href='prodRepoBorrar.php?id=$id'>Borrar Repo</a> ";
+	echo "<a class='button-red' href='scRepoBorrar.php?id=$id'>Borrar Repo</a> ";
 	echo "OJO: Se borra definitivamente!   ---\n";
-	echo "<a class='button-green' href='prodRepoCerrar.php?id=$id'>Cerrar Repo</a> ";
+	echo "<a class='button-green' href='scRepoCerrar.php?id=$id'>Cerrar Repo</a> ";
 	echo "No se podrá ni borrar ni agregar nada al reporte\n";
 ?>
 <script>
