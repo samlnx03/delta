@@ -34,7 +34,7 @@ elseif(isset($_POST["ultimos"])){
 <body>
 <?php require('menu.php'); ?>
 <?php require('menuProd.php'); ?>
-<h1>Reporte de Sierra Cinta</h1>
+<h1>Producción de Sierras Cintas</h1>
 <?php
 if(isset($_SESSION["msg"])){
 	echo "<div class='mensaje'>".$_SESSION["msg"]."</div>";

@@ -58,7 +58,7 @@ if (isset($_POST["soloOperador"])){
 $id=$db->insert_id;
 $_SESSION["msg"]="Registro realizado ( id=$id $id2)"; 
 //header("Location: scDetalle.php");
-header("Location: scMovsForm.php");
+header("Location: scDetalle.php");
 die();
 ?>
 

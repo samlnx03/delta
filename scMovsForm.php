@@ -33,14 +33,15 @@ if(isset($_SESSION["msg"])){
 }
 
 $db=db::getInstance();
-$q="select fecha, e1.nombre as operador, e2.nombre as ayudante, aplicadaEnInventario from repoProd as r LEFT JOIN empleados as e1 on r.operador=e1.id LEFT JOIN empleados as e2 on r.ayudante=e2.id WHERE r.id='$id'";
+$q="select fecha, sierraCinta, e1.nombre as operador, e2.nombre as ayudante, aplicadaEnInventario from repoProd as r LEFT JOIN empleados as e1 on r.operador=e1.id LEFT JOIN empleados as e2 on r.ayudante=e2.id WHERE r.id='$id'";
 $db->query($q);
 $db->next_row();
 $o=$db->f("operador");
 $a=$db->f("ayudante");
 $f=$db->f("fecha");
+$sc=$db->f("sierraCinta");
 $readonly=$db->f("aplicadaEnInventario");
-echo "Movimientos del Reporte No. <b>$id</b>. del día <b>$f</b><br>Operador: <b>$o</b>, Ayudante: <b>$a</b><br>\n";
+echo "Movimientos del Reporte No. <b>$id</b>. del día <b>$f</b> Sierra Cinta: <b>$sc</b><br>Operador: <b>$o</b>, Ayudante: <b>$a</b><br>\n";
 ?>
 [ Mostrar/Ocultar captura de 
 <button id='bmadera'>Madera Dimensionada</button>

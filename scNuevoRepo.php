@@ -29,9 +29,6 @@ require("menuProd.php");
 ?>
 <h1>Producción Sierras Cintas</h1>
 <h3>Nuevo reporte de producción</h3>
-<?php
-//<a class='button-slategray' href=prodSClistado.php>Listado</a>
-?>
 <?php 
 //if(isset($_SESSION["q1"])) echo $_SESSION["q1"];
 //if(isset($_SESSION["q"])) echo $_SESSION["q"];

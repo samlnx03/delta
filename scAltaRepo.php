@@ -6,14 +6,14 @@ require_once "Auth/session.php";
 //require_once "funcs.php";
 
 if(!isset($_POST["agregar"])){
-	header('Location: prodNuevoRepo.php');
+	header('Location: scNuevoRepo.php');
 	die();
 }
 // checar que exista operador y ayudante
 $op=htmlNpost("operador");
 if($op=="NULL") {
 	$_SESSION["msg"]="Debe especificar operador";
-	header('Location: prodNuevoRepo.php');
+	header('Location: scNuevoRepo.php');
 	die();
 }
 
@@ -22,7 +22,7 @@ $q="select nombre from empleados where id='$op'";
 $db->query($q);
 if($db->num_rows()==0){
 	$_SESSION["msg"]="No existe el operador $op";
-	header('Location: prodNuevoRepo.php');
+	header('Location: scNuevoRepo.php');
 	die();
 }
 $pctjOp=htmlNpost("pctjOp");
@@ -33,7 +33,7 @@ if($ayu!="NULL" AND $ayu!='0'){
 	$db->query($q);
 	if($db->num_rows()==0){
 		$_SESSION["msg"]="No existe el ayudante $ayu"; 
-		header('Location: prodNuevoRepo.php');
+		header('Location: scNuevoRepo.php');
 		die();
 	}
 } else{
@@ -49,7 +49,7 @@ $q="insert into repoProd(supervisor,fecha,sierraCinta, operador, pctjOp, ayudant
 $db->query($q);
 $id=$db->insert_id;
 //$_SESSION["q"]="$q<br>\n"; 
-header("Location: prodDetalle.php?id=$id");	//a los detalles
+header("Location: scDetalle.php?id=$id");	//a los detalles
 die();
 ?>
 

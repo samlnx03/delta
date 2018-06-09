@@ -6,7 +6,7 @@ require_once "desarrollo.php";  // show errores
 /*
 $cond="order by p.id desc limit 10";
 if(isset($_POST["alta"])){
-        header('Location: prodNuevoRepo.php');
+        //header('Location: prodNuevoRepo.php');
         die();
 }
 elseif(isset($_POST["today"])){

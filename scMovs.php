@@ -16,8 +16,10 @@ require_once "funcs.php";  // funciones utiles
 <script src="libs/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-<?php require('menu.php'); ?>
-<h1>Detalle de reporte de Produccion</h1>
+<?php require('menu.php');
+require("menuProd.php");
+?>
+<h1>Detalle de reporte de Sierra Cinta</h1>
 <?php
 if(isset($_GET["id"])){
 	$id=$_GET["id"];
@@ -36,14 +38,15 @@ if(isset($_SESSION["msg"])){
 }
 
 $db=db::getInstance();
-$q="select fecha, e1.nombre as operador, e2.nombre as ayudante, aplicadaEnInventario from repoProd as r LEFT JOIN empleados as e1 on r.operador=e1.id LEFT JOIN empleados as e2 on r.ayudante=e2.id WHERE r.id='$id'";
+$q="select fecha, sierraCinta, e1.nombre as operador, e2.nombre as ayudante, aplicadaEnInventario from repoProd as r LEFT JOIN empleados as e1 on r.operador=e1.id LEFT JOIN empleados as e2 on r.ayudante=e2.id WHERE r.id='$id'";
 $db->query($q);
 $db->next_row();
 $o=$db->f("operador");
 $a=$db->f("ayudante");
 $f=$db->f("fecha");
+$sc=$db->f("sierraCinta");
 $readonly=$db->f("aplicadaEnInventario");
-echo "Movimientos del Reporte No. <b>$id</b>. del día <b>$f</b><br>Operador: <b>$o</b>, Ayudante: <b>$a</b>\n";
+echo "Movimientos del Reporte No. <b>$id</b>. del día <b>$f</b> Sierra Cinta: <b>$sc</b><br>Operador: <b>$o</b>, Ayudante: <b>$a</b>\n";
 	// mostrar movimeintos de madera dimensionada
 	$q="select d.id, d.cantidad, a.descrip, t.especie, t.descrip as dimensiones from movsRepoDimensionado as d LEFT JOIN actividades as a ON d.actividad=a.clave LEFT JOIN tablas as t ON d.idtabla=t.id WHERE d.idRepo='$id'";
 	//echo "$q<br>\n";

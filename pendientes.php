@@ -13,6 +13,8 @@
 <?php require('menu.php'); ?>
 <h1>Pendientes en el desarrollo del sistema</h1>
 <pre>
+Modificar captura de movientos
+
 Invetario
 al consultar el inventario reportar si hay reportes de produccion pendientes o entradas/salidas de madera dimensionada
 
@@ -75,7 +77,7 @@ Borrar en actividades YA funciona
 no de debe poder borrar si hay produccion de esa actividad (bandera?) no, se checa la tabla de movs del reporte de produccion.
 
 Reporte de produccion
-una vez agregado a inventarios no de debe poder modificar (prodDetalle.php)
+una vez agregado a inventarios no de debe poder modificar (scDetalle.php, ctDetalle.php)
 
 </pre>
 

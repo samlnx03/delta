@@ -20,7 +20,6 @@ require_once "funcs.php";  // funciones utiles
 <?php require('menu.php');
 require('menuProd.php');
 ?>
-<div class=mensaje>Todavia no funciona</div>
 <h1>Detalle de reporte de Clavado de Tarima</h1>
 <?php
 if(!isset($_SESSION["idrepoct"])){ // viene de ctDetalle que hace require a este script
