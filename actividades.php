@@ -20,12 +20,13 @@ if(isset($_POST["cambiaCosto"])){
 }
 $existe=false;
 if(isset($clave)){
-	$q="select descrip from actividades where clave='$clave'";
+	$q="select descrip, costo from actividades where clave='$clave'";
 	$db->query($q);
 	if($db->num_rows()>0){
 		$existe=true;
 		$db->next_row();
 		$descrip=$db->f("descrip");
+		$costo1=$db->f("costo");
 	}
 }
 if(isset($_POST["alta"])){
@@ -34,8 +35,17 @@ if(isset($_POST["alta"])){
 		$descrip=$_POST["descrip"];
 		$costo=htmlNpost("costo");
 		$unidad=$_POST["unidad"];
-		$tipo=$_POST["tipo"];
-		$q="insert into actividades (clave, descrip, costo, unidad, tipo) values ('$clave','$descrip',$costo,'$unidad','$tipo')";
+		$unidadotro=$_POST["unidadotro"];
+		//$tipo=$_POST["tipo"];
+		if($unidad=="pie-tabla")
+			$tipo="tabla";
+		elseif($unidad=="tarima")
+			$tipo="tarima";
+		else
+			$tipo="otro";
+		$inventario=$_POST["inventario"];
+		if($unidadotro!='') $unidad=$unidadotro;
+		$q="insert into actividades (clave, descrip, costo, unidad, tipo, inventario) values ('$clave','$descrip',$costo,'$unidad','$tipo', '$inventario')";
 		$db->query($q);
 		$nreg=$db->affected_rows();
 		$_SESSION["msg"]="$nreg registro(s) insertado(s)";
@@ -87,7 +97,7 @@ if(isset($_POST["cambiaCosto"])){
 	echo "<form method='POST'>\n";
 	echo "actividad: $actividad: $descrip<br>\n";
 	echo "<input type=hidden name=activ2change value='$actividad'>";
-	echo " costo: <input type=text name=newCosto size=10 required>";
+	echo " costo: <input type=text name=newCosto size=10 value='$costo1' required>";
 	echo "<input type=submit name=okCambiaCosto value=Actualizar>\n";
 	echo "</form>\n";
 	echo "</body></html>\n";
@@ -98,22 +108,26 @@ if(isset($_POST["cambiaCosto"])){
 <form method='POST'>
 Nueva actividad:<br>
 clave: <input type=text name=clave size=10 maxlength=10 required>
-<!-- tipo es importante para el inventario de tablas -->
-tipo: <select name='tipo'>
-<option selected value='otro'>1 Otro</option>
-<option value='tabla'>2 Tablas</option>
-<option value='tarima'>3 Tarimas</option>
-</select>
 descripcion: <input type=text name=descrip required>
 <br>
 costo: <input type=text name=costo size=10 required>
-por <input type=text name=unidad size=10 required>
-(pie-tabla, tarima, hora, bulto, etc.)
+por: <select name='unidad'>
+<option selected value='otro'>Otro</option>
+<option value='pie-tabla'>pie-tabla</option>
+<option value='M3'>M3</option>
+<option value='tarima'>Tarima</option>
+</select>
+otro (especifique) <input type=text name=unidadotro size=10>
+<!-- tipo es importante para el inventario de tablas -->
+ (hora, bulto, pieza, etc.)
 <br>
-Especifique <b>pie-tabla</b> para madera dimensionada pagada por volumen en pie-tabla
-<br>
-Especifique <b>tarima</b> para clavado de tarima por pieza
-<br>
+Inventario: 
+<?php
+//function htmlSelect($qry, $name, $val, $tit, $selected){
+$q="select substr(clave, -1,1) as value, valor as toshow from claveValor where clave like 'invent_'";
+$s=htmlSelect($q, "inventario", 'value', 'toshow', '0');
+echo $s;
+?>
 <input type=submit name=alta value=Agregar>
 </form>
 </div>
@@ -141,7 +155,7 @@ Especifique <b>tarima</b> para clavado de tarima por pieza
 		array("clave")
 		)
 	);
-	$t->setcdatas(array("Acción"=>"Acción", "clave"=>"clave", "descripcion" => "descrip", "costo"=>"costo", "cambiar"=>"cambiar", "unidad"=>"unidad", "tipo"=>"tipo"));
+	$t->setcdatas(array("Acción"=>"Acción", "clave"=>"clave", "descripcion" => "descrip", "costo"=>"costo", "cambiar"=>"cambiar", "unidad"=>"unidad", "inv"=>"inventario"));
 	//echo "q:$q<br>";
 	echo "<form method='POST'>\n";
 	$t->show();
