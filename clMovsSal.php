@@ -1,0 +1,3 @@
+<?php
+// registros de salidas
+?>
