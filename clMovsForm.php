@@ -44,24 +44,55 @@ $readonly=$db->f("aplicadaEnInventario");
 echo "Movimientos del Reporte No. <b>$id</b>. del día <b>$f</b> Sierra Gemela: <b>$sg</b><br>Operador: <b>$o</b><br>\n";
 ?>
 [ Mostrar/Ocultar captura de 
+<button id='bmaderaexit'>Tablas Origen</button>
 <button id='bmadera'>Corte a Largo</button>
 <button id="botros">otros destajos</button> ]
 <?php 
 if(!isset($_SESSION["agregando"])){
 	$styl1="display: none; ";
 	$styl2="display: none; ";
+	$styl0="display: none; ";
 }
 elseif($_SESSION["agregando"]==1){
 	$styl1="display: block; ";
 	$styl2="display: none; ";
+	$styl0="display: none; ";
 }
 elseif($_SESSION["agregando"]==2){
-	$styl2="display: block; ";
 	$styl1="display: none; ";
+	$styl2="display: block; ";
+	$styl0="display: none; ";
 }
+elseif($_SESSION["agregando"]==3){
+	$styl1="display: none; ";
+	$styl2="display: none; ";
+	$styl0="display: block; ";
+}
+$styl0.="background-color: eeeeee; color: black; border:thin Black; border-style : dashed; line-height: 20px; padding-top: 6px; padding-left: 6px; padding-bottom: 6px; padding-right: 6px;";
+
 $styl1.="background-color: eeeeee; color: black; border:thin Black; border-style : dashed; line-height: 20px; padding-top: 6px; padding-left: 6px; padding-bottom: 6px; padding-right: 6px;";
 
 ?>
+<div  id="maderaexit" style="<?php echo $styl1;?>">
+<form id='cant_esp_dimx' action='clDetalleAltaMA.php' method='POST'>
+<?php
+//$q="select clave, descrip from actividades where tipo='tabla'";
+//$clave=htmlSelect($q, "clave", "clave", "descrip", '');
+//echo "$clave\n";
+$q="select distinct especie from tablas";
+$especies=htmlSelect($q, "especiex", "especie", "especie", '');
+?>
+<?php //echo "$clave\n";?>
+cantidad[-clave] <input id='cantidadx' type='text' name='cantidad' size='4'> 
+especie <?php echo $especies;?> 
+Dimensiones <input id='dimensionesx' type='text' name='descripcion'>
+<input type='submit' name='salidaMA' value='agregar'> 
+<button id="verlistax">Ver Lista</button>
+</form>
+<div id=listax></div>
+</div>
+
+
 <div  id="madera" style="<?php echo $styl1;?>">
 <form id='cant_esp_dim' action='clDetalleAltaMA.php' method='POST'>
 <?php
@@ -83,8 +114,10 @@ Dimensiones <input id='dimensiones' type='text' name='descripcion'>
 <?php
 $styl2.="background-color: eeeeee; color: black; border:thin Black; border-style : dashed; line-height: 20px; padding-top: 6px; padding-left: 6px; padding-bottom: 6px; padding-right: 6px;";
 ?>
+
+
 <div  id="otros" style="<?php echo $styl2;?>">
-<form action=scDetalleAltaOD.php method=POST>
+<form action=clDetalleAltaOD.php method=POST>
 <table>
 <tr>
 <td>Cantidad<br><input type=text name=cantidad size=3>
@@ -98,38 +131,12 @@ echo "<input type=hidden name=descripcion>";
 ?>
 <td> <br>
 <input type=submit name=soloOperador value='Agregar'>
-<?php echo "Solo el Operador: <b>$o</b>\n";?>
-</td></tr></table></form>
-<form action=scDetalleAltaOD.php method=POST>
-<table>
-<tr>
-<td>Cantidad<br><input type=text name=cantidad size=3>
-<?php
-echo "<td>Clave<br>$clave\n";
-echo "<td> \n";
-echo "<input type=hidden name=descripcion>";
-?>
-<td> <br>
-<input type=submit name=soloAyudante value='Agregar'>
-<?php echo "Solo el Ayudante: <b>$a</b>\n";?>
-</td></tr></table></form>
-<form action=scDetalleAltaOD.php method=POST>
-<table>
-<tr>
-<td>Cantidad<br><input type=text name=cantidad size=3>
-<?php
-echo "<td>Clave<br>$clave\n";
-echo "<td> \n";
-echo "<input type=hidden name=descripcion>";
-?>
-<td> <br>
-<input type=submit name=operadorYayudante value='Agregar'>
-<?php echo "Para cada uno: <b>$o y $a</b>\n";?>
+<?php echo "<b>$o</b>\n";?>
 </td></tr></table></form>
 </div>
 <?php
-	// mostrar movimeintos de madera dimensionada
-	$q="select d.id, d.cantidad, a.descrip, t.especie, t.descrip as dimensiones from movsRepoDimensionado as d LEFT JOIN actividades as a ON d.actividad=a.clave LEFT JOIN tablas as t ON d.idtabla=t.id WHERE d.idRepo='$id'";
+	// mostrar movimientos de madera dimensionada
+	$q="select d.id, d.cantidad, a.descrip, t.especie, t.descrip as dimensiones from movsRepoCL as d LEFT JOIN actividades as a ON d.actividad=a.clave LEFT JOIN tablas as t ON d.idtabla=t.id WHERE d.idRepoCL='$id'";
 	//echo "$q<br>\n";
 	$db->query($q);
 	$t=new html_table();
@@ -141,13 +148,13 @@ echo "<input type=hidden name=descripcion>";
   	);
 	  $t->setcdatas(array("Eliminar"=>"Editar", "cant" => "cantidad", "descrip"=>"descrip", "especie"=>"especie", "dimensiones"=>"dimensiones" ));
 	$t->setbody($db->get_all());
-  	echo "<form action='scDetalleBorrar.php' method='POST'>\n";
+  	echo "<form action='clDetalleBorrar.php' method='POST'>\n";
 	$t->show();
 	echo "<input type=hidden name=tabla value=MD>";
 	echo "</form>\n";
 	
 	// mostrar movimientos de otros destajos
-	$q="select d.id, d.cantidad, a.unidad, a.descrip, e.nombre from movsRepoOtrasActiv as d LEFT JOIN actividades as a ON d.actividad=a.clave LEFT JOIN empleados as e ON d.idEmpleado=e.id WHERE d.idRepo='$id'";
+	$q="select d.id, d.cantidad, a.unidad, a.descrip, e.nombre from movsRepoOtrasActiv as d LEFT JOIN actividades as a ON d.actividad=a.clave LEFT JOIN empleados as e ON d.idEmpleado=e.id WHERE d.idRepoCL='$id'";
 	$db->query($q);
 	$t=new html_table();
 	$t->addextras( array(
@@ -158,13 +165,13 @@ echo "<input type=hidden name=descripcion>";
   	);
 	$t->setcdatas(array("Eliminar"=>"Editar", "cant" => "cantidad", "unidad"=>"unidad", "descrip"=>"descrip","empleado"=>"nombre" ));
 	$t->setbody($db->get_all());
-	echo "<form action='scDetalleBorrar.php' method='POST'>\n";
+	echo "<form action='clDetalleBorrar.php' method='POST'>\n";
 	$t->show();
 	echo "<input type=hidden name=tabla value=OA>";
 	echo "</form>\n";
-	echo "<a class='button-red' href='scRepoBorrar.php?id=$id'>Borrar Repo</a> ";
+	echo "<a class='button-red' href='clRepoBorrar.php?id=$id'>Borrar Repo</a> ";
 	echo "OJO: Se borra definitivamente!   ---\n";
-	echo "<a class='button-green' href='scRepoCerrar.php?id=$id'>Cerrar Repo</a> ";
+	echo "<a class='button-green' href='clRepoCerrar.php?id=$id'>Cerrar Repo</a> ";
 	echo "No se podrá ni borrar ni agregar nada al reporte\n";
 ?>
 <script>
@@ -183,6 +190,11 @@ $("#bmadera").click(function(){
 		$("#cantidad").focus();
 	});
 	
+$("#bmaderaexit").click(function(){
+	$("#maderaexit").toggle();
+	if($("#maderaexit").is(":visible"))
+		$("#cantidadexit").focus();
+	});
 </script>
 <script>
 $( "#cantidad" )
