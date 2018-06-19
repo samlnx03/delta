@@ -1,5 +1,8 @@
+<?php
+require_once "clMovsFormHead.php";
+?>
 <div style="background-color: #b4d7d7; padding-top: 3px; padding-left: 4px; padding-bottom: 1px;">
-<button id="btcortealargo">Ver/ocultar</button> <b>Producción de Corte a Largo</b>
+<b>(2) Producción de Corte a Largo</b>
 <div id='CorteLargo'>
 <?php
 require "clMovsFormEntradas.php";
@@ -24,3 +27,7 @@ echo "</form>\n";
 ?>
 </div> <!-- id='CorteLargo' ocultable -->
 </div>
+<br>
+<?php
+require_once "clMovsFormFoot.php";
+?>

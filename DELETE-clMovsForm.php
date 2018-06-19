@@ -42,12 +42,13 @@ $f=$db->f("fecha");
 $sg=$db->f("sierraGemela");
 $readonly=$db->f("aplicadaEnInventario");
 echo "Movimientos del Reporte No. <b>$id</b>. del día <b>$f</b> Sierra Gemela: <b>$sg</b><br>Operador: <b>$o</b><br>\n";
-?>
+/*
 [ Mostrar/Ocultar captura de 
-<button id='bmaderaexit'>Tablas Origen</button>
-<button id='bmadera'>Corte a Largo</button>
 <button id="botros">otros destajos</button> ]
+ */
+?>
 <?php 
+/*
 if(!isset($_SESSION["agregando"])){
 	$styl1="display: none; ";
 	$styl2="display: none; ";
@@ -73,16 +74,21 @@ $styl0.="background-color: eeeeee; color: black; border:thin Black; border-style
 $styl1.="background-color: eeeeee; color: black; border:thin Black; border-style : dashed; line-height: 20px; padding-top: 6px; padding-left: 6px; padding-bottom: 6px; padding-right: 6px;";
 
 $styl2.="background-color: eeeeee; color: black; border:thin Black; border-style : dashed; line-height: 20px; padding-top: 6px; padding-left: 6px; padding-bottom: 6px; padding-right: 6px;";
-
+ */
 // formularios
-require "clMovsFormSalidas.php";
-require "clMovsFormEntradas.php";
-require "clMovsFormOtrosD.php";
+//require "clMovsFormSalidas.php";
+//require "clMovsFormEntradas.php";
+//require "clMovsFormOtrosD.php";
 
 // registros agregados
 require "clMovsSal.php";
 require "clMovsEn.php";
 require "clMovsOD.php";
+
+echo "<a class='button-red' href='clRepoBorrar.php?id=$id'>Borrar Repo</a> ";
+echo "OJO: Se borra definitivamente!   ---\n";
+echo "<a class='button-green' href='clRepoCerrar.php?id=$id'>Cerrar Repo</a> ";
+echo "No se podrá ni borrar ni agregar nada al reporte\n";
 ?>
 
 <script>
@@ -190,6 +196,20 @@ function botonclicked(b) { // en la lista ajax de tablas
 	$("#verlista").trigger("click");
   	$("#cantidad").focus();
 }
+</script>
+<script>
+// ver/ocultar otros destajos
+$("#btnotros").click(function(){
+	$("#OtrosD").toggle();
+});
+// ver/ocultar corte a largo
+$("#btcortealargo").click(function(){
+	$("#CorteLargo").toggle();
+});
+// ver/ocultar salidas de mad aserrada
+$("#btnsalidas").click(function(){
+	$("#SalidasMA").toggle();
+});
 </script>
 </body>
 </html>

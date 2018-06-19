@@ -1,9 +1,12 @@
-<div style="background-color: #b4d7d7; padding-top: 3px; padding-left: 4px; padding-bottom: 1px;">
-<button id="btcortealargo">Ver/ocultar</button> <b>Producción de Corte a Largo</b>
-<div id='CorteLargo'>
 <?php
-require "clMovsFormEntradas.php";
-// entradas a inventario, produccion de corte a largo
+require_once "clMovsFormHead.php";
+?>
+<div style="background-color: #a8dede80; padding-top: 3px; padding-left: 4px; padding-bottom: 1px;">
+<b>(1) Salidas de madera aserrada llevadas a corte a largo</b>
+<div id='SalidasMA'>
+<?php
+require "clMovsFormSalidas.php";
+// registros de salidas
 //
 $q="select d.id, d.cantidad, a.descrip, t.especie, t.descrip as dimensiones from movsRepoCL as d LEFT JOIN actividades as a ON d.actividad=a.clave LEFT JOIN tablas as t ON d.idtabla=t.id WHERE d.idRepoCL='$id'";
 //echo "$q<br>\n";
@@ -22,5 +25,9 @@ $t->show();
 echo "<input type=hidden name=tabla value=MD>";
 echo "</form>\n";
 ?>
-</div> <!-- id='CorteLargo' ocultable -->
+</div> <!-- id='SalidasMA' ocultable -->
 </div>
+<br>
+<?php
+require_once "clMovsFormFoot.php";
+?>

@@ -1,5 +1,4 @@
 <div  id="madera" style="<?php echo $styl1;?>">
-Tablas producidas en sierras Gemelas
 <form id='cant_esp_dim' action='clDetalleAltaMA.php' method='POST'>
 <?php
 $q="select clave, descrip from actividades where tipo='tabla'";
@@ -17,12 +16,6 @@ Dimensiones <input id='dimensiones' type='text' name='descripcion'>
 </form>
 <div id=lista></div>
 <script>
-$("#bmadera").click(function(){
-	$("#madera").toggle();
-	if($("#madera").is(":visible"))
-		$("#cantidad").focus();
-	});
-	
 $('#cant_esp_dim').submit(function(e){  // al enviar el formulario mad dimensionada (enter)
 	// form submit
 	  var cc = $( "#cantidad" ).val();

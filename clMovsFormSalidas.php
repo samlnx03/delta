@@ -1,5 +1,4 @@
 <div  id="maderaexit" style="<?php echo $styl1;?>">
-Tablas de Origen llevadas a corte a largo
 <form id='cant_esp_dimx' action='clDetalleAltaMA.php' method='POST'>
 <?php
 //$q="select clave, descrip from actividades where tipo='tabla'";
@@ -17,11 +16,6 @@ Dimensiones <input id='dimensionesx' type='text' name='descripcion'>
 </form>
 <div id=listax></div>
 <script>
-$("#bmaderaexit").click(function(){
-	$("#maderaexit").toggle();
-	if($("#maderaexit").is(":visible"))
-		$("#cantidadx").focus();
-	});
 </script>
 <script>
 $('#cant_esp_dimx').submit(function(e){  // al enviar el formulario mad dimensionada (enter)

@@ -1,5 +1,8 @@
+<?php
+require_once "clMovsFormHead.php";
+?>
 <div style="background-color: #a8dede80; padding-top: 3px; padding-left: 4px; padding-bottom: 1px;">
-<button id="btnotros">Ver/ocultar</button> <b>Otros Destajos</b>
+<b>(3) Otros Destajos</b>
 <div id='OtrosD'>
 <?php
 require "clMovsFormOtrosD.php";
@@ -23,4 +26,7 @@ require "clMovsFormOtrosD.php";
 ?>
 </div> <!-- id='OtrosD' ocultable -->
 </div>
-
+<br>
+<?php
+require_once "clMovsFormFoot.php";
+?>
