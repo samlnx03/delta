@@ -3,7 +3,6 @@ require_once "clMovsFormHead.php";
 ?>
 <div style="background-color: #a8dede80; padding-top: 3px; padding-left: 4px; padding-bottom: 1px;">
 <b>(3) Otros Destajos</b>
-<div id='OtrosD'>
 <?php
 require "clMovsFormOtrosD.php";
 // otros destajos reg
@@ -22,11 +21,13 @@ require "clMovsFormOtrosD.php";
         echo "<form action='clDetalleBorrar.php' method='POST'>\n";
         $t->show();
         echo "<input type=hidden name=tabla value=OA>";
+	echo "<input type=hidden name=redirect value='".$_SERVER['PHP_SELF']."'>\n";
         echo "</form>\n";
 ?>
-</div> <!-- id='OtrosD' ocultable -->
-</div>
+</div> <!-- stilized backgrouncolor -->
 <br>
 <?php
 require_once "clMovsFormFoot.php";
 ?>
+</body>
+</html>

@@ -36,7 +36,8 @@ if (isset($_POST["soloOperador"])){
 $id=$db->insert_id;
 $_SESSION["msg"]="Registro realizado ( id=$id)"; 
 //header("Location: scDetalle.php");
-header("Location: clDetalle.php");
+$redirect=htmlpost("redirect");
+header("Location: $redirect");
 die();
 ?>
 

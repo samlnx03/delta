@@ -47,4 +47,5 @@ echo "Movimientos del Reporte No. <b>$id</b>. del día <b>$f</b> Sierra Gemela: 
 <a class='button-green' href='clMovsSal0.php'>(1) Salidas de Aserrío</a>
 <a class='button-green' href='clMovsEn0.php'>(2) Prod Corte a Largo</a>
 <a class='button-green' href='clMovsOD0.php'>(3) Otros Destajos</a>
+<a class='button-green' href='clDetalle.php'>(4) Ver 1,2 y 3</a>
 <br>

@@ -24,8 +24,9 @@ $q="delete from $tabla where id='$id'";
 $db->query($q);
 $ar=$db->affected_rows();
 	
-$_SESSION["msg"]="Registros eliminados: $ar";
-header('Location: clDetalle.php');
+$_SESSION["msg"]="Registro eliminado: $ar";
+$redirect=htmlpost("redirect");
+header("Location: $redirect");
 die();
 
 ?>

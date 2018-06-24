@@ -5,7 +5,7 @@ require_once "Auth/session.php";
 //require_once "Auth/proteger.php";
 require_once "funcs.php";
 require_once("desarrollo.php");  // reporta errores
-if(!(isset($_POST["aserrioYhojeado"]) OR
+if(!(isset($_POST["salidaMA"]) OR
 	isset($_SESSION["idrepocl"])))
 {
 	$_SESSION["msg"]="Acceso incorrecto a script alta M.A.";
@@ -15,14 +15,25 @@ if(!(isset($_POST["aserrioYhojeado"]) OR
 
 $db=db::getInstance();
 // busqueda de la tabla
-$especie=htmlpost("especie");
+$tipoMov=htmlpost("tipoMov");
+$redirect=htmlpost('redirect');
+if($tipoMov=='descontar'){ // salidas de mad aserrada entra a corte a largo
+	$especie=htmlpost("especiex");
+	// datos del formulario de movimientos del reporte
+	$clave=htmlpost("clave");
+} else {
+	$especie=htmlpost("especie");
+	// datos del formulario de movimientos del reporte
+	$clave=htmlpost("clave");
+}
+$cantidad=htmlNpost("cantidad");
 $descripcion=htmlpost("descripcion");
 $q="select id from tablas where especie='$especie' AND descrip='$descripcion' LIMIT 1";
 $db->query($q);
 if($db->num_rows()==0)
 {
 	$_SESSION["msg"]="No exite especie y dimensiones dadas";
-	header('Location: clDetalle.php');
+	header("Location: $redirect");
 	die();
 }
 $db->next_row();
@@ -30,15 +41,13 @@ $idtabla=$db->f("id");
 
 $idRepo=$_SESSION["idrepocl"];
 
-// datos del formulario de movimientos del reporte
-$cantidad=htmlNpost("cantidad");
-$clave=htmlpost("clave");
 
-// un solo se registro y aplica op y ayudante como diga el reporte a la hora de los destajos
+// un solo se registro y aplica operador  como diga el reporte a la hora de los destajos
+// no hay clave para salidas de madera serrada que se van a habilitar a corte a largo
 $q="insert into movsRepoCL ";
 $q.="(idRepoCL, actividad, cantidad, idtabla, tipomov) ";
 $q.="VALUES ";
-$q.="($idRepo,'$clave',$cantidad,'$idtabla', 'agregar')";
+$q.="($idRepo,'$clave',$cantidad,'$idtabla', '$tipoMov')";
 // $clave es ap (aserrio de pino) u hp (hojeado de pino) etc.
 $db->query($q);
 
@@ -46,7 +55,7 @@ $db->query($q);
 $id=$db->insert_id;
 $_SESSION["msg"]="Registro realizado (id=$id)"; 
 $_SESSION["agregando"]=1; 
-header("Location: clDetalle.php");
+header("Location: $redirect");
 die();
 ?>
 

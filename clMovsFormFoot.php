@@ -1,3 +1,4 @@
+<!-- clMovsFormFoot -->
 <?php
 echo "<a class='button-red' href='clRepoBorrar.php?id=$id'>Borrar Repo</a> ";
 echo "OJO: Se borra definitivamente!   ---\n";

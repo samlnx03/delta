@@ -8,7 +8,14 @@
 .divcol3 {
     flex: 33%;
 }
-
+.divcol20 {
+	flex: 20%;
+	overflow-y: scroll; overflow-x: hidden;
+}
+.divcol30 {
+	flex: 30%;
+	overflow-y: scroll; overflow-x: hidden;
+}
 .divborde {
 	border: 1px solid black;
 }
