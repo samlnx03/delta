@@ -17,10 +17,12 @@ function htmlFpost($campo){  // fecha
 	return "'$d'";
 }
 
-function htmlSelect($qry, $name, $val, $tit, $selected){
+function htmlSelect($qry, $name, $val, $tit, $selected, $initial=""){
 	$db=db::getInstance();
 	$db->query($qry);
 	$ops="<select id='$name' name='$name'>\n";
+	if($initial!="")
+		$ops=$ops."<option value=''>$initial</option>\n";
 	while($db->next_row()){
 		$ops=$ops."<option ";
 		if($db->f($val)==$selected){

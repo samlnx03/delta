@@ -127,6 +127,10 @@ Inventario:
 $q="select substr(clave, -1,1) as value, valor as toshow from claveValor where clave like 'invent_'";
 $s=htmlSelect($q, "inventario", 'value', 'toshow', '0');
 echo $s;
+echo " Proceso: ";
+$q="select substr(clave, -1,1) as value, valor as toshow from claveValor where clave like 'proceso_'";
+$s=htmlSelect($q, "proceso", 'value', 'toshow', '0');
+echo $s;
 ?>
 <input type=submit name=alta value=Agregar>
 </form>
@@ -155,7 +159,7 @@ echo $s;
 		array("clave")
 		)
 	);
-	$t->setcdatas(array("Acción"=>"Acción", "clave"=>"clave", "descripcion" => "descrip", "costo"=>"costo", "cambiar"=>"cambiar", "unidad"=>"unidad", "inv"=>"inventario"));
+	$t->setcdatas(array("Acción"=>"Acción", "clave"=>"clave", "descripcion" => "descrip", "costo"=>"costo", "cambiar"=>"cambiar", "unidad"=>"unidad", "inv"=>"inventario", "Proc"=>"proceso"));
 	//echo "q:$q<br>";
 	echo "<form method='POST'>\n";
 	$t->show();
