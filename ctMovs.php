@@ -47,15 +47,28 @@ $s=$db->f("supervisor");
 $readonly=$db->f("aplicadaEnInventario");
 echo "Movimientos del Reporte No. <b>$id</b>. del día <b>$f</b><br>Supervisor: <b>$s</b><br>\n";
 
-// mostrar movimeintos del reporte de clavado de Tarima
-$q="select d.id, d.cantidad, a.unidad, a.descrip, e.nombre from movsRepoOtrasActiv as d LEFT JOIN actividades as a ON d.actividad=a.clave LEFT JOIN empleados as e ON d.idEmpleado=e.id WHERE d.idRepoCT='$id'";
+// mostrar movimientos del reporte de clavado de Tarima
+$q="select d.id, d.cantidad, a.unidad, a.descrip, e.nombre from movsRepoOtrasActiv as d LEFT JOIN actividades as a ON d.actividad=a.clave LEFT JOIN empleados as e ON d.idEmpleado=e.id WHERE d.idRepoCT='$id'  AND a.proceso=3";
 //echo "$q<br>\n";
 $db->query($q);
 $t=new html_table();
 $t->setcdatas(array("cant" => "cantidad", "unidad"=>"unidad", "descrip"=>"descrip","empleado"=>"nombre" ));
 $t->setbody($db->get_all());
+echo "<br>\n";
+echo "<b>Clavado de Tarimas</b><br>\n";
 $t->show();
 echo "<br>\n";
+// mostrar movimientos del reporte de otros destajos en reporte de clavado de Tarima
+$q="select d.id, d.cantidad, a.unidad, a.descrip, e.nombre from movsRepoOtrasActiv as d LEFT JOIN actividades as a ON d.actividad=a.clave LEFT JOIN empleados as e ON d.idEmpleado=e.id WHERE d.idRepoCT='$id'  AND a.proceso=0";
+//echo "$q<br>\n";
+$db->query($q);
+$t=new html_table();
+$t->setcdatas(array("cant" => "cantidad", "unidad"=>"unidad", "descrip"=>"descrip","empleado"=>"nombre" ));
+$t->setbody($db->get_all());
+echo "<b>Otros Destajos</b><br>\n";
+$t->show();
+echo "<br>\n";
+unset($_SESSION["idrepoct"]);
 ?>
 </body>
 </html>

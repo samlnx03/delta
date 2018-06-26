@@ -22,6 +22,9 @@ elseif(isset($_POST["ultimos"])){
 	$cond="order by p.id desc limit 10";
 }
 
+if(isset($_SESSION["idrepoct"])){
+	unset($_SESSION["idrepoct"]);
+}
 
 ?>
 <html>

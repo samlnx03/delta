@@ -128,7 +128,7 @@ $q="select substr(clave, -1,1) as value, valor as toshow from claveValor where c
 $s=htmlSelect($q, "inventario", 'value', 'toshow', '0');
 echo $s;
 echo " Proceso: ";
-$q="select substr(clave, -1,1) as value, valor as toshow from claveValor where clave like 'proceso_'";
+$q="select substr(clave, -1,1) as value, concat(substr(clave,-1,1), ' - ', valor) as toshow from claveValor where clave like 'proceso_'";
 $s=htmlSelect($q, "proceso", 'value', 'toshow', '0');
 echo $s;
 ?>

@@ -23,6 +23,7 @@ $idRepo=$_SESSION["idrepoct"];
 $cantidad=htmlNpost("cantidad");
 $clave=htmlpost("clave");
 $idOp=htmlpost("empleado");
+$redirect=htmlpost("redirect");
 
 $id2='';
 if (isset($_POST["soloOperador"])){   // para clavado es soloOperador
@@ -36,7 +37,7 @@ if (isset($_POST["soloOperador"])){   // para clavado es soloOperador
 //$_SESSION["q"]="$q<br>\n"; 
 $id=$db->insert_id;
 $_SESSION["msg"]="Registro realizado ( id=$id $id2)"; 
-header("Location: ctDetalle.php");
+header("Location: $redirect");
 die();
 ?>
 

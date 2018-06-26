@@ -17,6 +17,7 @@ echo "Empleado $empleado\n";
 
 ?>
 <input type=submit name=soloOperador value='Agregar'>
+<input type=hidden name=redirect value="<?php echo $_SERVER["PHP_SELF"];?>">
 </form>
 <?php
 // mostrar movimientos de Otros Destajos
@@ -40,6 +41,7 @@ $t->setbody($db->get_all());
 echo "<form action='ctDetalleBorrar.php' method='POST'>\n";
 $t->show();
 echo "<input type=hidden name=tabla value=OA>";
+echo "<input type=hidden name=redirect value='{$_SERVER["PHP_SELF"]}'>\n";
 echo "</form>\n";
 ?>
 </div>

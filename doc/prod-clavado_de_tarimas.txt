@@ -1,0 +1,27 @@
++ctListado.php: Listado de reportes (cada uno un boton a ctDetalle.php)
+	+ctNuevoRepo.php (btn Nuevo Reporte) formulario para nuevo reporte
+		+ctAltaRepo.php: insert into repoCT, redirect to ctDetalle.php?id=#
+	+ctDetalle.php: registra variable de sesion idrepoct, hace require de
+		+ctMovsEdit.php (si el repo no ha sido aplicado al inventario)
+				muestra clavado de tarimas y otros destajos (2 tablas)
+			+ctMovsCT.php formulario alta y tabla clavado de tarima
+					con movimientos actuales
+				+ctDetalleAlta.php (insert del formulario, redirije a ctMovsCT)
+				+ctDetalleBorrar.php (delete del renglon de la lista actual,
+					redirige a ctMovsCT)
+				+ctRepoBorrar.php (delete, redirige a ctListado) 
+				+ctRepoCerrar.php (aplica al inventario y actualiza bandera 
+					aplicadaEnInventario de la tabla sql repoCT, 
+					redirige a ctListado)
+			+ctMovsOD.php formulario alta y tabla otros destajos 
+					con movimientos actuales
+				+ctDetalleAlta.php (insert del formulario, redirije a ctMovsCT)
+				+ctDetalleBorrar.php (delete del renglon de la lista actual,
+					redirige a ctMovsCT)
+				+ctRepoBorrar.php (delete, redirige a ctListado) 
+				+ctRepoCerrar.php (aplica al inventario y actualiza bandera 
+					aplicadaEnInventario de la tabla sql repoCT, 
+					redirige a ctListado)
+		+ctMovs.php: si el repo ya ha sido cerrado, solo muestra movtos (una tabla para
+			clavado de tarima y otra para otros destajos)
+

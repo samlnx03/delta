@@ -20,13 +20,15 @@ if($t=="MD")
 else if($t=="OA")
 	$tabla="movsRepoOtrasActiv";
 
+$redirect=htmlpost("redirect");
 $id=htmlNpost("id");
 $q="delete from $tabla where id='$id'";
 $db->query($q);
 $ar=$db->affected_rows();
 	
 $_SESSION["msg"]="Registros eliminados: $ar";
-header('Location: ctDetalle.php');
+//header('Location: ctDetalle.php');
+header("Location: $redirect");
 die();
 
 ?>

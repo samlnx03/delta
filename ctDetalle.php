@@ -21,7 +21,8 @@ $db->query($q);
 $db->next_row();
 $readonly=$db->f("aplicadaEnInventario");
 if($readonly=='n'){
-	require_once "ctMovsForm.php";
+	//require_once "ctMovsForm.php";
+	require_once "ctMovsEdit.php";
 }else{
 	require_once "ctMovs.php";
 }

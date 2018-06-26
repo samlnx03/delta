@@ -62,6 +62,7 @@ echo "Movimientos del Reporte No. <b>$id</b>. del día <b>$f</b> Sierra Gemela: 
   	$t->setcdatas(array("cant" => "cantidad", "unidad"=>"unidad", "descrip"=>"descrip","empleado"=>"nombre" ));
 	$t->setbody($db->get_all());
 	$t->show();
+	unset($_SESSION["idrepocl"]);
 ?>
 </body>
 </html>

@@ -1,4 +1,11 @@
-﻿body{
+﻿@media print{
+.menu, .submenu{
+    display: none;
+}
+}
+
+@media screen{
+body{
 	background-color: #e9ebee;
 	/*background-image: url("nic_backfade.jpg");*/
 }
@@ -39,4 +46,5 @@ div.mensaje {
     padding: 5px;
     text-align: left;
     width: 400px;
+}
 }
