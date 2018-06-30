@@ -1,0 +1,2 @@
+alter table tablas modify column especie char(20);
+
