@@ -32,7 +32,7 @@ elseif(isset($_POST["ultimos"])){
 <body>
 <?php require('menu.php'); ?>
 <h1>Reportes Ejecutivos</h1>
-Aserrío Diario por máquina
+Aserrío Diario por máquina <a href=raserrio.php>Ver</a>
 <br>
 cantidad total diaria de piezas aserradas de cada dimension y especie
 <br>

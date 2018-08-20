@@ -42,6 +42,9 @@ madDimensionadaNueva.php
 quitar espacios al frente y detras de las dimensiones
 
 filtros como excel en el inventario de madera dimensionada
+http://tablefilter.free.fr/ex.php
+https://github.com/mik0yan/www/blob/master/demos/search/autofilter.php
+https://laravel-backpack.readme.io/v3.0/docs/filters
 
 renglon clickable
 https://www.electrictoolbox.com/jquey-make-entire-table-row-clickable/

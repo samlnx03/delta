@@ -65,7 +65,8 @@ $styl1.="background-color: eeeeee; color: black; border:thin Black; border-style
 <div  id="madera" style="<?php echo $styl1;?>">
 <form id='cant_esp_dim' action='scDetalleAltaMA.php' method='POST'>
 <?php
-$q="select clave, descrip from actividades where tipo='tabla'";
+//$q="select clave, descrip from actividades where tipo='tabla'";
+$q="select clave, descrip from actividades where proceso=1";
 $clave=htmlSelect($q, "clave", "clave", "descrip", '');
 //echo "$clave\n";
 $q="select distinct especie from tablas";
@@ -90,7 +91,8 @@ $styl2.="background-color: eeeeee; color: black; border:thin Black; border-style
 <td>Cantidad<br><input type=text name=cantidad size=3>
 <?php
 //$q="select clave, concat(unidad,' ',descrip) as descrip from actividades where unidad<>'pie-tabla'";
-$q="select clave, concat(clave,': (',unidad,') ',descrip) as descrip from actividades where tipo<>'tabla'";
+//$q="select clave, concat(clave,': (',unidad,') ',descrip) as descrip from actividades where tipo<>'tabla'";
+$q="select clave, concat(clave,': (',unidad,') ',descrip) as descrip from actividades where proceso=0";
 $clave=htmlSelect($q, "clave", "clave", "descrip", '');
 echo "<td>Clave<br>$clave\n";
 echo "<td> \n";

@@ -45,7 +45,8 @@ if(isset($_POST["alta"])){
 			$tipo="otro";
 		$inventario=$_POST["inventario"];
 		if($unidadotro!='') $unidad=$unidadotro;
-		$q="insert into actividades (clave, descrip, costo, unidad, tipo, inventario) values ('$clave','$descrip',$costo,'$unidad','$tipo', '$inventario')";
+		$proceso=htmlNpost("proceso");
+		$q="insert into actividades (clave, descrip, costo, unidad, tipo, inventario,proceso) values ('$clave','$descrip',$costo,'$unidad','$tipo', '$inventario','$proceso')";
 		$db->query($q);
 		$nreg=$db->affected_rows();
 		$_SESSION["msg"]="$nreg registro(s) insertado(s)";
