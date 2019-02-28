@@ -5,6 +5,19 @@ require_once "Auth/session.php";
 require_once "desarrollo.php";
 
 $db=db::getInstance();
+if(isset($_POST["borrar"])){
+	$borrar=$_POST["borrar"];
+	$q="select existen from tablas where id='$borrar'";
+	$db->query($q); $db->next_row();
+	if($db->f("existen")>0){
+		$_SESSION["msg"]="Error: Ya existe inventario";
+	}
+	$q="delete from tablas where id='$borrar'";
+	$db->query($q);
+	$_SESSION["msg"]="Eliminado!";
+	header('Location: madDimensionada.php');
+	die();
+}
 if(isset($_POST["agregar"])){
 	$especie=$_POST["especie"];
 	$descripcion=$_POST["descripcion"];

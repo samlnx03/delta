@@ -113,9 +113,15 @@ if($results){
 		array("id")
 		)
 	);
+	$t->addextras( array(
+		"borrar", 
+		"<button class='red' type='submit' name='borrar' value='%f0%'>Borrar</button>", 
+		array("id")
+		)
+	);
 	$lfav="<a href=favoritas.php title='Medidas Favoritas'>Fav</a>";
 	//$t->setcdatas(array("Agregar"=>"IO", "fav"=>"Favoritos", "id"=>"id",
-	$t->setcdatas(array("id"=>"id",
+	$t->setcdatas(array("borrar"=>"borrar", "id"=>"id",
 		"Especie"=>"especie", "sim"=>"Sim", "Descrip"=>"descrip",
 		"grueso" => "grueso", "ug"=>"ugrueso", "ancho"=>"ancho", "ua"=>"uancho", 
 		"largo"=>"largo", "ul"=>"ulargo", "volpt"=>"volpt"
