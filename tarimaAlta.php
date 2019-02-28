@@ -35,7 +35,11 @@ $_SESSION["idtarima"]=$db->insert_id;
 // insertar tambien la clave de produccion para clavado
 // el costo de clavado se debe poner en actividades
 $clave="ct$tarima";
-$q="insert into actividades (clave, descrip, costo, unidad, tipo) values ('$clave','$descripcion',0,'tarima','tarima')";
+$q="select substr(clave,-1) as proceso from claveValor where valor='Clavado de Tarima'";
+$db->query($q);
+if($db->num_rows()>0) {$db->next_row(); $proceso=$db->f("proceso");} else $proceso=0;
+//$q="insert into actividades (clave, descrip, costo, unidad, tipo) values ('$clave','$descripcion',0,'tarima','tarima')";
+$q="insert into actividades (clave, descrip, costo, unidad, proceso) values ('$clave','$descripcion',0,'tarima',$proceso)";
 $db->query($q);
 //$_SESSION["q"]="$q<br>\n"; 
 $_SESSION["msg"].="<br><br>Se agregó actividad de producción pero debe poner el costo en Actividades ";
