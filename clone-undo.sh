@@ -18,6 +18,6 @@ echo "to do:
 	cd ../delta
 	git pull
 
-	mysql -u sperez -p delta < changesdb.sql
+	mysql -u sperez -p delta < db/changesdb.sql
 	"
 
