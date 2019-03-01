@@ -20,13 +20,15 @@ if(isset($_POST["cambiaCosto"])){
 }
 $existe=false;
 if(isset($clave)){
-	$q="select descrip, costo from actividades where clave='$clave'";
+	$q="select descrip, costo, inventario, proceso from actividades where clave='$clave'";
 	$db->query($q);
 	if($db->num_rows()>0){
 		$existe=true;
 		$db->next_row();
 		$descrip=$db->f("descrip");
 		$costo1=$db->f("costo");
+		$inventario=$db->f("inventario");
+		$proceso=$db->f("proceso");
 	}
 }
 if(isset($_POST["alta"])){
@@ -72,7 +74,9 @@ if(isset($_POST["alta"])){
 } else if(isset($_POST["okCambiaCosto"])){
 	$clave=htmlpost("activ2change");
 	$newvalue=htmlNpost("newCosto");
-	$q="update actividades set costo=$newvalue WHERE clave='$clave'";
+	$inventario=htmlNpost("inventario");
+	$proceso=htmlNpost("proceso");
+	$q="update actividades set costo=$newvalue,inventario=$inventario, proceso=$proceso WHERE clave='$clave'";
 	$db->query($q);
 	$_SESSION["msg"]=$db->affected_rows()." Renglon(es) actualizado(s)";
 }
@@ -96,9 +100,33 @@ if(isset($_SESSION["msg"])){
 if(isset($_POST["cambiaCosto"])){
 	$actividad=$_POST["cambiaCosto"];
 	echo "<form method='POST'>\n";
-	echo "actividad: $actividad: $descrip<br>\n";
+	echo "actividad: <b>$actividad</b>: $descrip<br>\n";
 	echo "<input type=hidden name=activ2change value='$actividad'>";
 	echo " costo: <input type=text name=newCosto size=10 value='$costo1' required>";
+
+        $q="select id from movsRepoDimensionado where actividad='$actividad' limit 1";
+        $db->query($q);
+        $mdim=$db->num_rows();
+        $q="select id from movsRepoOtrasActiv where actividad='$actividad' limit 1";
+        $db->query($q);
+        $moa=$db->num_rows();
+        if($mdim==0 AND $moa==0){
+		echo "Inventario: ";
+		//function htmlSelect($qry, $name, $val, $tit, $selected){
+		$q="select substr(clave, -1,1) as value, valor as toshow from claveValor where clave like 'invent_'";
+		$s=htmlSelect($q, "inventario", 'value', 'toshow', $inventario);
+		echo $s;
+		echo " Proceso: ";
+		$q="select substr(clave, -1,1) as value, concat(substr(clave,-1,1), ' - ', valor) as toshow from claveValor where clave like 'proceso_'";
+		$s=htmlSelect($q, "proceso", 'value', 'toshow', $proceso);
+		echo $s;
+
+/*$q="delete from actividades where clave='$clave'";
+                $db->query($q);
+                $nreg=$db->affected_rows();
+		$_SESSION["msg"]="$nreg registro(s) eliminado(s)";*/
+	}
+
 	echo "<input type=submit name=okCambiaCosto value=Actualizar>\n";
 	echo "</form>\n";
 	echo "</body></html>\n";
@@ -156,11 +184,11 @@ echo $s;
 	$t->addextras( 
 		array(
 		"cambiar", 
-		"<button class='red' type='submit' name='cambiaCosto' value='%f0%'>costo</button>", 
+		"<button class='red' type='submit' name='cambiaCosto' value='%f0%'>Modif</button>", 
 		array("clave")
 		)
 	);
-	$t->setcdatas(array("Acción"=>"Acción", "clave"=>"clave", "descripcion" => "descrip", "costo"=>"costo", "cambiar"=>"cambiar", "unidad"=>"unidad", "inv"=>"inventario", "Proc"=>"proceso"));
+	$t->setcdatas(array("Acción"=>"Acción", "clave"=>"clave", "descripcion" => "descrip", "costo"=>"costo", "unidad"=>"unidad", "inv"=>"inventario", "Proc"=>"proceso", "cambiar"=>"cambiar"));
 	//echo "q:$q<br>";
 	echo "<form method='POST'>\n";
 	$t->show();

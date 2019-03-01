@@ -1,0 +1,14 @@
+CREATE TABLE repoOD (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  supervisor char(20) DEFAULT NULL,
+  fecha date DEFAULT NULL,
+  aplicadaEnInventario char(1) DEFAULT 'n',
+   observaciones varchar(80),
+  PRIMARY KEY (id),
+  KEY fecha (fecha)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+alter table movsRepoOtrasActiv add idRepoOD int(11) DEFAULT '0' COMMENT 'id de reportes de otros destajos' AFTER idRepoCL;
+alter table movsRepoOtrasActiv add KEY idRepoOD (idRepoOD);
+
+
