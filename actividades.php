@@ -74,9 +74,13 @@ if(isset($_POST["alta"])){
 } else if(isset($_POST["okCambiaCosto"])){
 	$clave=htmlpost("activ2change");
 	$newvalue=htmlNpost("newCosto");
-	$inventario=htmlNpost("inventario");
-	$proceso=htmlNpost("proceso");
-	$q="update actividades set costo=$newvalue,inventario=$inventario, proceso=$proceso WHERE clave='$clave'";
+	if(isset($_POST["inventario"])){
+		$inventario=htmlNpost("inventario");
+		$proceso=htmlNpost("proceso");
+		$q="update actividades set costo=$newvalue,inventario=$inventario, proceso=$proceso WHERE clave='$clave'";
+	} else {
+		$q="update actividades set costo=$newvalue WHERE clave='$clave'";
+	}
 	$db->query($q);
 	$_SESSION["msg"]=$db->affected_rows()." Renglon(es) actualizado(s)";
 }
