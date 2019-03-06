@@ -24,7 +24,7 @@ echo "<div class='divrow'>\n";
 echo "<div class='divcol' id='SalidasMA'>\n";
 echo "<form action='clDetalleBorrar.php' method='POST'>\n";
 $t->show();
-echo "<input type=hidden name=tabla value=MD>";
+echo "<input type=hidden name=tabla value=MD>"; // madera dimensionada (tablas)
 echo "<input type=hidden name=redirect value='".$_SERVER['PHP_SELF']."'>";
 echo "</form>\n";
 ?>
