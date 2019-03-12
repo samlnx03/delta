@@ -11,4 +11,27 @@ CREATE TABLE repoOD (
 alter table movsRepoOtrasActiv add idRepoOD int(11) DEFAULT '0' COMMENT 'id de reportes de otros destajos' AFTER idRepoCL;
 alter table movsRepoOtrasActiv add KEY idRepoOD (idRepoOD);
 
+CREATE TABLE `destajosMDim` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fecha` date DEFAULT NULL,
+  `empleado` int(11) DEFAULT NULL,
+  `nombre` char(60) DEFAULT NULL,
+  `pctj` int(11) DEFAULT NULL,
+  `idmov` int(11) NOT NULL DEFAULT '0' COMMENT 'id en movsRepoDimensionado',
+  `idrepo` int(11) NOT NULL,
+  `actividad` char(10) NOT NULL COMMENT 'aserrio u hojeado',
+  `activ` char(50) DEFAULT NULL,
+  `cantidad` int(11) NOT NULL,
+  `idtabla` int(11) NOT NULL COMMENT 'la tabla incluye la especie de madera',
+  `especie` char(20) DEFAULT NULL,
+  `medidas` char(50),
+  `volpt` decimal(19,4) DEFAULT NULL,
+  `costo` decimal(9,4) DEFAULT NULL,
+  `destajo` decimal(33,2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY fecha(fecha),
+  KEY empleado (empleado)
+) ENGINE=InnoDB ;
+
+drop table destajosDim;
 

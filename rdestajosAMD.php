@@ -1,0 +1,62 @@
+<?php
+require_once "Auth/session.php";
+require_once "Auth/table.php";
+require_once "desarrollo.php"; // debug show errors
+
+require_once "funcs.php";  // funciones utiles
+//
+// checar si hay reportes sin inventariar
+//
+//
+// reporte de destajos de aserrio de madera dimensionada
+//
+?>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="styles/menu.css">
+<link rel="stylesheet" type="text/css" href="styles/tableStyle.css">
+<link rel="stylesheet" type="text/css" href="styles/2cols.css">
+<link rel="stylesheet" type="text/css" href="styles/abutton.css">
+<script src="libs/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<?php 
+require('menu.php');
+//require("menuProd.php");
+?>
+<h1>Reporte de destajos de Aserrío</h1>
+<?php
+$db=db::getInstance();
+
+if(isset($_POST['todosRepos'])){
+	$f1=$_POST['f1'];
+	$f2=$_POST['f2'];
+	echo "Periodo del $f1 al $f2<br>\n";
+	$q="select any_value(nombre) as nombre, sum(volpt) as volumen, sum(destajo) as destajo from destajosMDim group by nombre";
+}
+elseif(isset($_POST['xrepo'])){
+	$nrepo=htmlNpost('nrepo');
+	$q="select * from destajosMDim where idRepo=$nrepo";
+	echo "Reporte $nrepo<br>\n";
+	//$q="select any_value(nombre) as nombre, sum(volpt) as volumen, sum(destajo) as destajo from destajosMDim where idRepo=$nrepo group by nombre";
+}
+elseif(isset($_POST['xempleado'])){
+	$persona=htmlNpost('empleado');
+	$f1=$_POST['f1'];
+	$f2=$_POST['f2'];
+	$q="select * from destajosMDim where empleado=$persona";
+	echo "Reporte del trabajador $persona, del $f1 al $f2<br>\n";
+}
+
+//$q="select any_value(r.sierraCinta) as Sierra, any_value(t.especie), sum(m.cantidad*t.volpt) as vol FROM repoProd r LEFT JOIN movsRepoDimensionado as m ON r.id=m.idRepo LEFT JOIN actividades as a ON m.actividad=a.clave LEFT JOIN tablas as t ON m.idtabla=t.id WHERE fecha='2018-5-31' and r.sierraCinta=1 and a.proceso=1 group by especie ";
+//$q="select r.fecha, r.id as Repo, r.sierraCinta as Sierra, m.cantidad, t.especie, t.descrip as dimensiones, m.cantidad*t.volpt as vol FROM repoProd r LEFT JOIN movsRepoDimensionado as m ON r.id=m.idRepo LEFT JOIN actividades as a ON m.actividad=a.clave LEFT JOIN tablas as t ON m.idtabla=t.id WHERE fecha='2018-5-31' and a.proceso=1 order by sierra,especie,grueso,ancho,largo";
+echo "$q<br>\n";
+$db->query($q);
+$t=new html_table();
+//$t->setcdatas(array("cant" => "cantidad", "descrip"=>"descrip", "especie"=>"especie", "dimensiones"=>"dimensiones" ));
+$t->setbody($db->get_all());
+$t->show();
+?>	
+</body>
+</html>
+
