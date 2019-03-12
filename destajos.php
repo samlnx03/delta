@@ -9,7 +9,7 @@ $f2="";
 if (isset($_POST["recalc"])){
 	$f1=$_POST["f1"];
 	$f2=$_POST["f2"];
-	$cond="fecha>='$f1' AND fecha<='$f2'";
+	$rangoFechas="fecha>='$f1' AND fecha<='$f2'";
 	$q="DELETE FROM destajosMDim";
 	$db->query($q);
 	$q="ALTER TABLE destajosMDim AUTO_INCREMENT = 1";
@@ -22,7 +22,7 @@ if (isset($_POST["recalc"])){
 		left join tablas t on m.idtabla=t.id
 		left join actividades a on m.actividad=a.clave
 		left join empleados e on operador=e.id
-	where $cond
+	where e.id IS NOT NULL AND $rangoFechas
 ";
 	//echo $q;
 	$db->query($q);
@@ -34,7 +34,7 @@ if (isset($_POST["recalc"])){
 		left join tablas t on m.idtabla=t.id
 		left join actividades a on m.actividad=a.clave
 		left join empleados e on ayudante=e.id
-	where $cond
+	where e.id IS NOT NULL AND $rangoFechas
 ";
 	//echo $q;
 	$db->query($q);
