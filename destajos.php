@@ -9,6 +9,11 @@ $f2="";
 if (isset($_POST["recalc"])){
 	$f1=$_POST["f1"];
 	$f2=$_POST["f2"];
+	$q="update claveValor set valor='$f1' where clave='rDestajSCf1'"; // registra fechas 
+	$db->query($q);
+	$q="update claveValor set valor='$f2' where clave='rDestajSCf2'"; 
+	$db->query($q);
+
 	$rangoFechas="fecha>='$f1' AND fecha<='$f2'";
 	$q="DELETE FROM destajosMDim";
 	$db->query($q);

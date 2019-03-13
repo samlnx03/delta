@@ -27,11 +27,22 @@ elseif(isset($_POST["ultimos"])){
  */
 
 $db=db::getInstance();
-$q="select min(fecha) as F1, max(fecha) as F2 from destajosMDim";
+//$q="select min(fecha) as F1, max(fecha) as F2 from destajosMDim";
+$q="select valor from claveValor where clave like 'rDestajSCf_'"; // f1 o f2
 $db->query($q);
-$db->next_row();
-$f1=$db->f("F1");
-$f2=$db->f("F2");
+if($db->num_rows()==0){
+        $q="insert into claveValor values('rDestajSCf1','')";
+        $db->query($q);
+        $q="insert into claveValor values('rDestajSCf2','')";
+        $db->query($q);
+        $f1=""; $f2="";
+} else {
+        $db->next_row(); $f1=$db->f("valor");
+        $db->next_row(); $f2=$db->f("valor");
+}
+//$db->next_row();
+//$f1=$db->f("F1");
+//$f2=$db->f("F2");
 ?>
 <html>
 <head>
