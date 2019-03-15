@@ -35,6 +35,8 @@ if($proceso==1)
 	$trepo="<h1>Reporte de destajos de Aserrío</h1>\n";
 elseif($proceso==2)
 	$trepo="<h1>Reporte de destajos de Corte a Largo</h1>\n";
+elseif($proceso==3)
+	$trepo="<h1>Reporte de destajos de Clavado de Tarimas</h1>\n";
 else
 	$trepo="<h1>Ups, esto no debia pasar!</h1>\n";
 
