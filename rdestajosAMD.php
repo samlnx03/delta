@@ -45,7 +45,10 @@ if(isset($_POST['todosRepos'])){
 	$f2=$_POST['f2'];
 	echo "$trepo\n";
 	echo "Periodo del $f1 al $f2<br>\n";
-	$q="select any_value(nombre) as nombre, sum(volpt) as volumen, sum(destajo) as destajo from destajosMDim where proceso='$proceso' group by nombre";
+	$acumula="sum(volpt) as volumen";
+	if($proceso==3)
+		$acumula="sum(cantidad) as cant";
+	$q="select any_value(nombre) as nombre, $acumula, sum(destajo) as destajo from destajosMDim where proceso='$proceso' group by nombre";
 }
 elseif(isset($_POST['xrepo'])){
 	$nrepo=htmlNpost('nrepo');

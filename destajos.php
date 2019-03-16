@@ -56,21 +56,24 @@ if (isset($_POST["recalc"])){
 ";
 	echo $q;
 	$db->query($q);
-	
-	// clavado de tarimas
-	// ya no entran a destajosMDim sino que se calcula directamente de las tablas
-	/*
-	$q="INSERT into destajosMDim (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso) 
-	select fecha, operador as empleado, e.nombre, 100 as pctj, m.id, m.idrepoCL, m.actividad, a.descrip as activ, m.cantidad, m.idtabla, t.especie, t.descrip as medidas,  t.volpt*cantidad as volpt, a.costo, round(a.costo*volpt*cantidad/100,2) as destajo, a.proceso
-	from movsRepoCL m
-	     left join repoCL rp1 on m.idRepoCL=rp1.id
-		left join tablas t on m.idtabla=t.id
-		left join actividades a on m.actividad=a.clave
-		left join empleados e on operador=e.id
-		where e.id IS NOT NULL AND a.proceso=2 AND $rangoFechas
+
+        // clavado de tarimas, los campos de destajosMDim, sufren cambios
+        // fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso
+        // fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso
+        //                                                                          xxxxxxxxxxxxxxxxxxxxx
+        // idtabla se usara como idTarima y no se usa  especie medidas voltp 
+        // 
+        
+        $q="INSERT into destajosMDim (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,costo,destajo,proceso) 
+        select fecha, idempleado as empleado, e.nombre, 100 as pctj, m.id, m.idrepoCT, m.actividad, a.descrip as activ, m.cantidad, 0,a.costo, round(a.costo*cantidad,2) as destajo, a.proceso
+        from movsRepoOtrasActiv m
+             left join repoCT rp1 on m.idRepoCT=rp1.id
+                left join actividades a on m.actividad=a.clave
+                left join empleados e on idempleado=e.id
+                where e.id IS NOT NULL AND a.proceso=3 AND $rangoFechas
 ";
-	echo $q;
-	$db->query($q); */
+        echo $q;
+        $db->query($q);
 }
 $_SESSION["msg"]="Periodo de destajos actualizado";
 header("Location: reportes.php");
