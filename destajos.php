@@ -61,7 +61,7 @@ if (isset($_POST["recalc"])){
         // fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso
         // fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso
         //                                                                          xxxxxxxxxxxxxxxxxxxxx
-        // idtabla se usara como idTarima y no se usa  especie medidas voltp 
+        // idtabla va en 0 
         // 
         
         $q="INSERT into destajosMDim (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,costo,destajo,proceso) 
