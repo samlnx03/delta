@@ -65,6 +65,31 @@ elseif(isset($_POST['xempleado'])){
 	echo "$trepo\n";
 	echo "Reporte del trabajador $persona, del $f1 al $f2<br>\n";
 }
+elseif(isset($_POST['rctdesglo'])){
+	$acumula="sum(cantidad) as cant";
+	$q="select distinct nombre,empleado from destajosMDim where proceso='$proceso' order by nombre";
+	$db->query($q);
+	$trabajadores=$db->get_all();
+	$f1=$_POST['f1'];
+	$f2=$_POST['f2'];
+	echo "$trepo\n";
+	echo "<h3>Periodo del $f1 al $f2</h3>\n";
+	foreach($trabajadores as $persona){
+		$numemp=$persona['empleado']."<br>\n";
+		$q="select activ, $acumula, any_value(costo) as unitario, sum(destajo) as destajo from destajosMDim where proceso='$proceso' AND empleado='$numemp' group by activ";
+		echo "<b>".$persona['nombre']."</b><br>\n";
+		$db->query($q);
+		$t=new html_table();
+		$t->setFieldTotalizado("cant", 0); // campo a totalizar, inicializado en 0
+		$t->setFieldTotalizado("destajo", 0); // campo a totalizar, inicializado en 0
+		$t->setbody($db->get_all());
+		$t->show();
+		echo "Total: <b>".$t->getFieldTotalizado("cant")." piezas. $".number_format($t->getFieldTotalizado("destajo"),2)."</b>\n";
+		echo "<br><br>\n";
+	}
+	exit;
+
+}
 
 //$q="select any_value(r.sierraCinta) as Sierra, any_value(t.especie), sum(m.cantidad*t.volpt) as vol FROM repoProd r LEFT JOIN movsRepoDimensionado as m ON r.id=m.idRepo LEFT JOIN actividades as a ON m.actividad=a.clave LEFT JOIN tablas as t ON m.idtabla=t.id WHERE fecha='2018-5-31' and r.sierraCinta=1 and a.proceso=1 group by especie ";
 //$q="select r.fecha, r.id as Repo, r.sierraCinta as Sierra, m.cantidad, t.especie, t.descrip as dimensiones, m.cantidad*t.volpt as vol FROM repoProd r LEFT JOIN movsRepoDimensionado as m ON r.id=m.idRepo LEFT JOIN actividades as a ON m.actividad=a.clave LEFT JOIN tablas as t ON m.idtabla=t.id WHERE fecha='2018-5-31' and a.proceso=1 order by sierra,especie,grueso,ancho,largo";
