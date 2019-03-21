@@ -61,9 +61,8 @@ if (isset($_POST["recalc"])){
         // fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso
         // fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso
         //                                                                          xxxxxxxxxxxxxxxxxxxxx
-        // idtabla va en 0 
+        // idtabla va en 0, especie, medidas,volpt no se usan
         // 
-        
         $q="INSERT into destajosMDim (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,costo,destajo,proceso) 
         select fecha, idempleado as empleado, e.nombre, 100 as pctj, m.id, m.idrepoCT, m.actividad, a.descrip as activ, m.cantidad, 0,a.costo, round(a.costo*cantidad,2) as destajo, a.proceso
         from movsRepoOtrasActiv m
@@ -71,6 +70,23 @@ if (isset($_POST["recalc"])){
                 left join actividades a on m.actividad=a.clave
                 left join empleados e on idempleado=e.id
                 where e.id IS NOT NULL AND a.proceso=3 AND $rangoFechas
+";
+        echo $q;
+	$db->query($q);
+
+        // otros destajo, similar a clavado de tarimas
+        // fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso
+        // fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso
+        //                                                                          xxxxxxxxxxxxxxxxxxxxx
+        // idtabla va en 0, especie, medidas,volpt no se usan
+        // 
+        $q="INSERT into destajosMDim (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,costo,destajo,proceso) 
+        select fecha, idempleado as empleado, e.nombre, 100 as pctj, m.id, m.idrepoOD, m.actividad, a.descrip as activ, m.cantidad, 0,a.costo, round(a.costo*cantidad,2) as destajo, a.proceso
+        from movsRepoOtrasActiv m
+             left join repoOD rp1 on m.idRepoOD=rp1.id
+                left join actividades a on m.actividad=a.clave
+                left join empleados e on idempleado=e.id
+                where e.id IS NOT NULL AND a.proceso=0 AND $rangoFechas
 ";
         echo $q;
         $db->query($q);

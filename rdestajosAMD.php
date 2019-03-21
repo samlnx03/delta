@@ -37,6 +37,8 @@ elseif($proceso==2)
 	$trepo="<h1>Reporte de destajos de Corte a Largo</h1>\n";
 elseif($proceso==3)
 	$trepo="<h1>Reporte de destajos de Clavado de Tarimas</h1>\n";
+elseif($proceso==0)
+	$trepo="<h1>Reporte de Otros Destajos</h1>\n";
 else
 	$trepo="<h1>Ups, esto no debia pasar!</h1>\n";
 
@@ -45,10 +47,14 @@ if(isset($_POST['todosRepos'])){
 	$f2=$_POST['f2'];
 	echo "$trepo\n";
 	echo "Periodo del $f1 al $f2<br>\n";
-	$acumula="sum(volpt) as volumen";
-	if($proceso==3)
+	if($proceso==1 ||  $proceso==2)
+		$acumula="sum(volpt) as volumen";
+	elseif($proceso==3)
 		$acumula="sum(cantidad) as cant";
+	elseif($proceso==0)
+		$acumula="sum(cantidad) as activ";
 	$q="select any_value(nombre) as nombre, $acumula, sum(destajo) as destajo from destajosMDim where proceso='$proceso' group by nombre";
+
 }
 elseif(isset($_POST['xrepo'])){
 	$nrepo=htmlNpost('nrepo');
@@ -89,6 +95,30 @@ elseif(isset($_POST['rctdesglo'])){
 	}
 	exit;
 
+}
+elseif(isset($_POST['roddesglo'])){  // reporte otros destajos desglosado
+	$acumula="sum(cantidad) as cant";
+	$q="select distinct nombre,empleado from destajosMDim where proceso='$proceso' order by nombre";
+	$db->query($q);
+	$trabajadores=$db->get_all();
+	$f1=$_POST['f1'];
+	$f2=$_POST['f2'];
+	echo "$trepo\n";
+	echo "<h3>Periodo del $f1 al $f2</h3>\n";
+	foreach($trabajadores as $persona){
+		$numemp=$persona['empleado']."<br>\n";
+		$q="select dayname(fecha) dia, fecha, activ, $acumula, any_value(costo) as unitario, sum(destajo) as destajo from destajosMDim where proceso='$proceso' AND empleado='$numemp' group by fecha,activ";
+		echo "<b>".$persona['nombre']."</b><br>\n";
+		$db->query($q);
+		$t=new html_table();
+		$t->setFieldTotalizado("cant", 0); // campo a totalizar, inicializado en 0
+		$t->setFieldTotalizado("destajo", 0); // campo a totalizar, inicializado en 0
+		$t->setbody($db->get_all());
+		$t->show();
+		echo "Total: <b>".number_format($t->getFieldTotalizado("destajo"),2)."</b>\n";
+		echo "<br><br>\n";
+	}
+	exit;
 }
 
 //$q="select any_value(r.sierraCinta) as Sierra, any_value(t.especie), sum(m.cantidad*t.volpt) as vol FROM repoProd r LEFT JOIN movsRepoDimensionado as m ON r.id=m.idRepo LEFT JOIN actividades as a ON m.actividad=a.clave LEFT JOIN tablas as t ON m.idtabla=t.id WHERE fecha='2018-5-31' and r.sierraCinta=1 and a.proceso=1 group by especie ";
