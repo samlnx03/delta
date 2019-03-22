@@ -35,7 +35,9 @@
 #
 #drop table destajosDim;
 
-ALTER TABLE destajosMDim add column proceso int;
+#ALTER TABLE destajosMDim add column proceso int;
+alter table destajosMDim modify column cantidad decimal(13,3);  # era entero y calculaba mal destajos 
+
 # no olvides comentar las lineas anteriores antes de pasar este script a mysql para que solo queden las nuevas
 # visual :s/^/#/g
 #

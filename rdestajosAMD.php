@@ -17,12 +17,11 @@ require_once "funcs.php";  // funciones utiles
 <link rel="stylesheet" type="text/css" href="styles/tableStyle.css">
 <link rel="stylesheet" type="text/css" href="styles/2cols.css">
 <link rel="stylesheet" type="text/css" href="styles/abutton.css">
-<script src="libs/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <?php 
 require('menu.php');
-//require("menuProd.php");
+require('menuReportes.php');
 ?>
 <?php
 $db=db::getInstance();
@@ -71,7 +70,7 @@ elseif(isset($_POST['xempleado'])){
 	echo "$trepo\n";
 	echo "Reporte del trabajador $persona, del $f1 al $f2<br>\n";
 }
-elseif(isset($_POST['rctdesglo'])){
+elseif(isset($_POST['rctdesglo'])){  // reporte de clavado de tarima desglosado
 	$acumula="sum(cantidad) as cant";
 	$q="select distinct nombre,empleado from destajosMDim where proceso='$proceso' order by nombre";
 	$db->query($q);

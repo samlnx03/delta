@@ -1,97 +1,125 @@
 <?php
 require_once "Auth/session.php";
+require_once "Auth/dbclass.php";
 //require_once "Auth/table.php";
 require_once "desarrollo.php";  // show errores
+require_once "funcs.php";  // funciones utiles
 
-$db=db::getInstance();
-$f1="";
-$f2="";
-if (isset($_POST["recalc"])){
+/*
+$cond="order by p.id desc limit 10";
+if(isset($_POST["alta"])){
+        //header('Location: prodNuevoRepo.php');
+        die();
+}
+elseif(isset($_POST["today"])){
+	$cond="where fecha=date(now()) order by p.id desc";
+} elseif (isset($_POST["semana"])){
+	$cond="where fecha<=date(NOW()) AND fecha>=date(DATE_SUB(NOW(), INTERVAL 7 DAY)) order by p.id desc";
+} elseif (isset($_POST["rango"])){
 	$f1=$_POST["f1"];
 	$f2=$_POST["f2"];
-	$q="update claveValor set valor='$f1' where clave='rDestajSCf1'"; // registra fechas 
-	$db->query($q);
-	$q="update claveValor set valor='$f2' where clave='rDestajSCf2'"; 
-	$db->query($q);
-
-	$rangoFechas="fecha>='$f1' AND fecha<='$f2'";
-	$q="DELETE FROM destajosMDim";
-	$db->query($q);
-	$q="ALTER TABLE destajosMDim AUTO_INCREMENT = 1";
-	$db->query($q);
-	// aserrio operadores
-	$q="INSERT into destajosMDim (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso) 
-	select fecha, operador as empleado, e.nombre, pctjOp as pctj, m.id, m.idrepo, m.actividad, a.descrip as activ, m.cantidad, m.idtabla, t.especie, t.descrip as medidas,  t.volpt*cantidad as volpt, a.costo, round(a.costo*volpt*cantidad*pctjOp/100,2) as destajo, a.proceso
-	from movsRepoDimensionado m
-	     left join repoProd rp1 on m.idRepo=rp1.id
-		left join tablas t on m.idtabla=t.id
-		left join actividades a on m.actividad=a.clave
-		left join empleados e on operador=e.id
-	where e.id IS NOT NULL AND a.proceso=1 AND $rangoFechas
-";
-	//echo $q;
-	$db->query($q);
-	// aserrio ayudantes
-	$q="INSERT into destajosMDim (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso) 
-	select fecha, ayudante as empleado, e.nombre, pctjAyu as pctj, m.id, m.idrepo, m.actividad, a.descrip as activ, m.cantidad, m.idtabla, t.especie, t.descrip as medidas,  t.volpt*cantidad as volpt, a.costo, round(a.costo*volpt*cantidad*pctjAyu/100,2) as destajo, a.proceso
-	from movsRepoDimensionado m
-	     left join repoProd rp1 on m.idRepo=rp1.id
-		left join tablas t on m.idtabla=t.id
-		left join actividades a on m.actividad=a.clave
-		left join empleados e on ayudante=e.id
-	where e.id IS NOT NULL AND a.proceso=1 AND $rangoFechas
-";
-	//echo $q;
-	$db->query($q);
-
-	//corte a largo
-	$q="INSERT into destajosMDim (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso) 
-	select fecha, operador as empleado, e.nombre, 100 as pctj, m.id, m.idrepoCL, m.actividad, a.descrip as activ, m.cantidad, m.idtabla, t.especie, t.descrip as medidas,  t.volpt*cantidad as volpt, a.costo, round(a.costo*volpt*cantidad,2) as destajo, a.proceso
-	from movsRepoCL m
-	     left join repoCL rp1 on m.idRepoCL=rp1.id
-		left join tablas t on m.idtabla=t.id
-		left join actividades a on m.actividad=a.clave
-		left join empleados e on operador=e.id
-		where e.id IS NOT NULL AND a.proceso=2 AND $rangoFechas
-";
-	echo $q;
-	$db->query($q);
-
-        // clavado de tarimas, los campos de destajosMDim, sufren cambios
-        // fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso
-        // fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso
-        //                                                                          xxxxxxxxxxxxxxxxxxxxx
-        // idtabla va en 0, especie, medidas,volpt no se usan
-        // 
-        $q="INSERT into destajosMDim (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,costo,destajo,proceso) 
-        select fecha, idempleado as empleado, e.nombre, 100 as pctj, m.id, m.idrepoCT, m.actividad, a.descrip as activ, m.cantidad, 0,a.costo, round(a.costo*cantidad,2) as destajo, a.proceso
-        from movsRepoOtrasActiv m
-             left join repoCT rp1 on m.idRepoCT=rp1.id
-                left join actividades a on m.actividad=a.clave
-                left join empleados e on idempleado=e.id
-                where e.id IS NOT NULL AND a.proceso=3 AND $rangoFechas
-";
-        echo $q;
-	$db->query($q);
-
-        // otros destajo, similar a clavado de tarimas
-        // fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso
-        // fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso
-        //                                                                          xxxxxxxxxxxxxxxxxxxxx
-        // idtabla va en 0, especie, medidas,volpt no se usan
-        // 
-        $q="INSERT into destajosMDim (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,costo,destajo,proceso) 
-        select fecha, idempleado as empleado, e.nombre, 100 as pctj, m.id, m.idrepoOD, m.actividad, a.descrip as activ, m.cantidad, 0,a.costo, round(a.costo*cantidad,2) as destajo, a.proceso
-        from movsRepoOtrasActiv m
-             left join repoOD rp1 on m.idRepoOD=rp1.id
-                left join actividades a on m.actividad=a.clave
-                left join empleados e on idempleado=e.id
-                where e.id IS NOT NULL AND a.proceso=0 AND $rangoFechas
-";
-        echo $q;
-        $db->query($q);
+	$cond="where fecha>='$f1' AND fecha<='$f2' order by p.id desc";
 }
-$_SESSION["msg"]="Periodo de destajos actualizado";
-header("Location: reportes.php");
-die();
+elseif(isset($_POST["ultimos"])){
+	$cond="order by p.id desc limit 10";
+}
+
+ */
+
+$db=db::getInstance();
+//$q="select min(fecha) as F1, max(fecha) as F2 from destajosMDim";
+$q="select valor from claveValor where clave like 'rDestajSCf_'"; // f1 o f2
+$db->query($q);
+if($db->num_rows()==0){
+        $q="insert into claveValor values('rDestajSCf1','')";
+        $db->query($q);
+        $q="insert into claveValor values('rDestajSCf2','')";
+        $db->query($q);
+        $f1=""; $f2="";
+} else {
+        $db->next_row(); $f1=$db->f("valor");
+        $db->next_row(); $f2=$db->f("valor");
+}
+//$db->next_row();
+//$f1=$db->f("F1");
+//$f2=$db->f("F2");
 ?>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="styles/menu.css">
+<link rel="stylesheet" type="text/css" href="styles/tabs.css">
+<script src="libs/jquery-3.3.1.min.js"></script>
+<script>
+$(document).ready(function(){
+
+	$('ul.tabs li').click(function(){
+		var tab_id = $(this).attr('data-tab');
+
+		$('ul.tabs li').removeClass('current');
+		$('.tab-content').removeClass('current');
+
+		$(this).addClass('current');
+		$("#"+tab_id).addClass('current');
+	})
+
+})
+</script>
+</head>
+<body>
+<?php require('menu.php'); ?>
+<?php require('menuReportes.php'); ?>
+<h1>Reportes de Destajos</h1>
+<form method='POST' action='periodoDestajos.php'>
+Periodo para calculo de destajos: de 
+<?php echo" <input type=date name=f1 value='$f1' required> ";?>
+a 
+<?php echo "<input type=date name=f2 value='$f2' required> ";?> 
+<input type=submit name=recalc value='Recalcular'>
+</form>
+<?php
+if(isset($_SESSION["msg"])){
+        echo "<div class='mensaje'>".$_SESSION["msg"]."</div>";
+        unset($_SESSION["msg"]);
+}
+?>
+<div class="container">
+	<ul class="tabs">
+		<li class="tab-link current" data-tab="tab-1">Aserrío</li>
+		<li class="tab-link" data-tab="tab-2">Corte a Largo</li>
+		<li class="tab-link" data-tab="tab-3">Clavado de Tarimas</li>
+		<li class="tab-link" data-tab="tab-4">Otros destajos</li>
+		<li class="tab-link" data-tab="tab-5">Globales</li>
+	</ul>
+
+	<div id="tab-1" class="tab-content current">
+	<?php require "destaAserrio.php";?>
+	</div>
+	<div id="tab-2" class="tab-content">
+	<?php require "destaCorteLargo.php";?>
+	</div>
+	<div id="tab-3" class="tab-content">
+	<?php require "destaCTarima.php";?>
+	</div>
+	<div id="tab-4" class="tab-content">
+	<?php require "destaOtrosD.php";?>
+	</div>
+	<div id="tab-5" class="tab-content">
+	<?php require "destaGlob.php";?>
+	</div>
+</div><!-- container -->
+
+<!--
+Aserrío Diario por máquina <a href=raserrio.php>Ver</a>
+<br>
+cantidad total diaria de piezas aserradas de cada dimension y especie
+<br>
+Pagos de destajos (jueves-miercoles)
+<br>
+Entradas y salidas de madera dimensionada
+<br>
+Inventario de materias primas
+<br>
+-->
+</body>
+</html>
+
