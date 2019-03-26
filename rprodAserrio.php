@@ -11,6 +11,15 @@ require_once "funcs.php";  // funciones utiles
 // join:
 // repoProd r left join movsRepoDimensionado m on r.id=m.idrepo
 // 	left join 
+if(isset($_POST['xmedidas'])){
+	$f1=$_POST['f1'];
+	$f2=$_POST['f2'];
+	$rangoFechas="fecha>='$f1' AND fecha<='$f2'";
+} else {
+	$_SESSION["msg"]="Periodo de producción no especificado";
+	header("Location: produccion.php");
+	exit;
+}
 ?>
 <html>
 <head>
@@ -23,14 +32,21 @@ require_once "funcs.php";  // funciones utiles
 <body>
 <?php 
 require('menu.php');
-//require("menuProd.php");
+require('menuReportes.php');
 ?>
 <h1>Reporte de Aserrío</h1>
 <?php
+echo "<h3>Periodo del $f1 al $f2</h3>\n";
 $db=db::getInstance();
-$q="select any_value(r.sierraCinta) as Sierra, any_value(t.especie), sum(m.cantidad*t.volpt) as vol FROM repoProd r LEFT JOIN movsRepoDimensionado as m ON r.id=m.idRepo LEFT JOIN actividades as a ON m.actividad=a.clave LEFT JOIN tablas as t ON m.idtabla=t.id WHERE fecha='2018-5-31' and r.sierraCinta=1 and a.proceso=1 group by especie ";
+$q="select t.descrip, t.especie as especie, sum(m.cantidad) as cantidad, sum(m.cantidad*t.volpt) as vol ".
+	"FROM repoProd r ".
+	"LEFT JOIN movsRepoDimensionado as m ON r.id=m.idRepo ".
+	"LEFT JOIN actividades as a ON m.actividad=a.clave ".
+	"LEFT JOIN tablas as t ON m.idtabla=t.id ".
+	"WHERE $rangoFechas group by idtabla ORDER BY especie,grueso,ancho,largo";
+//$q="select any_value(r.sierraCinta) as Sierra, any_value(t.especie), sum(m.cantidad*t.volpt) as vol FROM repoProd r LEFT JOIN movsRepoDimensionado as m ON r.id=m.idRepo LEFT JOIN actividades as a ON m.actividad=a.clave LEFT JOIN tablas as t ON m.idtabla=t.id WHERE fecha='2019-1-02' and r.sierraCinta=1 and a.proceso=1 group by especie ";
 //$q="select r.fecha, r.id as Repo, r.sierraCinta as Sierra, m.cantidad, t.especie, t.descrip as dimensiones, m.cantidad*t.volpt as vol FROM repoProd r LEFT JOIN movsRepoDimensionado as m ON r.id=m.idRepo LEFT JOIN actividades as a ON m.actividad=a.clave LEFT JOIN tablas as t ON m.idtabla=t.id WHERE fecha='2018-5-31' and a.proceso=1 order by sierra,especie,grueso,ancho,largo";
-echo "$q<br>\n";
+//echo "$q<br>\n";
 $db->query($q);
 $t=new html_table();
 //$t->setcdatas(array("cant" => "cantidad", "descrip"=>"descrip", "especie"=>"especie", "dimensiones"=>"dimensiones" ));
@@ -39,7 +55,6 @@ $t->show();
 ?>	
 </body>
 </html>
-
 <!--
 Aserrío Diario por máquina <a href=raserrio.php>Ver</a>
 <br>
