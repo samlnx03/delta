@@ -50,8 +50,10 @@ $q="select t.descrip, t.especie as especie, sum(m.cantidad) as cantidad, sum(m.c
 $db->query($q);
 $t=new html_table();
 //$t->setcdatas(array("cant" => "cantidad", "descrip"=>"descrip", "especie"=>"especie", "dimensiones"=>"dimensiones" ));
+$t->setFieldTotalizado("vol", 0); // campo a totalizar, inicializado en 0
 $t->setbody($db->get_all());
 $t->show();
+echo "Total volumen (pt): <b>".$t->getFieldTotalizado("vol")."</b><br>\n";
 ?>	
 </body>
 </html>
