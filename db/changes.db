@@ -38,8 +38,8 @@
 #ALTER TABLE destajosMDim add column proceso int;
 #alter table destajosMDim modify column cantidad decimal(13,3);  # era entero y calculaba mal destajos 
 #
-drop table destajosOtros;   ## no se ocupa 2019/03/25
-rename table destajosMDim to destajos;
+#drop table destajosOtros;   ## no se ocupa 2019/03/25
+#rename table destajosMDim to destajos;
 
 # no olvides en el directorio en produccion
 # haz el pull
