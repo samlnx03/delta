@@ -27,7 +27,7 @@ elseif(isset($_POST["ultimos"])){
  */
 
 $db=db::getInstance();
-//$q="select min(fecha) as F1, max(fecha) as F2 from destajosMDim";
+//$q="select min(fecha) as F1, max(fecha) as F2 from destajos";
 $q="select valor from claveValor where clave like 'rDestajSCf_'"; // f1 o f2
 $db->query($q);
 if($db->num_rows()==0){

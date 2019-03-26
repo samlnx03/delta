@@ -1,5 +1,5 @@
 <h3>Destajos Corte a Largo</h3>
-<form method=post action=rdestajosAMD.php>
+<form method=post action=rdestajos.php>
 <input type=hidden name=destajos_proceso value='2'>
 <input type=hidden name=f1 value='<?php echo $f1;?>'>
 <input type=hidden name=f2 value='<?php echo $f2;?>'>

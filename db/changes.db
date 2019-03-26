@@ -37,7 +37,15 @@
 
 #ALTER TABLE destajosMDim add column proceso int;
 #alter table destajosMDim modify column cantidad decimal(13,3);  # era entero y calculaba mal destajos 
+#
+drop table destajosOtros;   ## no se ocupa 2019/03/25
+rename table destajosMDim to destajos;
 
-# no olvides comentar las lineas anteriores antes de pasar este script a mysql para que solo queden las nuevas
-# visual :s/^/#/g
+# no olvides en el directorio en produccion
+# haz el pull
+# haz un respaldo de la db antes de cambiar tablas
+# aplica los cambios sql y comenta los cambios sql
+# haz el push
+#
+# visual :s/^/#/g    para comentar el bloque en vi
 #

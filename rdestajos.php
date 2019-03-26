@@ -52,21 +52,21 @@ if(isset($_POST['todosRepos'])){
 		$acumula="sum(cantidad) as cant";
 	elseif($proceso==0)
 		$acumula="sum(cantidad) as activ";
-	$q="select any_value(nombre) as nombre, $acumula, sum(destajo) as destajo from destajosMDim where proceso='$proceso' group by nombre";
+	$q="select any_value(nombre) as nombre, $acumula, sum(destajo) as destajo from destajos where proceso='$proceso' group by nombre";
 
 }
 elseif(isset($_POST['xrepo'])){
 	$nrepo=htmlNpost('nrepo');
-	$q="select * from destajosMDim where proceso='$proceso' AND idRepo=$nrepo";
+	$q="select * from destajos where proceso='$proceso' AND idRepo=$nrepo";
 	echo "$trepo\n";
 	echo "Reporte $nrepo<br>\n";
-	//$q="select any_value(nombre) as nombre, sum(volpt) as volumen, sum(destajo) as destajo from destajosMDim where idRepo=$nrepo group by nombre";
+	//$q="select any_value(nombre) as nombre, sum(volpt) as volumen, sum(destajo) as destajo from destajos where idRepo=$nrepo group by nombre";
 }
 elseif(isset($_POST['xempleado'])){
 	$persona=htmlNpost('empleado');
 	$f1=$_POST['f1'];
 	$f2=$_POST['f2'];
-	$q="select * from destajosMDim where proceso='$proceso' AND empleado=$persona";
+	$q="select * from destajos where proceso='$proceso' AND empleado=$persona";
 	echo "$trepo\n";
 	echo "Reporte del trabajador $persona, del $f1 al $f2<br>\n";
 }

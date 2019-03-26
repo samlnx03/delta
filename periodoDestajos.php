@@ -15,12 +15,12 @@ if (isset($_POST["recalc"])){
 	$db->query($q);
 
 	$rangoFechas="fecha>='$f1' AND fecha<='$f2'";
-	$q="DELETE FROM destajosMDim";
+	$q="DELETE FROM destajos";
 	$db->query($q);
-	$q="ALTER TABLE destajosMDim AUTO_INCREMENT = 1";
+	$q="ALTER TABLE destajos AUTO_INCREMENT = 1";
 	$db->query($q);
 	// aserrio operadores
-	$q="INSERT into destajosMDim (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso) 
+	$q="INSERT into destajos (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso) 
 	select fecha, operador as empleado, e.nombre, pctjOp as pctj, m.id, m.idrepo, m.actividad, a.descrip as activ, m.cantidad, m.idtabla, t.especie, t.descrip as medidas,  t.volpt*cantidad as volpt, a.costo, round(a.costo*volpt*cantidad*pctjOp/100,2) as destajo, a.proceso
 	from movsRepoDimensionado m
 	     left join repoProd rp1 on m.idRepo=rp1.id
@@ -32,7 +32,7 @@ if (isset($_POST["recalc"])){
 	//echo $q;
 	$db->query($q);
 	// aserrio ayudantes
-	$q="INSERT into destajosMDim (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso) 
+	$q="INSERT into destajos (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso) 
 	select fecha, ayudante as empleado, e.nombre, pctjAyu as pctj, m.id, m.idrepo, m.actividad, a.descrip as activ, m.cantidad, m.idtabla, t.especie, t.descrip as medidas,  t.volpt*cantidad as volpt, a.costo, round(a.costo*volpt*cantidad*pctjAyu/100,2) as destajo, a.proceso
 	from movsRepoDimensionado m
 	     left join repoProd rp1 on m.idRepo=rp1.id
@@ -45,7 +45,7 @@ if (isset($_POST["recalc"])){
 	$db->query($q);
 
 	//corte a largo
-	$q="INSERT into destajosMDim (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso) 
+	$q="INSERT into destajos (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso) 
 	select fecha, operador as empleado, e.nombre, 100 as pctj, m.id, m.idrepoCL, m.actividad, a.descrip as activ, m.cantidad, m.idtabla, t.especie, t.descrip as medidas,  t.volpt*cantidad as volpt, a.costo, round(a.costo*volpt*cantidad,2) as destajo, a.proceso
 	from movsRepoCL m
 	     left join repoCL rp1 on m.idRepoCL=rp1.id
@@ -57,13 +57,13 @@ if (isset($_POST["recalc"])){
 	echo $q;
 	$db->query($q);
 
-        // clavado de tarimas, los campos de destajosMDim, sufren cambios
+        // clavado de tarimas, los campos de destajos, sufren cambios
         // fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso
         // fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,especie,medidas,volpt,costo,destajo,proceso
         //                                                                          xxxxxxxxxxxxxxxxxxxxx
         // idtabla va en 0, especie, medidas,volpt no se usan
         // 
-        $q="INSERT into destajosMDim (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,costo,destajo,proceso) 
+        $q="INSERT into destajos (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,costo,destajo,proceso) 
         select fecha, idempleado as empleado, e.nombre, 100 as pctj, m.id, m.idrepoCT, m.actividad, a.descrip as activ, m.cantidad, 0,a.costo, round(a.costo*cantidad,2) as destajo, a.proceso
         from movsRepoOtrasActiv m
              left join repoCT rp1 on m.idRepoCT=rp1.id
@@ -80,7 +80,7 @@ if (isset($_POST["recalc"])){
         //                                                                          xxxxxxxxxxxxxxxxxxxxx
         // idtabla va en 0, especie, medidas,volpt no se usan
         // 
-        $q="INSERT into destajosMDim (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,costo,destajo,proceso) 
+        $q="INSERT into destajos (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,costo,destajo,proceso) 
         select fecha, idempleado as empleado, e.nombre, 100 as pctj, m.id, m.idrepoOD, m.actividad, a.descrip as activ, m.cantidad, 0,a.costo, round(a.costo*cantidad,2) as destajo, a.proceso
         from movsRepoOtrasActiv m
              left join repoOD rp1 on m.idRepoOD=rp1.id
@@ -92,7 +92,7 @@ if (isset($_POST["recalc"])){
 	$db->query($q);
 
 	// otros destajos de reportes de aserrio
-        $q="INSERT into destajosMDim (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,costo,destajo,proceso) 
+        $q="INSERT into destajos (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,costo,destajo,proceso) 
         select fecha, idempleado as empleado, e.nombre, 100 as pctj, m.id, m.idRepo, m.actividad, a.descrip as activ, m.cantidad, 0,a.costo, round(a.costo*cantidad,2) as destajo, a.proceso
         from movsRepoOtrasActiv m
              left join repoProd rp1 on m.idRepo=rp1.id

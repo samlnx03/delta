@@ -38,7 +38,7 @@ if(isset($_POST['condensado'])){
 		sum(case when proceso=3 then destajo end) as Clavado_tarima, 
 		sum(case when proceso=0 then destajo end) as Otros_destajos,
 		sum(destajo) as suma
-		FROM destajosMDim group by nombre";
+		FROM destajos group by nombre";
 	$db->query($q);
 	if($db->num_rows()>0){
 		echo "Condensado de destajos<br>\n";
@@ -61,11 +61,11 @@ if(isset($_POST['condensado'])){
 	exit;
 }
 elseif(isset($_POST['todosRepos'])){
-	$q="SELECT distinct nombre,empleado from destajosMDim order by nombre";
+	$q="SELECT distinct nombre,empleado from destajos order by nombre";
 }
 else  {
 	$persona=htmlNpost('empleado');
-        $q="select distinct nombre,empleado from destajosMDim where empleado=$persona";
+        $q="select distinct nombre,empleado from destajos where empleado=$persona";
 }
 $db->query($q);
 $trabajadores=$db->get_all();
@@ -75,7 +75,7 @@ foreach($trabajadores as $persona){
 
 	$proceso=1; // aserrio
 	$acumula="sum(volpt) as volumen";
-	$q="select any_value(activ) as Actividad, $acumula, any_value(costo) as unitario, sum(destajo) as destajo from destajosMDim where proceso='$proceso' AND empleado='$numemp' group by activ";
+	$q="select any_value(activ) as Actividad, $acumula, any_value(costo) as unitario, sum(destajo) as destajo from destajos where proceso='$proceso' AND empleado='$numemp' group by activ";
 	echo "<b>".$persona['nombre']."</b><br>\n";
 	$db->query($q);
 	if($db->num_rows()>0){
@@ -90,7 +90,7 @@ foreach($trabajadores as $persona){
 	}
 	$proceso=2; // corte a largo
 	$acumula="sum(volpt) as volumen";
-	$q="select any_value(activ) as Actividad, $acumula, any_value(costo) as unitario, sum(destajo) as destajo from destajosMDim where proceso='$proceso' AND empleado='$numemp' group by activ";
+	$q="select any_value(activ) as Actividad, $acumula, any_value(costo) as unitario, sum(destajo) as destajo from destajos where proceso='$proceso' AND empleado='$numemp' group by activ";
 	$db->query($q);
 	if($db->num_rows()>0){
 		echo "Destajos de Corte a largo<br>\n";
@@ -104,7 +104,7 @@ foreach($trabajadores as $persona){
 	}
 	$proceso=3; // clavado de tarima
 	$acumula="sum(cantidad) as cant";
-	$q="select activ as Actividad, $acumula, any_value(costo) as unitario, sum(destajo) as destajo from destajosMDim where proceso='$proceso' AND empleado='$numemp' group by activ";
+	$q="select activ as Actividad, $acumula, any_value(costo) as unitario, sum(destajo) as destajo from destajos where proceso='$proceso' AND empleado='$numemp' group by activ";
 	$db->query($q);
 	if($db->num_rows()>0){
 		echo "Destajos de Clavado de Tarimas<br>\n";
@@ -118,7 +118,7 @@ foreach($trabajadores as $persona){
 	}
 	$proceso=0; // otros destajos
 	$acumula="sum(cantidad) as cantidad";
-	$q="select activ as Actividad, $acumula, any_value(costo) as unitario, sum(destajo) as destajo from destajosMDim where proceso='$proceso' AND empleado='$numemp' group by activ";
+	$q="select activ as Actividad, $acumula, any_value(costo) as unitario, sum(destajo) as destajo from destajos where proceso='$proceso' AND empleado='$numemp' group by activ";
 	$db->query($q);
 	if($db->num_rows()>0){
 		echo "Otros Destajos<br>\n";
