@@ -69,10 +69,10 @@ if(isset($_SESSION["msg"])){
 	<?php require "prodAserrio.php";?>
 	</div>
 	<div id="tab-2" class="tab-content">
-	<?php require "destaCorteLargo.php";?>
+	<?php require "prodCorteLargo.php";?>
 	</div>
 	<div id="tab-3" class="tab-content">
-	<?php require "destaCTarima.php";?>
+	<?php require "prodCTarima.php";?>
 	</div>
 </div><!-- container -->
 </body>
