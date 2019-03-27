@@ -4,10 +4,14 @@ require_once "Auth/table.php";
 
 //		corte a largo Listado de reportes
 
-$cond="order by p.id desc limit 10";
+//$cond="order by p.id desc limit 10";
+$cond="where month(fecha)=month(now()) order by fecha desc";
 if(isset($_POST["alta"])){
         header('Location: clNuevoRepo.php');
         die();
+}
+elseif(isset($_POST["mes"])){
+	$cond="where month(fecha)=month(now()) order by fecha desc";
 }
 elseif(isset($_POST["today"])){
 	$cond="where fecha=date(now()) order by p.id desc";
@@ -44,7 +48,8 @@ if(isset($_SESSION["agregando"]))
 ?>
 <form method='POST'>
 <input type=submit name=alta value='Nuevo Reporte'> 
-ver: <input type=submit name=ultimos value='Ultimos 10'>
+ver: <input type=submit name=mes value='Mes'>  
+<input type=submit name=ultimos value='Ultimos 10'>
 <input type=submit name=today value=Hoy>
 <input type=submit name=semana value='7 Dias'>
 o entre las fechas <input type=date name=f1> 
