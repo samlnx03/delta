@@ -40,7 +40,8 @@ if($ayu!="NULL" AND $ayu!='0'){
 	$pctjAyu=0;
 }
 // dar el alta
-$supervisor=htmlpost("supervisor");
+//$supervisor=htmlpost("supervisor"); // antes era un char(20), ahora es un id (int)
+$supervisor=htmlNpost("supervisor");
 $fecha=htmlFpost("fecha");
 $sierraCinta=htmlpost("sierraCinta");
 $entrego=htmlpost("entrego");

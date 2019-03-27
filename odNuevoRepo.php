@@ -2,6 +2,7 @@
 require_once "Auth/session.php"; // include dbclass.php
 require_once "Auth/table.php";
 require_once "desarrollo.php";  // show errors
+require_once "funcs.php";
 //
 //	Nuevo reporte de Otros destajos
 ?>
@@ -23,7 +24,9 @@ function validar(){
 </script>
 </head>
 <body>
-<?php require('menu.php'); ?>
+<?php require('menu.php');
+require("menuProd.php");
+?>
 <h1>Otros Destajos</h1>
 <h3>Nuevo reporte de otros destajos</h3>
 <?php 
@@ -39,7 +42,12 @@ if(isset($_SESSION["msg"])){
 <form action='odAltaRepo.php' method='POST' onsubmit='validar()'>
 <table>
 <tr>
-<td>Supervisor de Area<td><input type=text name=supervisor required>
+<?php
+$q="select nombre,id from supervisores where baja<>'s'";
+$supervisores=htmlSelect($q, "supervisor", "id", "nombre", ''); // ($qry, $name, $val, $tit, $selected, $initial="")
+echo "<td>Supervisor de Area<td>$supervisores\n";
+//<td>Supervisor de Area<td><input type=text name=supervisor required>
+?>
 <tr>
 <td>fecha<td><input type=date name=fecha required>
 <tr>

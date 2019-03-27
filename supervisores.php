@@ -64,7 +64,7 @@ if(isset($_POST["opcion"])){
 
 <body>
 <?php require('menu.php'); ?>
-<h1>Empleados</h1>
+<h1>Supervisores</h1>
 <?php
 if(isset($_SESSION["msg"])){
 	echo "<div class='mensaje'>".$_SESSION["msg"]."</div>";

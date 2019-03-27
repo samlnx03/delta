@@ -3,7 +3,7 @@ require_once "Auth/session.php"; // include dbclass.php
 require_once "Auth/table.php";
 // borrar 2
 //require_once "Auth/proteger.php";
-//require_once "funcs.php";
+require_once "funcs.php";
 require_once "desarrollo.php";  // show errors
 ?>
 <html>
@@ -42,7 +42,12 @@ if(isset($_SESSION["msg"])){
 <form action='scAltaRepo.php' method='POST' onsubmit='validar()'>
 <table>
 <tr>
-<td>Supervisor de Area<td><input type=text name=supervisor required>
+<?php
+$q="select nombre,id from supervisores where baja<>'s'";
+$supervisores=htmlSelect($q, "supervisor", "id", "nombre", ''); // ($qry, $name, $val, $tit, $selected, $initial="")
+echo "<td>Supervisor de Area<td>$supervisores\n";
+//<td>Supervisor de Area<td><input type=text name=supervisor required>
+?>
 <tr>
 <td>fecha<td><input type=date name=fecha required>
 <tr>
