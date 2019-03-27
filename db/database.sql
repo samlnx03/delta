@@ -3546,7 +3546,7 @@ CREATE TABLE `movsRepoDimensionado` (
   PRIMARY KEY (`id`),
   KEY `idRepo` (`idRepo`),
   KEY `actividad` (`actividad`,`idtabla`)
-) ENGINE=InnoDB AUTO_INCREMENT=1723 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1724 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4476,7 +4476,6 @@ INSERT INTO `movsRepoDimensionado` VALUES (1487,456,'2-1 AsP',70,221);
 INSERT INTO `movsRepoDimensionado` VALUES (1489,456,'2-1 AsP',130,210);
 INSERT INTO `movsRepoDimensionado` VALUES (1491,456,'2-1 AsP',315,223);
 INSERT INTO `movsRepoDimensionado` VALUES (1493,456,'2-1 AsP',150,212);
-INSERT INTO `movsRepoDimensionado` VALUES (1494,456,'2-1 AsP',200,316);
 INSERT INTO `movsRepoDimensionado` VALUES (1496,456,'2-1 AsP',497,214);
 INSERT INTO `movsRepoDimensionado` VALUES (1497,457,'2-1 AsCB',414,187);
 INSERT INTO `movsRepoDimensionado` VALUES (1498,457,'2-1 AsCB',600,176);
@@ -4684,6 +4683,7 @@ INSERT INTO `movsRepoDimensionado` VALUES (1719,507,'2-1 AsP',180,280);
 INSERT INTO `movsRepoDimensionado` VALUES (1720,507,'2-1 AsP',50,319);
 INSERT INTO `movsRepoDimensionado` VALUES (1721,456,'2-1 AsP',50,318);
 INSERT INTO `movsRepoDimensionado` VALUES (1722,429,'2-1 AsP',380,214);
+INSERT INTO `movsRepoDimensionado` VALUES (1723,456,'2-1 AsP',200,320);
 /*!40000 ALTER TABLE `movsRepoDimensionado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -6632,7 +6632,6 @@ INSERT INTO `repoOD` VALUES (116,'SEÃ‘ORA ROSA','2019-03-16','n','');
 INSERT INTO `repoOD` VALUES (117,'SEÃ‘ORA ROSA','2019-03-16','n','');
 INSERT INTO `repoOD` VALUES (118,'ARTURO DIAZ IBAÃ‘EZ','2019-03-18','n','');
 INSERT INTO `repoOD` VALUES (119,'ARTURO DIAZ IBAÃ‘EZ','2019-03-19','n','');
-INSERT INTO `repoOD` VALUES (120,'ROSA ELENA','2019-03-19','n','');
 /*!40000 ALTER TABLE `repoOD` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -7333,4 +7332,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-26 18:11:13
+-- Dump completed on 2019-03-26 19:26:57
