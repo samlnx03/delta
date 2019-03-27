@@ -53,7 +53,9 @@ y <input type=date name=f2>
 </form>
 
 <?php
-$q="select p.id, supervisor, fecha, sierraGemela, e1.nombre as operador, entrego, recibio, aplicadaEnInventario from repoCL as p LEFT JOIN empleados as e1 on p.operador=e1.id $cond";
+$q="select p.id, supervisores.nombre, fecha, sierraGemela, e1.nombre as operador, entrego, recibio, aplicadaEnInventario ".
+	"from repoCL as p LEFT JOIN empleados as e1 on p.operador=e1.id ".
+	"LEFT JOIN supervisores on p.supervisor=supervisores.id $cond";
 //echo "<br>q: $q<br>\n";
 $db=db::getInstance();
 $db->query($q);
@@ -65,7 +67,7 @@ $t->addextras( array(
 		array("id")
 		)
 );
-$t->setcdatas(array("Ver"=>"Editar", "id"=>"id", "supervisor" => "supervisor", "fecha" => "fecha", "# sierra"=>"sierraGemela", "operador"=>"operador", "entregó"=>"entrego", "recibió"=>"recibio","en<br>Inv"=>"aplicadaEnInventario"));
+$t->setcdatas(array("Ver"=>"Editar", "id"=>"id", "supervisor" => "nombre", "fecha" => "fecha", "# sierra"=>"sierraGemela", "operador"=>"operador", "entregó"=>"entrego", "recibió"=>"recibio","en<br>Inv"=>"aplicadaEnInventario"));
 //$t->setFieldClas("Importe","class='alin-der'"); //campo=>id_class, p.e. 'id'=>"class='myclas'"
 //$t->setFieldTotalizado("total", 0); // campo a totalizar, inicializado en 0
 echo "<form action='clDetalle.php' method='GET'>\n";

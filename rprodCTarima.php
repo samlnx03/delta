@@ -35,10 +35,11 @@ require('menuReportes.php');
 <?php
 echo "<h3>Periodo del $f1 al $f2</h3>\n";
 $db=db::getInstance();
-$q="select a.descrip, supervisor, sum(m.cantidad) as cantidad ".
+$q="select a.descrip, supervisores.nombre as supervisor, sum(m.cantidad) as cantidad ".
 	"FROM repoCT r ".
 	"LEFT JOIN movsRepoOtrasActiv as m ON r.id=m.idRepoCT ".
 	"LEFT JOIN actividades as a ON m.actividad=a.clave ".
+	"LEFT JOIN supervisores on r.supervisor=supervisores.id ".
 	"WHERE $rangoFechas AND proceso=3 group by descrip, supervisor";
 //$q="select any_value(r.sierraCinta) as Sierra, any_value(t.especie), sum(m.cantidad*t.volpt) as vol FROM repoProd r LEFT JOIN movsRepoDimensionado as m ON r.id=m.idRepo LEFT JOIN actividades as a ON m.actividad=a.clave LEFT JOIN tablas as t ON m.idtabla=t.id WHERE fecha='2019-1-02' and r.sierraCinta=1 and a.proceso=1 group by especie ";
 //$q="select r.fecha, r.id as Repo, r.sierraCinta as Sierra, m.cantidad, t.especie, t.descrip as dimensiones, m.cantidad*t.volpt as vol FROM repoProd r LEFT JOIN movsRepoDimensionado as m ON r.id=m.idRepo LEFT JOIN actividades as a ON m.actividad=a.clave LEFT JOIN tablas as t ON m.idtabla=t.id WHERE fecha='2018-5-31' and a.proceso=1 order by sierra,especie,grueso,ancho,largo";

@@ -59,7 +59,8 @@ y <input type=date name=f2>
 </form>
 
 <?php
-$q="select id, supervisor, fecha, aplicadaEnInventario from repoCT as p $cond";
+$q="select p.id, supervisores.nombre, fecha, aplicadaEnInventario from ".
+	"repoCT as p LEFT JOIN supervisores on p.supervisor=supervisores.id $cond";
 //echo "<br>q: $q<br>\n";
 $db=db::getInstance();
 $db->query($q);
@@ -71,7 +72,7 @@ $t->addextras( array(
 		array("id")
 		)
 );
-$t->setcdatas(array("Ver"=>"Editar", "id"=>"id", "supervisor" => "supervisor", "fecha" => "fecha",
+$t->setcdatas(array("Ver"=>"Editar", "id"=>"id", "supervisor" => "nombre", "fecha" => "fecha",
        "en<br>Inv"=>"aplicadaEnInventario"));
 //$t->setFieldClas("Importe","class='alin-der'"); //campo=>id_class, p.e. 'id'=>"class='myclas'"
 //$t->setFieldTotalizado("total", 0); // campo a totalizar, inicializado en 0

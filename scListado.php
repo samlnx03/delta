@@ -54,7 +54,10 @@ y <input type=date name=f2>
 </form>
 
 <?php
-$q="select p.id, supervisor, fecha, sierraCinta, e1.nombre as operador, pctjOp, e2.nombre as ayudante, pctjAyu, entrego, recibio, aplicadaEnInventario from repoProd as p LEFT JOIN empleados as e1 on p.operador=e1.id LEFT JOIN empleados as e2 on p.ayudante=e2.id $cond";
+$q="select p.id, supervisores.nombre, fecha, sierraCinta, e1.nombre as operador, pctjOp, e2.nombre as ayudante, pctjAyu, entrego, recibio, aplicadaEnInventario ".
+	"from repoProd as p LEFT JOIN empleados as e1 on p.operador=e1.id ".
+	"LEFT JOIN empleados as e2 on p.ayudante=e2.id ".
+	"LEFT JOIN supervisores on p.supervisor=supervisores.id $cond";
 //echo "<br>q: $q<br>\n";
 $db=db::getInstance();
 $db->query($q);
@@ -66,7 +69,7 @@ $t->addextras( array(
 		array("id")
 		)
 );
-$t->setcdatas(array("Ver"=>"Editar", "id"=>"id", "supervisor" => "supervisor", "fecha" => "fecha", "# sierra"=>"sierraCinta", "operador"=>"operador", "op%"=>"pctjOp", "ayudante"=>"ayudante", "ay%"=>"pctjAyu", "entregó"=>"entrego", "recibió"=>"recibio","en<br>Inv"=>"aplicadaEnInventario"));
+$t->setcdatas(array("Ver"=>"Editar", "id"=>"id", "supervisor" => "nombre", "fecha" => "fecha", "# sierra"=>"sierraCinta", "operador"=>"operador", "op%"=>"pctjOp", "ayudante"=>"ayudante", "ay%"=>"pctjAyu", "entregó"=>"entrego", "recibió"=>"recibio","en<br>Inv"=>"aplicadaEnInventario"));
 //$t->setFieldClas("Importe","class='alin-der'"); //campo=>id_class, p.e. 'id'=>"class='myclas'"
 //$t->setFieldTotalizado("total", 0); // campo a totalizar, inicializado en 0
 echo "<form action='scDetalle.php' method='GET'>\n";
