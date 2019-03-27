@@ -6984,6 +6984,31 @@ INSERT INTO `repoProd` VALUES (519,'ARTURO DIAZ IBAÃ‘EZ','2019-03-25','4',54,
 UNLOCK TABLES;
 
 --
+-- Table structure for table `supervisores`
+--
+
+DROP TABLE IF EXISTS `supervisores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `supervisores` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` char(60) DEFAULT NULL,
+  `baja` char(1) DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `nombre` (`nombre`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `supervisores`
+--
+
+LOCK TABLES `supervisores` WRITE;
+/*!40000 ALTER TABLE `supervisores` DISABLE KEYS */;
+/*!40000 ALTER TABLE `supervisores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tablas`
 --
 
@@ -7308,4 +7333,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-26 18:08:26
+-- Dump completed on 2019-03-26 18:11:13

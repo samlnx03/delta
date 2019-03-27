@@ -41,13 +41,13 @@
 #drop table destajosOtros;   ## no se ocupa 2019/03/25
 #rename table destajosMDim to destajos;
 
-CREATE TABLE `supervisores` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` char(60) DEFAULT NULL,
-  `baja` char(1) DEFAULT '',
-  PRIMARY KEY (`id`),
-  KEY `nombre` (`nombre`)
-) ENGINE=InnoDB;  # para no provocar errores de acumular por areas (1 supervisor por area)
+#CREATE TABLE `supervisores` (
+#  `id` int(11) NOT NULL AUTO_INCREMENT,
+#  `nombre` char(60) DEFAULT NULL,
+#  `baja` char(1) DEFAULT '',
+#  PRIMARY KEY (`id`),
+#  KEY `nombre` (`nombre`)
+#) ENGINE=InnoDB;  # para no provocar errores de acumular por areas (1 supervisor por area)
 
 # no olvides en el directorio en produccion
 # haz el pull
