@@ -64,7 +64,8 @@
 #alter table repoOD MODIFY COLUMN supervisor int;
 #2019-03-26:19.31 lo anterior
 #
-update empleados set nombre=trim(nombre); # quita el espacio al frente para ordenar correctamente 20190324.1642
+#update empleados set nombre=trim(nombre); # quita el espacio al frente para ordenar correctamente 20190324.1642
+
 # no olvides en el directorio en produccion
 # haz el pull
 # haz un respaldo de la db antes de cambiar tablas
