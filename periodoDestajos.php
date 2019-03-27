@@ -101,6 +101,30 @@ if (isset($_POST["recalc"])){
                 where e.id IS NOT NULL AND a.proceso=0 AND $rangoFechas
 ";
         echo $q;
+	$db->query($q);
+
+	// otros destajos de reportes de corte a largo
+        $q="INSERT into destajos (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,costo,destajo,proceso) 
+        select fecha, idempleado as empleado, e.nombre, 100 as pctj, m.id, m.idRepo, m.actividad, a.descrip as activ, m.cantidad, 0,a.costo, round(a.costo*cantidad,2) as destajo, a.proceso
+        from movsRepoOtrasActiv m
+             left join repoCL rp1 on m.idRepoCL=rp1.id
+                left join actividades a on m.actividad=a.clave
+                left join empleados e on idempleado=e.id
+                where e.id IS NOT NULL AND a.proceso=0 AND $rangoFechas
+";
+        echo $q;
+	$db->query($q);
+
+	// otros destajos de reportes de clavado de tarima
+        $q="INSERT into destajos (fecha,empleado,nombre,pctj,idmov,idrepo,actividad,activ,cantidad,idtabla,costo,destajo,proceso) 
+        select fecha, idempleado as empleado, e.nombre, 100 as pctj, m.id, m.idRepo, m.actividad, a.descrip as activ, m.cantidad, 0,a.costo, round(a.costo*cantidad,2) as destajo, a.proceso
+        from movsRepoOtrasActiv m
+             left join repoCT rp1 on m.idRepoCT=rp1.id
+                left join actividades a on m.actividad=a.clave
+                left join empleados e on idempleado=e.id
+                where e.id IS NOT NULL AND a.proceso=0 AND $rangoFechas
+";
+        echo $q;
         $db->query($q);
 }
 $_SESSION["msg"]="Periodo de destajos actualizado";
