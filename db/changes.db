@@ -49,19 +49,21 @@
 #  KEY `nombre` (`nombre`)
 #) ENGINE=InnoDB;  # para no provocar errores de acumular por areas (1 supervisor por area)
 
-INSERT INTO `supervisores` (nombre) VALUES ('Rosa Elena Hernandez'),('Arturo Diaz IbaÃ±ez');
-update repoProd set supervisor='1' where supervisor='SEÃ‘ORA ROSA';
-update repoProd set supervisor='2' where supervisor='ARTURO DIAZ IBAÃ‘EZ';
-update repoCT set supervisor='1' where supervisor='SEÃ‘ORA ROSA';
-update repoCT set supervisor='2' where supervisor='ARTURO DIAZ IBAÃ‘EZ';
-update repoCL set supervisor='1' where supervisor='SEÃ‘ORA ROSA';
-update repoCL set supervisor='2' where supervisor='ARTURO DIAZ IBAÃ‘EZ';
-update repoOD set supervisor='1' where supervisor='SEÃ‘ORA ROSA';
-update repoOD set supervisor='2' where supervisor='ARTURO DIAZ IBAÃ‘EZ';
-alter table repoProd MODIFY COLUMN supervisor int;
-alter table repoCT MODIFY COLUMN supervisor int;
-alter table repoCL MODIFY COLUMN supervisor int;
-alter table repoOD MODIFY COLUMN supervisor int;
+#INSERT INTO `supervisores` (nombre) VALUES ('Rosa Elena Hernandez'),('Arturo Diaz IbaÃ±ez');
+#update repoProd set supervisor='1' where supervisor='SEÃ‘ORA ROSA';
+#update repoProd set supervisor='2' where supervisor='ARTURO DIAZ IBAÃ‘EZ';
+#update repoCT set supervisor='1' where supervisor='SEÃ‘ORA ROSA';
+#update repoCT set supervisor='2' where supervisor='ARTURO DIAZ IBAÃ‘EZ';
+#update repoCL set supervisor='1' where supervisor='SEÃ‘ORA ROSA';
+#update repoCL set supervisor='2' where supervisor='ARTURO DIAZ IBAÃ‘EZ';
+#update repoOD set supervisor='1' where supervisor='SEÃ‘ORA ROSA';
+#update repoOD set supervisor='2' where supervisor='ARTURO DIAZ IBAÃ‘EZ';
+#alter table repoProd MODIFY COLUMN supervisor int;
+#alter table repoCT MODIFY COLUMN supervisor int;
+#alter table repoCL MODIFY COLUMN supervisor int;
+#alter table repoOD MODIFY COLUMN supervisor int;
+#2019-03-26:19.31 lo anterior
+#
 
 # no olvides en el directorio en produccion
 # haz el pull
