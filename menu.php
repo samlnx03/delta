@@ -3,6 +3,7 @@
 echo "<ul class='menu'>\n";
 echo "<li><a href=index.php>[Inicio]</a></li>\n";
 echo "<li><a href=empleados.php>[Empleados]</a></li>\n";
+echo "<li><a href=supervisores.php>[Supervisores]</a></li>\n";
 echo "<li><a href=actividades.php>[Actividades]</a></li>\n";
 echo "<li><a href=scListado.php>[Produccion]</a></li>\n";
 echo "<li><a href=madDimensionada.php>[Madera Dim]</a></li>\n";
