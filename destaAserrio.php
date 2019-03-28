@@ -3,7 +3,9 @@
 <input type=hidden name=destajos_proceso value='1'>
 <input type=hidden name=f1 value='<?php echo $f1;?>'>
 <input type=hidden name=f2 value='<?php echo $f2;?>'>
-Todos en el periodo <input type=submit name=todosRepos value=ver><br>
+Todos en el periodo <input type=submit name=todosRepos value=ver>
+<input type=submit name=rasdesglo value=desglosado>
+<br>
 Del reporte <input type=text name=nrepo size=5> <input type=submit name=xrepo value='ver'><br>
 <?php
 $q="select id, nombre from empleados order by nombre";

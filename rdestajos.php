@@ -70,6 +70,11 @@ elseif(isset($_POST['xempleado'])){
 	echo "$trepo\n";
 	echo "Reporte del trabajador $persona, del $f1 al $f2<br>\n";
 }
+elseif(isset($_POST['rasdesglo'])){  // reporte de aserrio desglosado
+	require_once("destaASrepoDesglo.php");
+	exit;
+
+}
 elseif(isset($_POST['rctdesglo'])){  // reporte de clavado de tarima desglosado
 	require_once("destaCTrepoDesglo.php");
 	exit;

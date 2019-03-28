@@ -75,6 +75,22 @@ foreach($trabajadores as $persona){
 
 	$proceso=1; // aserrio
 	$acumula="sum(volpt) as volumen";
+
+	$q="select * from destajos where proceso='$proceso' AND empleado='$numemp'";
+	echo "<b>".$persona['nombre']."</b><br>\n";
+	$db->query($q);
+	if($db->num_rows()>0){
+		echo "Destajos de Aserrio<br>\n";
+		$t=new html_table();
+		$t->setcdatas(array("fecha" => "fecha", "pctj" => "pctj", "activ"=>"activ", "cantidad"=>"cantidad", "especie"=>"especie", "medidas"=>"medidas", "vol_pt"=>"volpt", "costo"=>"costo", "destajo"=>"destajo"));
+		$t->setFieldTotalizado("volpt", 0); // campo a totalizar, inicializado en 0
+		$t->setFieldTotalizado("destajo", 0); // campo a totalizar, inicializado en 0
+		$t->setbody($db->get_all());
+		$t->show();
+		echo "Total: <b>".$t->getFieldTotalizado("volpt")." pie-tabla. $".number_format($t->getFieldTotalizado("destajo"),2)."</b>\n";
+		echo "<br>\n";
+	}
+/*
 	$q="select any_value(activ) as Actividad, $acumula, any_value(costo) as unitario, sum(destajo) as destajo from destajos where proceso='$proceso' AND empleado='$numemp' group by activ";
 	echo "<b>".$persona['nombre']."</b><br>\n";
 	$db->query($q);
@@ -87,7 +103,7 @@ foreach($trabajadores as $persona){
 		$t->show();
 		echo "Total: <b>".$t->getFieldTotalizado("volumen")." pie-tabla. $".number_format($t->getFieldTotalizado("destajo"),2)."</b>\n";
 		echo "<br>\n";
-	}
+	} */
 	$proceso=2; // corte a largo
 	$acumula="sum(volpt) as volumen";
 	$q="select any_value(activ) as Actividad, $acumula, any_value(costo) as unitario, sum(destajo) as destajo from destajos where proceso='$proceso' AND empleado='$numemp' group by activ";
