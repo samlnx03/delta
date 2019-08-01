@@ -2,7 +2,7 @@
 require_once "desarrollo.php"; // show errors
 require_once "Auth/session.php";
 // borrar 2
-//require_once "Auth/proteger.php";
+require_once "Auth/proteger.php";
 //require_once "funcs.php";
 
 if(!isset($_POST["agregar"])){

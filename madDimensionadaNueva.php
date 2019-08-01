@@ -1,4 +1,5 @@
 <?php
+require_once "Auth/proteger.php";
 require_once "Auth/dbclass.php";
 require_once "Auth/session.php";
 require_once "Auth/table.php";

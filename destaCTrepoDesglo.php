@@ -1,4 +1,5 @@
 <?php
+require_once "Auth/proteger.php";
 // destaCTrepoDesglo	destajos Clavado de Tarima desglosado
 //
 $acumula="sum(cantidad) as cant";

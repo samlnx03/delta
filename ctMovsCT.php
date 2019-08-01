@@ -1,4 +1,5 @@
 <?php
+require_once "Auth/proteger.php";
 require_once "ctMovsFormHead.php";
 // mostrar forma para el clavado de tarima
 ?>

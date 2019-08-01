@@ -2,7 +2,7 @@
 // borrar detalle de reporte de clavado de tarima	ctDetalleBorrar
 //
 require_once "Auth/session.php";
-//require_once "Auth/proteger.php";
+require_once "Auth/proteger.php";
 require_once "funcs.php";
 require_once("desarrollo.php");  // reporta errores
 if(!isset($_POST["id"]))

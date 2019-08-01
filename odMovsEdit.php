@@ -1,4 +1,5 @@
 <?php
+require_once "Auth/proteger.php";
 require_once "odMovsFormHead.php";
 
 echo "<form action=odDetalleAlta.php method=POST>\n";

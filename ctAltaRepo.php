@@ -1,4 +1,5 @@
 <?php
+require_once "Auth/proteger.php";
 require_once "desarrollo.php"; // show errors
 require_once "Auth/session.php";
 

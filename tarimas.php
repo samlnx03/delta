@@ -4,7 +4,7 @@ require_once "Auth/table.php";
 
 require_once "desarrollo.php";
 // borrar 2
-//require_once "Auth/proteger.php";
+require_once "Auth/proteger.php";
 //require_once "funcs.php";
 
 $cond="order by p.id desc limit 10";

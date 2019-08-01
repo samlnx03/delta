@@ -1,6 +1,6 @@
 <?php
 
-//require_once "Auth/proteger.php";
+require_once "Auth/proteger.php";
 //require_once "funcs.php";
 
 ?>

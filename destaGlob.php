@@ -1,4 +1,5 @@
 <h3>Destajos Globales</h3>
+require_once "Auth/proteger.php";
 <form method=post action=destaGlobRepo.php>
 <input type=hidden name=f1 value='<?php echo $f1;?>'>
 <input type=hidden name=f2 value='<?php echo $f2;?>'>

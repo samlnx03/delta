@@ -1,5 +1,5 @@
 <?php
-require_once "Auth/session.php";
+require_once "Auth/dbclass.php";
 require_once "desarrollo.php";
 ?>
 <!DOCTYPE html>

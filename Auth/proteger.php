@@ -1,7 +1,15 @@
 <?php
-//error_reporting(E_ERROR);  // comentar
-//ini_set('display_errors','on'); // comentar
+//
+// incluir este script en las paginas que se quiera proteger con password
+//
 require_once "Auth/session.php";
-$session->start();
+require_once "Auth/auth.php";
+
+$auth = Auth::getInstance();
+$auth->start();  // inicia el proceso de autenticacion
+
+// para llegar a las funciones
+// $session=Session::getInstance;
+// $auth=Auth::getInstance;
 ?>
 

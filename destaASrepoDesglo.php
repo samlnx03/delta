@@ -1,4 +1,5 @@
 <?php
+require_once "Auth/proteger.php";
 // destaASrepoDesglo	destajos Aserrio desglosado
 //
 $acumula="sum(cantidad) as cant";

@@ -1,4 +1,5 @@
 <?php
+require_once "Auth/proteger.php";
 require_once "ctMovsFormHead.php";
 echo "<br>\n";
 echo "<div class='divrow'>\n"; 

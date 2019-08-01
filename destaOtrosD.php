@@ -1,4 +1,5 @@
 <h3>Otros Destajos</h3>
+require_once "Auth/proteger.php";
 <form method=post action=rdestajos.php>
 <input type=hidden name=destajos_proceso value='0'>
 <input type=hidden name=f1 value='<?php echo $f1;?>'>

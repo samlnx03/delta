@@ -2,7 +2,7 @@
 // borrar detalle de reporte de corte a largo, madera dimensionada u otras actividades
 //
 require_once "Auth/session.php";
-//require_once "Auth/proteger.php";
+require_once "Auth/proteger.php";
 require_once "funcs.php";
 require_once("desarrollo.php");  // reporta errores
 if(!isset($_POST["id"]))

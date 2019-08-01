@@ -1,4 +1,5 @@
 <?php
+require_once "Auth/proteger.php";
 // destaODrepoDesglo	destajos Otros Destajos desglosado
 //
 $acumula="sum(cantidad) as cant";

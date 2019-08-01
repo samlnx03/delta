@@ -1,4 +1,5 @@
 <?php
+require_once "Auth/proteger.php";
 //		odRepoBorrar   borrar un reporte de otros destajos
 //
 require_once "Auth/session.php";

@@ -1,4 +1,5 @@
 <?php
+require_once "Auth/proteger.php";
 //		ctRepoBorrar   borrar un reporte de calavado de tarima
 //
 require_once "Auth/session.php";

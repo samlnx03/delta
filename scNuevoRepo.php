@@ -2,7 +2,7 @@
 require_once "Auth/session.php"; // include dbclass.php
 require_once "Auth/table.php";
 // borrar 2
-//require_once "Auth/proteger.php";
+require_once "Auth/proteger.php";
 require_once "funcs.php";
 require_once "desarrollo.php";  // show errors
 ?>

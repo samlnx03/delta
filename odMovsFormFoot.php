@@ -1,4 +1,5 @@
 <!-- clMovsFormFoot -->
+require_once "Auth/proteger.php";
 <?php
 echo "<a class='button-red' href='odRepoBorrar.php?id=$id'>Borrar Repo</a> ";
 echo "OJO: Se borra definitivamente!   ---\n";

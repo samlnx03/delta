@@ -1,4 +1,5 @@
 <form id='cant_esp_dimx' action='clDetalleAltaMA.php' method='POST'>
+require_once "Auth/proteger.php";
 <?php
 //$q="select clave, descrip from actividades where tipo='tabla'";
 //$clave=htmlSelect($q, "clave", "clave", "descrip", '');
