@@ -1,0 +1,8 @@
+archivos que incluyen con require Auth/proteger.php
+rgrep "Auth/proteger\.php" | awk -F: '{print $1}' | sort -u > /tmp/con_proteger.txt
+
+todos los archivos .php
+find -name "*php" |sort -u > /tmp/todos-los-php.txt
+
+
+
