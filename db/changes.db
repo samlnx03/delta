@@ -79,7 +79,7 @@
 
 #2019/08/30
 #alter table provGeneros change generoLargo generoDimension varchar(40);
-alter table provProductos change generoylargo generoDimension int(11);
+#alter table provProductos change generoylargo generoDimension int(11);
 
 # no olvides en el directorio en produccion
 # haz el pull
