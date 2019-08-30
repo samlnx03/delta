@@ -1,0 +1,58 @@
+
+
+mysql> select .... from entradasCD;
++----+-----------------+----------+---------+
+| id | vol_embarcadoM3 | producto | precio  |
++----+-----------------+----------+---------+
+|  7 |          14.005 |        6 | 1150.00 |
+|  8 |          13.125 |        6 | 1150.00 |
+|  9 |          14.067 |        6 | 1150.00 |
+| 10 |          13.025 |        6 | 1150.00 |
+| 11 |          13.034 |        6 | 1150.00 |
+| 12 |          12.475 |        6 | 1150.00 |
+| 13 |          14.310 |        7 | 1250.00 |
++----+-----------------+----------+---------+
+
+mysql> select * from provProductos;
++----+-----------------+---------+-----------+---------+------+
+| id | generoDimension | id_prov | id_proced | precio  | baja |
++----+-----------------+---------+-----------+---------+------+
+|  6 |               8 |       1 |         4 | 1150.00 |      |
+|  7 |               9 |       1 |         5 | 1250.00 |      |
++----+-----------------+---------+-----------+---------+------+
+
+mysql> select * from provGeneros;
++----+-----------------+
+| id | generoDimension |
++----+-----------------+
+|  8 | Cedro Blanco CD |
+|  9 | Pino CD         |
++----+-----------------+
+
+mysql> desc provProcedencias;
++-------------+----------+------+-----+---------+----------------+
+| Field       | Type     | Null | Key | Default | Extra          |
++-------------+----------+------+-----+---------+----------------+
+| id          | int(11)  | NO   | PRI | NULL    | auto_increment |
+| id_prov     | int(11)  | YES  |     | NULL    |                |
+| procedencia | char(60) | YES  |     | NULL    |                |
++-------------+----------+------+-----+---------+----------------+
+
+mysql> desc proveedores;
++--------+----------+------+-----+---------+----------------+
+| Field  | Type     | Null | Key | Default | Extra          |
++--------+----------+------+-----+---------+----------------+
+| id     | int(11)  | NO   | PRI | NULL    | auto_increment |
+| nombre | char(60) | YES  |     | NULL    |                |
+| baja   | char(1)  | YES  |     |         |                |
++--------+----------+------+-----+---------+----------------+
+
+
+entradasCD.producto --> provProductos.id
+provProductos.generoDimension --> provGeneros.id
+
+
+entradasCD.producto --> provProductos.id
+provProductos.id_prov --> proveedores.id
+provProductos.id_proced --> provProcedencias.id
+

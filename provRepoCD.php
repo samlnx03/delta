@@ -17,7 +17,7 @@ if(isset($_POST["fechas"])){  // ver resultado del filtrado
 	$proveedor=$_POST['proveedor'];
 	$cond="fecha>='$f1' AND fecha<='$f2'";
 	//$qr="select prov.nombre, pg.generoDimension as producto, i.id, i.fecha, i.remision, i.largoCDcm, i.vol_recibidoM3, i.vol_embarcadoM3, folioftal ".
-	$qr="select count(*) as viajes, pg.generoDimension as producto, prod.generoDimension as idprod, i.largoCDcm, sum(i.vol_recibidoM3) as vol_recibidoM3 ".
+	$qr="select count(*) as viajes, pg.generoDimension as producto, prod.generoDimension as idprod, i.largoCDcm, sum(i.vol_recibidoM3) as vol_recibidoM3, sum(i.vol_recibidoM3*i.precio) as importe ".
 	"from entradasCD i LEFT JOIN provProductos prod ON i.producto=prod.id ".
 	//"LEFT JOIN provProcedencias proced ON prod.id_proced=proced.id ".
 	//"LEFT JOIN proveedores prov ON prod.id_prov=prov.id ".
@@ -93,7 +93,6 @@ $gl=htmlSelect($q, "proveedor", "id", "nombre", ''); // ($qry, $name, $val, $tit
 echo " Proveedor $gl ";
  */
 ?>
-<br>
 <input type=submit name=fechas value='Ver'>
 </form>
 
@@ -107,7 +106,7 @@ $q="select prov.nombre, pg.generoDimension as producto, i.id, i.fecha, i.remisio
 	"$cond ".
 	"";
  */
-echo "<br>qr: $qr<br>\n";
+//echo "<br>qr: $qr<br>\n";
 $db->query($qr);
 $t=new html_table();
 $t->setbody($db->get_all());
@@ -119,7 +118,7 @@ $t->addextras( array(
 		array("idprod","largoCDcm")
 		)
 );
-$t->setcdatas(array("Detalle"=>"ver","Viajes"=>"viajes", "Producto"=>"producto", "largo"=>"largoCDcm", "Vol Rec"=>"vol_recibidoM3" ));
+$t->setcdatas(array("Detalle"=>"ver","Viajes"=>"viajes", "Producto"=>"producto", "largo"=>"largoCDcm", "Vol Rec"=>"vol_recibidoM3", "Importe"=>"importe" ));
 //$t->setFieldClas("Importe","class='alin-der'"); //campo=>id_class, p.e. 'id'=>"class='myclas'"
 //$t->setFieldTotalizado("total", 0); // campo a totalizar, inicializado en 0
 echo "<form method='POST'>\n";
