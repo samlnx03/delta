@@ -12,9 +12,13 @@ $db=db::getInstance();
 if(isset($_POST["fechas"])){  // ver resultado del filtrado
 	$f1=$_POST["f1"];
 	$f2=$_POST["f2"];
+	$_SESSION["f1"]=$f1;
+	$_SESSION["f2"]=$f2;
+
 	$generoDimension=$_POST['generoDimension'];
 	$largo=$_POST['largo'];
 	$proveedor=$_POST['proveedor'];
+
 	$cond="fecha>='$f1' AND fecha<='$f2'";
 	//$qr="select prov.nombre, pg.generoDimension as producto, i.id, i.fecha, i.remision, i.largoCDcm, i.vol_recibidoM3, i.vol_embarcadoM3, folioftal ".
 	$qr="select count(*) as viajes, pg.generoDimension as producto, prod.generoDimension as idprod, i.largoCDcm, sum(i.vol_recibidoM3) as vol_recibidoM3, sum(i.vol_recibidoM3*i.precio) as importe ".
@@ -30,33 +34,6 @@ if(isset($_POST["fechas"])){  // ver resultado del filtrado
 $msg="Filtro: ";
 $msg.=$cond;
 //$msg.="Entre $f1 y $f2";
-
-if(isset($_POST["id"])){  // borrar viaje de entrada de madera
-	$id=$_POST['id'];
-	$db->query("delete from entradasCD where id='$id'");
-	$msg="Registro de entrada c.d. Eliminado";
-}
-elseif(isset($_POST["mes"])){
-	$cond="where month(fecha)=month(now()) order by fecha desc";
-	$msg="Este mes";
-}
-elseif(isset($_POST["today"])){
-	$cond="where fecha=date(now()) order by id desc";
-	$msg="solo el día de Hoy";
-} elseif (isset($_POST["semana"])){
-	$cond="where fecha<=date(NOW()) AND fecha>=date(DATE_SUB(NOW(), INTERVAL 7 DAY)) order by id desc";
-	$msg="Ultimos 7 dias";
-} elseif (isset($_POST["rango"])){
-	$f1=$_POST["f1"];
-	$f2=$_POST["f2"];
-	$cond="where fecha>='$f1' AND fecha<='$f2' order by id desc";
-	$msg="Entre $f1 y $f2";
-}
-elseif(isset($_POST["ultimos"])){
-	$cond="order by id desc limit 10";
-	$msg="Ultimos 10 capturados";
-}
-
 
 ?>
 <html>
@@ -78,8 +55,8 @@ if(isset($_SESSION["agregando"]))
        unset($_SESSION["agregando"]); // no abras formularios al entrar a revisar detalles
 ?>
 <form method='POST'>
-entre las fechas <input type=date name=f1> 
-y <input type=date name=f2>
+entre las fechas <input type=date name=f1 value='<?php echo $f1;?>'> 
+y <input type=date name=f2 value='<?php echo $f2;?>'>
 <?php
 /*
 $q="select id, generoDimension from provGeneros UNION select 0,' TODO' order by generoDimension";
