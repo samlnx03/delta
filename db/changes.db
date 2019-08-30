@@ -66,6 +66,17 @@
 #
 #update empleados set nombre=trim(nombre); # quita el espacio al frente para ordenar correctamente 20190324.1642
 
+#2019/08/23
+create table proveedores ( id int not null auto_increment primary key, nombre char(60), baja char(1) default ' ');
+
+create table provProcedencias (id int not null auto_increment primary key, id_prov int, procedencia char(60));
+
+create table provProductos (id int not null auto_increment primary key, generoylargo int, id_prov int, id_proced int, precio decimal(9,2), baja char(1) default ' ');
+
+create table entradasCD(id int not null auto_increment primary key, fecha date, remision char(10), chofer varchar(60),  producto int, folioftal char(10), altoProm decimal(4,2), ancho decimal(4,2), largo decimal(4,2), largoCDcm int, vol_embarcadoM3 decimal(7,3), vol_recibidoM3 decimal(7,3));
+
+create table provGeneros (id int not null auto_increment primary key, generoLargo varchar(40));
+
 # no olvides en el directorio en produccion
 # haz el pull
 # haz un respaldo de la db antes de cambiar tablas

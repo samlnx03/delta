@@ -8,6 +8,7 @@ echo "<li><a href=actividades.php>[Actividades]</a></li>\n";
 echo "<li><a href=scListado.php>[Produccion]</a></li>\n";
 echo "<li><a href=madDimensionada.php>[Madera Dim]</a></li>\n";
 echo "<li><a href=tarimas.php>[Tarimas]</a></li>\n";
+echo "<li><a href=proveedores.php>[Rollo y Rollito]</a></li>\n";
 echo "<li><a href=destajos.php>[Reportes]</a></li>\n";
 echo "<li><a href=bye.php>[Logout]</a></li>\n";
 echo "<li><a href=pendientes.php>[Pendientes]</a></li>\n";
