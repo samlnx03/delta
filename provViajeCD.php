@@ -52,7 +52,7 @@ if(isset($_SESSION["msg"])){
 <div class="divcol">
 <form method='POST'>
 Producto: <input id='producto' type='text' size='5' name='producto' required />
-<input id='prodDetalle' type=text size=50 readonly>
+<input style='font-size: x-small;' id='prodDetalle' type=text size=70 readonly>
 <br>
 Fecha: <input type=date name='fecha' required> Remisión <input type=text name='remision'> <br>
 Chofer: <input type=text name='chofer'> 
@@ -60,6 +60,15 @@ Folio Forestal: <input type=text name='folioftal'>
 <br>
 <br>
 <b>Medidas del camión METROS</b><br>
+Alturas medidas 
+A1: <input id="a1" size=1 type=text name=a1 required>
+A2: <input id="a2" size=1 type=text name=a2 required>
+A3: <input id="a3" size=1 type=text name=a3 required>
+A4: <input id="a4" size=1 type=text name=a4 required>
+A5: <input id="a5" size=1 type=text name=a5 required>
+A6: <input id="a6" size=1 type=text name=a6 required>
+<br>
+
 Alto (promedio) <input id="alto" size=10 type=text name=alto required>
 Ancho <input id="ancho" type=text size=10 name=ancho required>
 Largo <input id="largo" type=text size=10 name=largo required>
@@ -119,7 +128,51 @@ $( "#largo" )
 	  var alto = $( "#alto" ).val();
 	  var ancho = $( "#ancho" ).val();
 	  var largo = $( "#largo" ).val();
-	  $( "#volrecibido" ).val( Math.trunc(alto*ancho*largo*0.7*1000)/1000 );
+	  $( "#volrecibido" ).val( Math.trunc(alto*ancho*largo*7*100)/1000 );
+	  // alto*ancho*largo*0.7*1000....  da 62.999 !
+	  return;
+  });
+
+function prom(){
+	  var a1 = Number($( "#a1" ).val());
+	  var a2 = Number($( "#a2" ).val());
+	  var a3 = Number($( "#a3" ).val());
+	  var a4 = Number($( "#a4" ).val());
+	  var a5 = Number($( "#a5" ).val());
+	  var a6 = Number($( "#a6" ).val());
+	  var suma= a1 + a2 + a3 + a4 + a5 + a6;
+	  var altoprom = suma/6.0;
+	  $( "#alto" ).val( Math.trunc(altoprom*100)/100 );
+}
+
+$( "#a1" )
+  .focusout(function() {
+	  prom();
+	  return;
+  });
+$( "#a2" )
+  .focusout(function() {
+	  prom();
+	  return;
+  });
+$( "#a3" )
+  .focusout(function() {
+	  prom();
+	  return;
+  });
+$( "#a4" )
+  .focusout(function() {
+	  prom();
+	  return;
+  });
+$( "#a5" )
+  .focusout(function() {
+	  prom();
+	  return;
+  });
+$( "#a6" )
+  .focusout(function() {
+	  prom();
 	  return;
   });
 </script>

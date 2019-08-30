@@ -67,7 +67,7 @@ y <input type=date name=f2>
 <input type=submit name=rango value='Ver'>
 </form>
 <?php
-$q="select prov.nombre, pg.generoLargo as producto, i.id, i.fecha, i.remision, i.largoCDcm, i.vol_recibidoM3, i.vol_embarcadoM3, folioftal ".
+$q="select prov.nombre, pg.generoDimension as producto, i.id, i.fecha, i.remision, i.largoCDcm, i.vol_recibidoM3, i.vol_embarcadoM3, folioftal ".
 	"from entradasCD i LEFT JOIN provProductos prod ON i.producto=prod.id ".
 	"LEFT JOIN provProcedencias proced ON prod.id_proced=proced.id ".
 	"LEFT JOIN proveedores prov ON prod.id_prov=prov.id ".

@@ -15,7 +15,7 @@ function provProdSel(id) {
 </script>
 <?php
 	$db=db::getInstance();
-	$q="SELECT prod.id, prov.nombre, proced.procedencia, pg.generoLargo as producto, prod.precio ".
+	$q="SELECT prod.id, prov.nombre, proced.procedencia, pg.generoDimension as producto, prod.precio ".
 		"FROM provProductos prod ".
 		"LEFT JOIN provProcedencias proced ON prod.id_proced=proced.id ".
 		"LEFT JOIN proveedores prov ON prod.id_prov=prov.id ".

@@ -16,8 +16,8 @@ if(isset($_POST["fechas"])){  // ver resultado del filtrado
 	$largo=$_POST['largo'];
 	$proveedor=$_POST['proveedor'];
 	$cond="fecha>='$f1' AND fecha<='$f2'";
-	//$qr="select prov.nombre, pg.generoLargo as producto, i.id, i.fecha, i.remision, i.largoCDcm, i.vol_recibidoM3, i.vol_embarcadoM3, folioftal ".
-	$qr="select count(*) as viajes, pg.generoLargo as producto, prod.generoylargo as idprod, i.largoCDcm, sum(i.vol_recibidoM3) as vol_recibidoM3 ".
+	//$qr="select prov.nombre, pg.generoDimension as producto, i.id, i.fecha, i.remision, i.largoCDcm, i.vol_recibidoM3, i.vol_embarcadoM3, folioftal ".
+	$qr="select count(*) as viajes, pg.generoDimension as producto, prod.generoylargo as idprod, i.largoCDcm, sum(i.vol_recibidoM3) as vol_recibidoM3 ".
 	"from entradasCD i LEFT JOIN provProductos prod ON i.producto=prod.id ".
 	//"LEFT JOIN provProcedencias proced ON prod.id_proced=proced.id ".
 	//"LEFT JOIN proveedores prov ON prod.id_prov=prov.id ".
@@ -82,8 +82,8 @@ entre las fechas <input type=date name=f1>
 y <input type=date name=f2>
 <?php
 /*
-$q="select id, generoLargo from provGeneros UNION select 0,' TODO' order by generoLargo";
-$gl=htmlSelect($q, "generoylargo", "id", "generoLargo", ''); // ($qry, $name, $val, $tit, $selected, $initial="")
+$q="select id, generoDimension from provGeneros UNION select 0,' TODO' order by generoDimension";
+$gl=htmlSelect($q, "generoylargo", "id", "generoDimension", ''); // ($qry, $name, $val, $tit, $selected, $initial="")
 echo " Género $gl ";
 $q="select distinct largoCDcm from entradasCD UNION select ' TODO' order by largoCDcm";
 $gl=htmlSelect($q, "largo", "largoCDcm", "largoCDcm", ''); // ($qry, $name, $val, $tit, $selected, $initial="")
@@ -99,7 +99,7 @@ echo " Proveedor $gl ";
 
 <?php
 /*
-$q="select prov.nombre, pg.generoLargo as producto, i.id, i.fecha, i.remision, i.largoCDcm, i.vol_recibidoM3, i.vol_embarcadoM3, folioftal ".
+$q="select prov.nombre, pg.generoDimension as producto, i.id, i.fecha, i.remision, i.largoCDcm, i.vol_recibidoM3, i.vol_embarcadoM3, folioftal ".
 	"from entradasCD i LEFT JOIN provProductos prod ON i.producto=prod.id ".
 	"LEFT JOIN provProcedencias proced ON prod.id_proced=proced.id ".
 	"LEFT JOIN proveedores prov ON prod.id_prov=prov.id ".

@@ -24,10 +24,10 @@ if(isset($_POST["altaproced"])){
         $db->query($q);
 } else if(isset($_POST["altagenero"])){
 	$genero=$_POST["genero"];
-	$q="select * from provGeneros where generoLargo='$genero'";
+	$q="select * from provGeneros where generoDimension='$genero'";
 	$db->query($q);
 	if($db->num_rows()<1){
-		$q="insert into provGeneros (generoLargo) values ('$genero')";
+		$q="insert into provGeneros (generoDimension) values ('$genero')";
         	$db->query($q);
 	} else {
 		$_SESSION["msg"]="El Género ya existe";
@@ -88,8 +88,8 @@ EOF;
 <?php
 $q="select id, procedencia from provProcedencias where id_prov='$id_prov'";
 $origenes=htmlSelect($q, "origenes", "id", "procedencia", ''); // ($qry, $name, $val, $tit, $selected, $initial="")
-$q="select id, generoLargo from provGeneros order by generoLargo";
-$gl=htmlSelect($q, "generoylargo", "id", "generoLargo", ''); // ($qry, $name, $val, $tit, $selected, $initial="")
+$q="select id, generoDimension from provGeneros order by generoDimension";
+$gl=htmlSelect($q, "generoylargo", "id", "generoDimension", ''); // ($qry, $name, $val, $tit, $selected, $initial="")
 ?>
 <div id="altas">
 <!-- <h3>Procedencias</h3> -->
@@ -114,7 +114,7 @@ Precio:<input type=text size=10 name=precio value'0.00'>
 
 <div id="lista">
 <?php
-$q="select prod.id, procedencia, provGeneros.generoLargo as producto, precio from provProcedencias proced LEFT JOIN provProductos prod ON prod.id_proced=proced.id LEFT JOIN provGeneros ON prod.generoylargo=provGeneros.id WHERE proced.id_prov='$id_prov' AND prod.baja=' '";
+$q="select prod.id, procedencia, provGeneros.generoDimension as producto, precio from provProcedencias proced LEFT JOIN provProductos prod ON prod.id_proced=proced.id LEFT JOIN provGeneros ON prod.generoylargo=provGeneros.id WHERE proced.id_prov='$id_prov' AND prod.baja=' '";
 
 //echo "q:$q<br>\n";
 $t=new html_table();
