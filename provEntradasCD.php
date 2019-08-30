@@ -71,7 +71,7 @@ $q="select prov.nombre, pg.generoDimension as producto, i.id, i.fecha, i.remisio
 	"from entradasCD i LEFT JOIN provProductos prod ON i.producto=prod.id ".
 	"LEFT JOIN provProcedencias proced ON prod.id_proced=proced.id ".
 	"LEFT JOIN proveedores prov ON prod.id_prov=prov.id ".
-	"LEFT JOIN provGeneros pg ON prod.generoylargo=pg.id ".
+	"LEFT JOIN provGeneros pg ON prod.generoDimension=pg.id ".
 	"$cond ".
 	"";
 //echo "<br>q: $q<br>\n";

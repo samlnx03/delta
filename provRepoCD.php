@@ -12,16 +12,16 @@ $db=db::getInstance();
 if(isset($_POST["fechas"])){  // ver resultado del filtrado
 	$f1=$_POST["f1"];
 	$f2=$_POST["f2"];
-	$generoylargo=$_POST['generoylargo'];
+	$generoDimension=$_POST['generoDimension'];
 	$largo=$_POST['largo'];
 	$proveedor=$_POST['proveedor'];
 	$cond="fecha>='$f1' AND fecha<='$f2'";
 	//$qr="select prov.nombre, pg.generoDimension as producto, i.id, i.fecha, i.remision, i.largoCDcm, i.vol_recibidoM3, i.vol_embarcadoM3, folioftal ".
-	$qr="select count(*) as viajes, pg.generoDimension as producto, prod.generoylargo as idprod, i.largoCDcm, sum(i.vol_recibidoM3) as vol_recibidoM3 ".
+	$qr="select count(*) as viajes, pg.generoDimension as producto, prod.generoDimension as idprod, i.largoCDcm, sum(i.vol_recibidoM3) as vol_recibidoM3 ".
 	"from entradasCD i LEFT JOIN provProductos prod ON i.producto=prod.id ".
 	//"LEFT JOIN provProcedencias proced ON prod.id_proced=proced.id ".
 	//"LEFT JOIN proveedores prov ON prod.id_prov=prov.id ".
-	"LEFT JOIN provGeneros pg ON prod.generoylargo=pg.id ".
+	"LEFT JOIN provGeneros pg ON prod.generoDimension=pg.id ".
 	"WHERE $cond ".
 	"GROUP BY producto,largoCDcm ".
 	"";
@@ -83,7 +83,7 @@ y <input type=date name=f2>
 <?php
 /*
 $q="select id, generoDimension from provGeneros UNION select 0,' TODO' order by generoDimension";
-$gl=htmlSelect($q, "generoylargo", "id", "generoDimension", ''); // ($qry, $name, $val, $tit, $selected, $initial="")
+$gl=htmlSelect($q, "generoDimension", "id", "generoDimension", ''); // ($qry, $name, $val, $tit, $selected, $initial="")
 echo " Género $gl ";
 $q="select distinct largoCDcm from entradasCD UNION select ' TODO' order by largoCDcm";
 $gl=htmlSelect($q, "largo", "largoCDcm", "largoCDcm", ''); // ($qry, $name, $val, $tit, $selected, $initial="")
@@ -103,7 +103,7 @@ $q="select prov.nombre, pg.generoDimension as producto, i.id, i.fecha, i.remisio
 	"from entradasCD i LEFT JOIN provProductos prod ON i.producto=prod.id ".
 	"LEFT JOIN provProcedencias proced ON prod.id_proced=proced.id ".
 	"LEFT JOIN proveedores prov ON prod.id_prov=prov.id ".
-	"LEFT JOIN provGeneros pg ON prod.generoylargo=pg.id ".
+	"LEFT JOIN provGeneros pg ON prod.generoDimension=pg.id ".
 	"$cond ".
 	"";
  */

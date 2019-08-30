@@ -19,7 +19,7 @@ function provProdSel(id) {
 		"FROM provProductos prod ".
 		"LEFT JOIN provProcedencias proced ON prod.id_proced=proced.id ".
 		"LEFT JOIN proveedores prov ON prod.id_prov=prov.id ".
-		"LEFT JOIN provGeneros pg ON prod.generoylargo=pg.id ".
+		"LEFT JOIN provGeneros pg ON prod.generoDimension=pg.id ".
 		"ORDER BY prov.nombre, proced.procedencia, producto ".
 		"";
         $t=new html_table();
