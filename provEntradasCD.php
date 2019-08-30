@@ -67,7 +67,7 @@ y <input type=date name=f2>
 <input type=submit name=rango value='Ver'>
 </form>
 <?php
-$q="select prov.nombre, pg.generoDimension as producto, i.id, i.fecha, i.remision, i.largoCDcm, i.vol_recibidoM3, i.vol_embarcadoM3, folioftal ".
+$q="select prov.nombre, pg.generoDimension as producto, i.id, i.fecha, i.remision, i.largoCDcm, i.vol_recibidoM3, i.vol_embarcadoM3, folioftal, i.precio ".
 	"from entradasCD i LEFT JOIN provProductos prod ON i.producto=prod.id ".
 	"LEFT JOIN provProcedencias proced ON prod.id_proced=proced.id ".
 	"LEFT JOIN proveedores prov ON prod.id_prov=prov.id ".
@@ -86,7 +86,7 @@ $t->addextras( array(
 		)
 );
 
-$t->setcdatas(array("Acción"=>"Borrar", "Producto"=>"producto", "largo"=>"largoCDcm", "Proveedor" => "nombre", "fecha" => "fecha", "Remision"=>"remision", "Vol Rec"=>"vol_recibidoM3", "Vol Emb"=>"vol_embarcadoM3", "Folio Ftal"=>"folioftal"));
+$t->setcdatas(array("Acción"=>"Borrar", "Producto"=>"producto", "largo"=>"largoCDcm", "Proveedor" => "nombre", "fecha" => "fecha", "Remision"=>"remision", "Precio"=>"precio", "Vol Rec"=>"vol_recibidoM3", "Vol Emb"=>"vol_embarcadoM3", "Folio Ftal"=>"folioftal"));
 //$t->setFieldClas("Importe","class='alin-der'"); //campo=>id_class, p.e. 'id'=>"class='myclas'"
 //$t->setFieldTotalizado("total", 0); // campo a totalizar, inicializado en 0
 echo "<form method='POST'>\n";

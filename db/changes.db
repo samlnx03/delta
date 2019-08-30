@@ -80,6 +80,9 @@
 #2019/08/30
 #alter table provGeneros change generoLargo generoDimension varchar(40);
 #alter table provProductos change generoylargo generoDimension int(11);
+alter table entradasCD add column precio decimal(9,2);
+select e.id, e.vol_embarcadoM3, e.precio, e.producto, prod.id, prod.precio from entradasCD e left join provProductos prod on e.producto=prod.id;
+
 
 # no olvides en el directorio en produccion
 # haz el pull
