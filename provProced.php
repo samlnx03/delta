@@ -98,7 +98,7 @@ $gl=htmlSelect($q, "generoylargo", "id", "generoLargo", ''); // ($qry, $name, $v
 <input type=submit name=altaproced value=Agregar>
 </form>
 <form method=POST>
-<b>Nuevo Género y Largo:</b> (p.e. Pino c.d.) <input type=text name=genero required> 
+<b>Nuevo Género y Dimensión:</b> (p.e. Pino c.d.) <input type=text name=genero required> 
 <input type=submit name=altagenero value=Agregar>
 </form>
 <form method=POST>
