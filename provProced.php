@@ -24,8 +24,14 @@ if(isset($_POST["altaproced"])){
         $db->query($q);
 } else if(isset($_POST["altagenero"])){
 	$genero=$_POST["genero"];
-	$q="insert into provGeneros (generoLargo) values ('$genero')";
-        $db->query($q);
+	$q="select * from provGeneros where generoLargo='$genero'";
+	$db->query($q);
+	if($db->num_rows()<1){
+		$q="insert into provGeneros (generoLargo) values ('$genero')";
+        	$db->query($q);
+	} else {
+		$_SESSION["msg"]="El Género ya existe";
+	}
 } else if(isset($_POST["altaprod"])){
 	$prod=$_POST["generoylargo"];
 	$origen=$_POST['origenes'];
