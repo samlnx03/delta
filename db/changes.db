@@ -78,7 +78,7 @@
 #create table provGeneros (id int not null auto_increment primary key, generoLargo varchar(40));
 
 #2019/08/30
-alter table provGeneros change generoLargo generoDimension varchar(40);
+#alter table provGeneros change generoLargo generoDimension varchar(40);
 
 # no olvides en el directorio en produccion
 # haz el pull

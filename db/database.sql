@@ -1681,6 +1681,46 @@ INSERT INTO `empleados` VALUES (144,'TINOCO PONCE RAUL','');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `entradasCD`
+--
+
+DROP TABLE IF EXISTS `entradasCD`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `entradasCD` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fecha` date DEFAULT NULL,
+  `remision` char(10) DEFAULT NULL,
+  `chofer` varchar(60) DEFAULT NULL,
+  `producto` int(11) DEFAULT NULL,
+  `folioftal` char(10) DEFAULT NULL,
+  `altoProm` decimal(4,2) DEFAULT NULL,
+  `ancho` decimal(4,2) DEFAULT NULL,
+  `largo` decimal(4,2) DEFAULT NULL,
+  `largoCDcm` int(11) DEFAULT NULL,
+  `vol_embarcadoM3` decimal(7,3) DEFAULT NULL,
+  `vol_recibidoM3` decimal(7,3) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `entradasCD`
+--
+
+LOCK TABLES `entradasCD` WRITE;
+/*!40000 ALTER TABLE `entradasCD` DISABLE KEYS */;
+INSERT INTO `entradasCD` VALUES (7,'2019-01-03','0987','LUIS PURECO',6,'005',1.59,2.50,5.50,125,14.005,15.303);
+INSERT INTO `entradasCD` VALUES (8,'2019-01-03','0988','Elodio Garcia',6,'006',1.69,2.10,5.45,105,13.125,13.539);
+INSERT INTO `entradasCD` VALUES (9,'2019-01-03','0989','ALEJANDRO GOMEZ',6,'007',1.78,2.10,5.80,105,14.067,15.176);
+INSERT INTO `entradasCD` VALUES (10,'2019-01-04','0990','ALEJANDRO GOMEZ',6,'010',1.67,2.10,5.80,105,13.025,14.238);
+INSERT INTO `entradasCD` VALUES (11,'2019-01-04','0991','LUIS PURECO',6,'008',1.85,2.10,5.40,105,13.034,14.685);
+INSERT INTO `entradasCD` VALUES (12,'2019-01-04','0992','Elodio Garcia',6,'009',1.77,2.10,5.30,105,12.475,13.774);
+INSERT INTO `entradasCD` VALUES (13,'2019-01-04','0993','ALEJANDRO GOMEZ',7,'10/10',1.47,2.50,5.85,125,14.310,15.049);
+/*!40000 ALTER TABLE `entradasCD` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `favoritablas`
 --
 
@@ -13582,6 +13622,111 @@ INSERT INTO `movsRepoOtrasActiv` VALUES (7813,0,488,0,0,'ctIEQNv',72.000,104);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `provGeneros`
+--
+
+DROP TABLE IF EXISTS `provGeneros`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `provGeneros` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `generoDimension` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `provGeneros`
+--
+
+LOCK TABLES `provGeneros` WRITE;
+/*!40000 ALTER TABLE `provGeneros` DISABLE KEYS */;
+INSERT INTO `provGeneros` VALUES (8,'Cedro Blanco CD');
+INSERT INTO `provGeneros` VALUES (9,'Pino CD');
+/*!40000 ALTER TABLE `provGeneros` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `provProcedencias`
+--
+
+DROP TABLE IF EXISTS `provProcedencias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `provProcedencias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_prov` int(11) DEFAULT NULL,
+  `procedencia` char(60) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `provProcedencias`
+--
+
+LOCK TABLES `provProcedencias` WRITE;
+/*!40000 ALTER TABLE `provProcedencias` DISABLE KEYS */;
+INSERT INTO `provProcedencias` VALUES (4,1,'COMUNIDAD INDIGENA DE ZIRAHUEN');
+INSERT INTO `provProcedencias` VALUES (5,1,'PARCELA 61 Z-Z P 1/4 EJIDO ZIRAHUEN');
+/*!40000 ALTER TABLE `provProcedencias` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `provProductos`
+--
+
+DROP TABLE IF EXISTS `provProductos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `provProductos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `generoylargo` int(11) DEFAULT NULL,
+  `id_prov` int(11) DEFAULT NULL,
+  `id_proced` int(11) DEFAULT NULL,
+  `precio` decimal(9,2) DEFAULT NULL,
+  `baja` char(1) DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `provProductos`
+--
+
+LOCK TABLES `provProductos` WRITE;
+/*!40000 ALTER TABLE `provProductos` DISABLE KEYS */;
+INSERT INTO `provProductos` VALUES (6,8,1,4,1150.00,'');
+INSERT INTO `provProductos` VALUES (7,9,1,5,1250.00,'');
+/*!40000 ALTER TABLE `provProductos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `proveedores`
+--
+
+DROP TABLE IF EXISTS `proveedores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `proveedores` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` char(60) DEFAULT NULL,
+  `baja` char(1) DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `proveedores`
+--
+
+LOCK TABLES `proveedores` WRITE;
+/*!40000 ALTER TABLE `proveedores` DISABLE KEYS */;
+INSERT INTO `proveedores` VALUES (1,'ROSALES MARTINEZ JUAN LUIS','');
+/*!40000 ALTER TABLE `proveedores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `repoCL`
 --
 
@@ -16314,4 +16459,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-29 20:28:17
+-- Dump completed on 2019-08-30 14:51:46
