@@ -74,7 +74,7 @@ EOF;
 ?>
 <div id="altas">
 <form method=POST>
-nombre: <input type=text name=nombre size=60>
+nombre: <input type=text name=nombre size=60 required>
 <input type=submit name=opcion value=Agregar>
 <input type=submit name=opcion value=Buscar>
 </form>
