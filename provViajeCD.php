@@ -17,12 +17,13 @@ if(isset($_POST["alta"])){
 	$largoCDcm=$_POST['largoCD'];
 	$vol_embarcadoM3=$_POST['volEmbarcado'];
 	$vol_recibidoM3=$_POST['volRecibido'];
+	$precio=$_POST['prodPrecio'];
 	$q="insert into entradasCD ".
 		"(fecha, remision, chofer, producto, folioftal, altoProm, ancho, largo, ".
-		"largoCDcm, vol_embarcadoM3, vol_recibidoM3) ".
+		"largoCDcm, vol_embarcadoM3, vol_recibidoM3, precio) ".
 		"values ".
 		"('$fecha', '$remision', '$chofer', '$producto', '$folioftal', '$altoProm', ".
-		"'$ancho', '$largo', '$largoCDcm', '$vol_embarcadoM3', '$vol_recibidoM3')";
+		"'$ancho', '$largo', '$largoCDcm', '$vol_embarcadoM3', '$vol_recibidoM3', '$precio')";
 	$db->query($q);
 	$_SESSION["msg"]="Viaje de rollito CD agregado";
         header('Location: provEntradasCD.php');
@@ -79,6 +80,7 @@ Vol Embarcado (m3) <input type=text name='volEmbarcado' required>
 Vol Recibido (m3) <input id="volrecibido" type=text name='volRecibido' required> <br>
 <br>
 <input type=submit name=alta value='Agregar'>
+<input id=prodPrecio type=hidden name=prodPrecio>
 </form>
 </div> <!-- column1 -->
 <div class="divcol" style="overflow-y: scroll; overflow-x: hidden; height: 300px;">

@@ -8,7 +8,8 @@ function provProdSel(id) {
                   .done( function (data) {
                           //alert("data descrip: "+data);
                           var r=jQuery.parseJSON(data);
-                          $( "#prodDetalle" ).val( r.prodDetalle );
+			  $( "#prodDetalle" ).val( r.prodDetalle );
+			  $( "#prodPrecio" ).val( r.precio );
                         });
 
 }
