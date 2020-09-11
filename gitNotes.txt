@@ -12,3 +12,10 @@ git remote -v
 
 git push origin master
 
+-------------------
+https://help.github.com/en/github/using-git/changing-a-remotes-url#switching-remote-urls-from-https-to-ssh
+
+git remote -v
+
+git remote set-url origin git@github.com:USERNAME/REPOSITORY.git
+
